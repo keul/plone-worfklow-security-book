@@ -1,0 +1,8 @@
+- workflow script/external method
+- variabili di worflow
+- worklist
+- protezioni degli script in ZMI tramite file metadata
+- ruoli Zope e ruoli Plone
+- gruppo virtuale authenticated users
+- dashboard
+- allowedRolesAndUSers, View e prodotti che usano lo stesso principio (per il revisore)
