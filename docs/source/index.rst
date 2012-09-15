@@ -15,6 +15,7 @@ Indice dei contenuti:
    intro
    users
    groups
+   roles
 
 Indices and tables
 ==================

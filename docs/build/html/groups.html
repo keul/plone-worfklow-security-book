@@ -8,7 +8,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>I gruppi &mdash; Plone: worfklow e sicurezza 0.1 documentation</title>
+    <title>I Gruppi &mdash; Plone: worfklow e sicurezza 0.1 documentation</title>
     
     <link rel="stylesheet" href="_static/default.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -27,7 +27,8 @@
     <script type="text/javascript" src="_static/doctools.js"></script>
     <script type="text/javascript" src="_static/translations.js"></script>
     <link rel="top" title="Plone: worfklow e sicurezza 0.1 documentation" href="index.html" />
-    <link rel="prev" title="Gli utenti" href="users.html" /> 
+    <link rel="next" title="I Ruoli" href="roles.html" />
+    <link rel="prev" title="Gli Utenti" href="users.html" /> 
   </head>
   <body>
     <div class="related">
@@ -37,7 +38,10 @@
           <a href="genindex.html" title="Indice generale"
              accesskey="I">indice</a></li>
         <li class="right" >
-          <a href="users.html" title="Gli utenti"
+          <a href="roles.html" title="I Ruoli"
+             accesskey="N">successivo</a> |</li>
+        <li class="right" >
+          <a href="users.html" title="Gli Utenti"
              accesskey="P">precedente</a> |</li>
         <li><a href="index.html">Plone: worfklow e sicurezza 0.1 documentation</a> &raquo;</li> 
       </ul>
@@ -49,17 +53,18 @@
           <div class="body">
             
   <div class="section" id="i-gruppi">
-<h1>I gruppi<a class="headerlink" href="#i-gruppi" title="link permanente per questa intestazione">¶</a></h1>
-<p>I gruppi sono semplicemente un accorpamento di utenti e a basso livello molto spesso gruppi e utenti
-sono visti allo stesso modo.</p>
-<p>I gruppi sono estremamente utili e molto comodi nel momento in cui è necessario assegnare <em>ruoli
-locali</em> qua e là per il sito.</p>
+<h1>I Gruppi<a class="headerlink" href="#i-gruppi" title="link permanente per questa intestazione">¶</a></h1>
+<p>I gruppi sono definibili semplicemente come un accorpamento di utenti. A basso livello, nei meandri
+del codice, molto spesso gruppi e utenti sono visti allo stesso modo.</p>
+<p>I gruppi sono estremamente utili nel momento in cui è necessario assegnare <em>ruoli locali</em> qua e là
+per il sito.</p>
 <p>Solo gli utenti reali possono far parte dei gruppi, l&#8217;utente anonimo non è identificabile in nessun
 gruppo.</p>
 <div class="section" id="i-gruppi-predefiniti-di-plone">
 <h2>I gruppi predefiniti di Plone<a class="headerlink" href="#i-gruppi-predefiniti-di-plone" title="link permanente per questa intestazione">¶</a></h2>
-<p>Alla creazione di un sito Plone troverete già <em>quattro gruppi predefiniti</em>, tre di questi hanno
-assegnati dei <strong>ruoli globali</strong> (che non ha di solito molto senso modificare).</p>
+<p>Alla creazione di un sito Plone troverete già <strong>quattro gruppi predefiniti</strong>, tre di questi hanno
+assegnati dei <strong>ruoli globali</strong>, che non ha di solito senso modificare, ma può aver senso eliminare
+il gruppo, o evitare di usarlo.</p>
 <p>Se uno o più di questi gruppi non serve: cancellatelo! Non ci sono problemi.</p>
 <div class="figure">
 <img alt="Elenco generale dei gruppi" src="_images/usergroup-groupprefs.png" />
@@ -71,17 +76,19 @@ assegnati dei <strong>ruoli globali</strong> (che non ha di solito molto senso m
 l&#8217;introduzione del nuovo ruolo <strong>Amministratore del sito</strong> (<strong>Site Administrator</strong>) ha forse perso
 parte della sua importanza.</p>
 <p>Nella configurazione base (e non ho mai trovato motivi per cambiare questo comportamento) il gruppo
-possiede nativamente il ruolo di <strong>Manager</strong>.</p>
+possiede nativamente il ruolo di <strong>Manager</strong>, il ruolo più potente di Zope.</p>
 <p>Il ruolo di <em>Manager</em> non è un ruolo pensato per essere dato localmente a sezioni del sito, quindi
-la presenza di questo gruppo è importante e comoda.
-All&#8217;interno del gruppo vanno inseriti tutti gli utenti (pochi!) che devono avere questo potere.</p>
+la presenza di questo gruppo e il fatto che il ruolo ad esso assegnato sia un ruolo globale è
+una scelta giusta e comoda.</p>
+<p>All&#8217;interno del gruppo vanno inseriti tutti gli utenti (pochi... o nessuno) che devono avere
+questo potere.</p>
 </div>
 <div class="section" id="il-gruppo-site-administrators">
 <h3>Il gruppo &#8220;Site Administrators&#8221;<a class="headerlink" href="#il-gruppo-site-administrators" title="link permanente per questa intestazione">¶</a></h3>
 <p>Il gruppo degli amministratori del sito è stato introdotto di recente, con l&#8217;introduzione del nuovo
 ruolo <strong>Amministratore del sito</strong> (<strong>Site Administrator</strong>).</p>
-<p>Le osservazioni fatte per il gruppo <em>Administrators</em> si ripetono qui: è un gruppo estremamente utile
-e vi vanno inseriti tutti gli utenti del sito che dovranno gestire il sito in futuro.</p>
+<p>Le osservazioni fatte per il gruppo <em>Administrators</em> si ripetono qui: è un gruppo estremamente
+utile e vi vanno inseriti tutti gli utenti del sito che dovranno gestire il sito in futuro.</p>
 </div>
 <div class="section" id="il-gruppo-reviewers">
 <h3>Il gruppo &#8220;Reviewers&#8221;<a class="headerlink" href="#il-gruppo-reviewers" title="link permanente per questa intestazione">¶</a></h3>
@@ -90,13 +97,13 @@ e vi vanno inseriti tutti gli utenti del sito che dovranno gestire il sito in fu
 <p>A differenza degli altri due gruppi descritti precedentemente, l&#8217;utilità di questo gruppo non è
 assicurata.</p>
 <p>Lo consiglio in presenza di piccoli siti, dove la redazione è estremamente limitata ed in effetti
-chi revisiona i contenuti lo fa in tutto il sito, questo gruppo può servire.
-Va però tenuto presente che il ruolo di <em>Revisore</em> è assegnato in modo globale a questo gruppo,
-quindi bisogna anche avere la certezza che non ci siano eccezioni di sorta (nessuna cartella
-&#8220;speciale&#8221; dove il gruppo <em>non</em> deve avere questo potere).</p>
-<p>In molti altri casi, dove ci sono gruppi separati e redazioni separate, questo gruppo finisce sempre
-per rimanere vuoto. A questo punto consiglio di eliminarlo: non ci sono problemi nel farlo e non
-otterrete altro che evitare problemi o possibili errori.</p>
+chi revisiona i contenuti lo fa in tutto il sito. In tal caso questo gruppo può servire.</p>
+<p>Va però tenuto presente che il ruolo di <em>Revisore</em> è assegnato in modo globale, quindi bisogna
+anche avere la certezza che non ci siano eccezioni di sorta (nessuna cartella &#8220;speciale&#8221; dove il
+gruppo <em>non</em> deve avere questo potere).</p>
+<p>In molti altri casi, dove ci sono gruppi separati e redazioni separate, questo gruppo finisce
+sempre per rimanere vuoto. A questo punto consiglio di eliminarlo: non ci sono problemi nel farlo e
+non otterrete altro che evitare problemi o possibili errori.</p>
 </div>
 <div class="section" id="il-gruppo-virtuale-authenticated-users">
 <h3>Il gruppo virtuale &#8220;Authenticated Users&#8221;<a class="headerlink" href="#il-gruppo-virtuale-authenticated-users" title="link permanente per questa intestazione">¶</a></h3>
@@ -111,16 +118,19 @@ parte del gruppo.</p>
 come <em>ruolo globale</em>) significa dare il ruolo a <em>chiunque</em> ha un account nel sito.</p>
 <p>Il suo uso può invalidare altre configurazioni fatte per altri gruppi o altri utenti.</p>
 <p>Un esempio: se assegnassimo un qualunque ruolo al gruppo &#8220;<em>Authenticated Users</em>&#8221;, per esempio:
-<strong>Lettore</strong> (ma sarebbe uguale per un qualunque altro ruolo) questo renderebbe inutile l&#8217;aver
-assegnato (o assegnare in futuro) quello stesso ruolo ad utenti e gruppi.
+<strong>Lettore</strong> questo renderebbe inutile l&#8217;aver assegnato (o assegnare in futuro) quello stesso ruolo
+a veri utenti e gruppi.
 E&#8217; inutile dire &#8220;il gruppo dell&#8217;Ufficio 5 è <em>Lettore</em> sulla cartella
 <tt class="docutils literal"><span class="pre">/uffici/ufficio-5/documenti-privati</span></tt> se <em>tutti</em> gli utenti del sito hanno quel potere e possono
-quindi leggere da quella cartella.</p>
+quindi leggere da quella cartella.
+Il rischio è trovarsi in una situazione in cui non si capisce come mai anche i membri del gruppo
+&#8220;Ufficio 3&#8221; possono leggere i documenti riservati in quella sezione.</p>
 <div class="section" id="perche-non-lo-consiglio">
 <h4>Perché non lo consiglio?<a class="headerlink" href="#perche-non-lo-consiglio" title="link permanente per questa intestazione">¶</a></h4>
 <p>Questo gruppo è usato molto spesso a sproposito perché <em>sembra</em> facile da capire e usare, più
-semplice che capire fino in fondo come configurare per bene i workflow di Plone e verificato lo
-stato di revisione dei contenuti del sito.</p>
+semplice che comprendere fino in fondo come configurare per bene i workflow di Plone e verificato
+lo stato di revisione dei contenuti del sito.</p>
+<p>Ne potete di certo fare a meno.</p>
 </div>
 </div>
 </div>
@@ -137,7 +147,7 @@ stato di revisione dei contenuti del sito.</p>
             </a></p>
   <h3><a href="index.html">Tabella dei contenuti</a></h3>
   <ul>
-<li><a class="reference internal" href="#">I gruppi</a><ul>
+<li><a class="reference internal" href="#">I Gruppi</a><ul>
 <li><a class="reference internal" href="#i-gruppi-predefiniti-di-plone">I gruppi predefiniti di Plone</a><ul>
 <li><a class="reference internal" href="#il-gruppo-administrators">Il gruppo &#8220;Administrators&#8221;</a></li>
 <li><a class="reference internal" href="#il-gruppo-site-administrators">Il gruppo &#8220;Site Administrators&#8221;</a></li>
@@ -154,7 +164,10 @@ stato di revisione dei contenuti del sito.</p>
 
   <h4>Argomento precedente</h4>
   <p class="topless"><a href="users.html"
-                        title="capitolo precedente">Gli utenti</a></p>
+                        title="capitolo precedente">Gli Utenti</a></p>
+  <h4>Argomento successivo</h4>
+  <p class="topless"><a href="roles.html"
+                        title="capitolo successivo">I Ruoli</a></p>
   <h3>Questa pagina</h3>
   <ul class="this-page-menu">
     <li><a href="_sources/groups.txt"
@@ -184,7 +197,10 @@ stato di revisione dei contenuti del sito.</p>
           <a href="genindex.html" title="Indice generale"
              >indice</a></li>
         <li class="right" >
-          <a href="users.html" title="Gli utenti"
+          <a href="roles.html" title="I Ruoli"
+             >successivo</a> |</li>
+        <li class="right" >
+          <a href="users.html" title="Gli Utenti"
              >precedente</a> |</li>
         <li><a href="index.html">Plone: worfklow e sicurezza 0.1 documentation</a> &raquo;</li> 
       </ul>
