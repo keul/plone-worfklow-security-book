@@ -7,7 +7,18 @@ Per quanto poco ci possa essere da dire sugli utenti, qualcosa vale la pena veng
 Un utente è un visitatore del sito che ha eseguito l'autenticazione, che possiede quindi un account
 per accedere al sito.
 
+In alcuni siti, dove è abilitata l'autoregistrazione degli utenti, chiunque può diventare utente
+del sito.
+
 Ogni utente del sito ha (di solito) il **ruolo Collaboratore** (**Member**).
+
+Ci possono essere eccezioni?
+Sì, un esempio molto comune è legato alle basi dati di utenti che non siano quella predefinita di
+Plone (**plugin PAS** che forniscono altri basi dati utente).
+La base dati LDAP più comune in Plone permette di configurare quali ruoli assegnare agli utenti
+che si autenticano attraverso quel sistema.
+In questo caso *Member* è solo il valore predefinito, ma sarebbe possibile fornire da subito altri
+ruoli o non fornire nemmeno *Member*.
 
 Che poteri ha un utente?
 ========================
@@ -26,6 +37,9 @@ personali.
 
 Per il resto (e nella versione attuale di Plone questo è vero di partenza) un utente del sito non
 ha di partenza nessun altro potere.
+
+L'utente inizia ad acquisire poteri nel momento in cui gli vengono assegnati dei ruoli
+(direttamente, o tramite un gruppo).
 
 Le cartelle personali
 ---------------------
@@ -79,12 +93,12 @@ solito va presa in considerazione assieme ad una modifica dei workflow e della s
 L'utente anonimo
 ================
 
-Anche *il visitatore anonimo è un utente*, che possiede un ruolo speciale: **Anonimo**
-(**Anonymous**). L'unica differenza con un utente autenticato è che non ha strumenti personali
-o un'area dove salvare le proprie preferenze e che non identifica un singolo visitatore ma
-una intera schiera di visitatori.
+Anche *il visitatore anonimo è un utente* e che possiede un ruolo speciale: **Anonimo**
+(**Anonymous**). L'unica differenza con un utente autenticato è che non ha link agli strumenti
+personali o un'area dove salvare le proprie preferenze, e che non identifica un singolo visitatore
+ma una intera schiera di visitatori.
 
-Sia che stiate disegnando una sito pubblico o una intranet, *questo utente va previsto*.
+Sia che stiate realizzando una sito pubblico o una intranet, *questo utente va previsto*.
 
 In un **sito pubblico** l'utente anonimo è quello che genera la maggior parte del traffico (i bot e
 crawler dei motori di ricerca sono utenti anonimi). Va capito cosa e cosa non possono vedere, e
@@ -107,8 +121,5 @@ documenti che si credevano segreti.
    Il "*workflow intranet*" fornito da Plone non è ottimale! 
 
 In questi casi la ricerca di Plone può darvi da subito un'idea della situazione (ma non basta).
-
-
-
 
 

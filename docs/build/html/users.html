@@ -27,6 +27,7 @@
     <script type="text/javascript" src="_static/doctools.js"></script>
     <script type="text/javascript" src="_static/translations.js"></script>
     <link rel="top" title="Plone: worfklow e sicurezza 0.1 documentation" href="index.html" />
+    <link rel="next" title="I gruppi" href="groups.html" />
     <link rel="prev" title="Introduzione" href="intro.html" /> 
   </head>
   <body>
@@ -36,6 +37,9 @@
         <li class="right" style="margin-right: 10px">
           <a href="genindex.html" title="Indice generale"
              accesskey="I">indice</a></li>
+        <li class="right" >
+          <a href="groups.html" title="I gruppi"
+             accesskey="N">successivo</a> |</li>
         <li class="right" >
           <a href="intro.html" title="Introduzione"
              accesskey="P">precedente</a> |</li>
@@ -53,7 +57,16 @@
 <p>Per quanto poco ci possa essere da dire sugli utenti, qualcosa vale la pena venga detto.</p>
 <p>Un utente è un visitatore del sito che ha eseguito l&#8217;autenticazione, che possiede quindi un account
 per accedere al sito.</p>
+<p>In alcuni siti, dove è abilitata l&#8217;autoregistrazione degli utenti, chiunque può diventare utente
+del sito.</p>
 <p>Ogni utente del sito ha (di solito) il <strong>ruolo Collaboratore</strong> (<strong>Member</strong>).</p>
+<p>Ci possono essere eccezioni?
+Sì, un esempio molto comune è legato alle basi dati di utenti che non siano quella predefinita di
+Plone (<strong>plugin PAS</strong> che forniscono altri basi dati utente).
+La base dati LDAP più comune in Plone permette di configurare quali ruoli assegnare agli utenti
+che si autenticano attraverso quel sistema.
+In questo caso <em>Member</em> è solo il valore predefinito, ma sarebbe possibile fornire da subito altri
+ruoli o non fornire nemmeno <em>Member</em>.</p>
 <div class="section" id="che-poteri-ha-un-utente">
 <h2>Che poteri ha un utente?<a class="headerlink" href="#che-poteri-ha-un-utente" title="link permanente per questa intestazione">¶</a></h2>
 <p>Ci si potrebbe aspettare che il possedere un account in un sito Plone fornisca qualche tipo di
@@ -67,6 +80,8 @@ personali.</p>
 </div>
 <p>Per il resto (e nella versione attuale di Plone questo è vero di partenza) un utente del sito non
 ha di partenza nessun altro potere.</p>
+<p>L&#8217;utente inizia ad acquisire poteri nel momento in cui gli vengono assegnati dei ruoli
+(direttamente, o tramite un gruppo).</p>
 <div class="section" id="le-cartelle-personali">
 <h3>Le cartelle personali<a class="headerlink" href="#le-cartelle-personali" title="link permanente per questa intestazione">¶</a></h3>
 <p>In alcuni siti l&#8217;amministratore potrebbe aver abilitato l&#8217;uso delle <strong>cartelle personali</strong> degli
@@ -110,11 +125,11 @@ solito va presa in considerazione assieme ad una modifica dei workflow e della s
 </div>
 <div class="section" id="l-utente-anonimo">
 <h2>L&#8217;utente anonimo<a class="headerlink" href="#l-utente-anonimo" title="link permanente per questa intestazione">¶</a></h2>
-<p>Anche <em>il visitatore anonimo è un utente</em>, che possiede un ruolo speciale: <strong>Anonimo</strong>
-(<strong>Anonymous</strong>). L&#8217;unica differenza con un utente autenticato è che non ha strumenti personali
-o un&#8217;area dove salvare le proprie preferenze e che non identifica un singolo visitatore ma
-una intera schiera di visitatori.</p>
-<p>Sia che stiate disegnando una sito pubblico o una intranet, <em>questo utente va previsto</em>.</p>
+<p>Anche <em>il visitatore anonimo è un utente</em> e che possiede un ruolo speciale: <strong>Anonimo</strong>
+(<strong>Anonymous</strong>). L&#8217;unica differenza con un utente autenticato è che non ha link agli strumenti
+personali o un&#8217;area dove salvare le proprie preferenze, e che non identifica un singolo visitatore
+ma una intera schiera di visitatori.</p>
+<p>Sia che stiate realizzando una sito pubblico o una intranet, <em>questo utente va previsto</em>.</p>
 <p>In un <strong>sito pubblico</strong> l&#8217;utente anonimo è quello che genera la maggior parte del traffico (i bot e
 crawler dei motori di ricerca sono utenti anonimi). Va capito cosa e cosa non possono vedere, e
 la sicurezza del sito deve essere calibrata su questa idea.</p>
@@ -160,6 +175,9 @@ documenti che si credevano segreti.</p>
   <h4>Argomento precedente</h4>
   <p class="topless"><a href="intro.html"
                         title="capitolo precedente">Introduzione</a></p>
+  <h4>Argomento successivo</h4>
+  <p class="topless"><a href="groups.html"
+                        title="capitolo successivo">I gruppi</a></p>
   <h3>Questa pagina</h3>
   <ul class="this-page-menu">
     <li><a href="_sources/users.txt"
@@ -188,6 +206,9 @@ documenti che si credevano segreti.</p>
         <li class="right" style="margin-right: 10px">
           <a href="genindex.html" title="Indice generale"
              >indice</a></li>
+        <li class="right" >
+          <a href="groups.html" title="I gruppi"
+             >successivo</a> |</li>
         <li class="right" >
           <a href="intro.html" title="Introduzione"
              >precedente</a> |</li>

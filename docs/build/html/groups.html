@@ -1,0 +1,197 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>I gruppi &mdash; Plone: worfklow e sicurezza 0.1 documentation</title>
+    
+    <link rel="stylesheet" href="_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/translations.js"></script>
+    <link rel="top" title="Plone: worfklow e sicurezza 0.1 documentation" href="index.html" />
+    <link rel="prev" title="Gli utenti" href="users.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigazione</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="Indice generale"
+             accesskey="I">indice</a></li>
+        <li class="right" >
+          <a href="users.html" title="Gli utenti"
+             accesskey="P">precedente</a> |</li>
+        <li><a href="index.html">Plone: worfklow e sicurezza 0.1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="i-gruppi">
+<h1>I gruppi<a class="headerlink" href="#i-gruppi" title="link permanente per questa intestazione">¶</a></h1>
+<p>I gruppi sono semplicemente un accorpamento di utenti e a basso livello molto spesso gruppi e utenti
+sono visti allo stesso modo.</p>
+<p>I gruppi sono estremamente utili e molto comodi nel momento in cui è necessario assegnare <em>ruoli
+locali</em> qua e là per il sito.</p>
+<p>Solo gli utenti reali possono far parte dei gruppi, l&#8217;utente anonimo non è identificabile in nessun
+gruppo.</p>
+<div class="section" id="i-gruppi-predefiniti-di-plone">
+<h2>I gruppi predefiniti di Plone<a class="headerlink" href="#i-gruppi-predefiniti-di-plone" title="link permanente per questa intestazione">¶</a></h2>
+<p>Alla creazione di un sito Plone troverete già <em>quattro gruppi predefiniti</em>, tre di questi hanno
+assegnati dei <strong>ruoli globali</strong> (che non ha di solito molto senso modificare).</p>
+<p>Se uno o più di questi gruppi non serve: cancellatelo! Non ci sono problemi.</p>
+<div class="figure">
+<img alt="Elenco generale dei gruppi" src="_images/usergroup-groupprefs.png" />
+<p class="caption"><em>Come si presenta la gestione dei gruppi</em></p>
+</div>
+<div class="section" id="il-gruppo-administrators">
+<h3>Il gruppo &#8220;Administrators&#8221;<a class="headerlink" href="#il-gruppo-administrators" title="link permanente per questa intestazione">¶</a></h3>
+<p>Il gruppo degli amministratore è estremamente utile, anche se con la versione 4.1 di Plone e
+l&#8217;introduzione del nuovo ruolo <strong>Amministratore del sito</strong> (<strong>Site Administrator</strong>) ha forse perso
+parte della sua importanza.</p>
+<p>Nella configurazione base (e non ho mai trovato motivi per cambiare questo comportamento) il gruppo
+possiede nativamente il ruolo di <strong>Manager</strong>.</p>
+<p>Il ruolo di <em>Manager</em> non è un ruolo pensato per essere dato localmente a sezioni del sito, quindi
+la presenza di questo gruppo è importante e comoda.
+All&#8217;interno del gruppo vanno inseriti tutti gli utenti (pochi!) che devono avere questo potere.</p>
+</div>
+<div class="section" id="il-gruppo-site-administrators">
+<h3>Il gruppo &#8220;Site Administrators&#8221;<a class="headerlink" href="#il-gruppo-site-administrators" title="link permanente per questa intestazione">¶</a></h3>
+<p>Il gruppo degli amministratori del sito è stato introdotto di recente, con l&#8217;introduzione del nuovo
+ruolo <strong>Amministratore del sito</strong> (<strong>Site Administrator</strong>).</p>
+<p>Le osservazioni fatte per il gruppo <em>Administrators</em> si ripetono qui: è un gruppo estremamente utile
+e vi vanno inseriti tutti gli utenti del sito che dovranno gestire il sito in futuro.</p>
+</div>
+<div class="section" id="il-gruppo-reviewers">
+<h3>Il gruppo &#8220;Reviewers&#8221;<a class="headerlink" href="#il-gruppo-reviewers" title="link permanente per questa intestazione">¶</a></h3>
+<p>Il gruppo dei revisori. Tutti i componenti di questo gruppo hanno il potere di <strong>Revisore</strong>
+(<strong>Reviewer</strong>) nel sito.</p>
+<p>A differenza degli altri due gruppi descritti precedentemente, l&#8217;utilità di questo gruppo non è
+assicurata.</p>
+<p>Lo consiglio in presenza di piccoli siti, dove la redazione è estremamente limitata ed in effetti
+chi revisiona i contenuti lo fa in tutto il sito, questo gruppo può servire.
+Va però tenuto presente che il ruolo di <em>Revisore</em> è assegnato in modo globale a questo gruppo,
+quindi bisogna anche avere la certezza che non ci siano eccezioni di sorta (nessuna cartella
+&#8220;speciale&#8221; dove il gruppo <em>non</em> deve avere questo potere).</p>
+<p>In molti altri casi, dove ci sono gruppi separati e redazioni separate, questo gruppo finisce sempre
+per rimanere vuoto. A questo punto consiglio di eliminarlo: non ci sono problemi nel farlo e non
+otterrete altro che evitare problemi o possibili errori.</p>
+</div>
+<div class="section" id="il-gruppo-virtuale-authenticated-users">
+<h3>Il gruppo virtuale &#8220;Authenticated Users&#8221;<a class="headerlink" href="#il-gruppo-virtuale-authenticated-users" title="link permanente per questa intestazione">¶</a></h3>
+<p>Questo gruppo è un gruppo <em>virtuale</em>, non un vero gruppo e non può essere eliminato, poiché
+rappresenta tutti gli utenti autenticati nel sito: non appena un utente esegue il login, diventa
+parte del gruppo.</p>
+<div class="admonition note">
+<p class="first admonition-title">Nota</p>
+<p class="last">Questa funzionalità è <strong>pericolosa</strong> e va capita fino in fondo</p>
+</div>
+<p>Dare un qualunque potere a questo gruppo (soprattutto nel pannello di controllo dei gruppi, quindi
+come <em>ruolo globale</em>) significa dare il ruolo a <em>chiunque</em> ha un account nel sito.</p>
+<p>Il suo uso può invalidare altre configurazioni fatte per altri gruppi o altri utenti.</p>
+<p>Un esempio: se assegnassimo un qualunque ruolo al gruppo &#8220;<em>Authenticated Users</em>&#8221;, per esempio:
+<strong>Lettore</strong> (ma sarebbe uguale per un qualunque altro ruolo) questo renderebbe inutile l&#8217;aver
+assegnato (o assegnare in futuro) quello stesso ruolo ad utenti e gruppi.
+E&#8217; inutile dire &#8220;il gruppo dell&#8217;Ufficio 5 è <em>Lettore</em> sulla cartella
+<tt class="docutils literal"><span class="pre">/uffici/ufficio-5/documenti-privati</span></tt> se <em>tutti</em> gli utenti del sito hanno quel potere e possono
+quindi leggere da quella cartella.</p>
+<div class="section" id="perche-non-lo-consiglio">
+<h4>Perché non lo consiglio?<a class="headerlink" href="#perche-non-lo-consiglio" title="link permanente per questa intestazione">¶</a></h4>
+<p>Questo gruppo è usato molto spesso a sproposito perché <em>sembra</em> facile da capire e usare, più
+semplice che capire fino in fondo come configurare per bene i workflow di Plone e verificato lo
+stato di revisione dei contenuti del sito.</p>
+</div>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="index.html">
+              <img class="logo" src="_static/plone.png" alt="Logo"/>
+            </a></p>
+  <h3><a href="index.html">Tabella dei contenuti</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">I gruppi</a><ul>
+<li><a class="reference internal" href="#i-gruppi-predefiniti-di-plone">I gruppi predefiniti di Plone</a><ul>
+<li><a class="reference internal" href="#il-gruppo-administrators">Il gruppo &#8220;Administrators&#8221;</a></li>
+<li><a class="reference internal" href="#il-gruppo-site-administrators">Il gruppo &#8220;Site Administrators&#8221;</a></li>
+<li><a class="reference internal" href="#il-gruppo-reviewers">Il gruppo &#8220;Reviewers&#8221;</a></li>
+<li><a class="reference internal" href="#il-gruppo-virtuale-authenticated-users">Il gruppo virtuale &#8220;Authenticated Users&#8221;</a><ul>
+<li><a class="reference internal" href="#perche-non-lo-consiglio">Perché non lo consiglio?</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  <h4>Argomento precedente</h4>
+  <p class="topless"><a href="users.html"
+                        title="capitolo precedente">Gli utenti</a></p>
+  <h3>Questa pagina</h3>
+  <ul class="this-page-menu">
+    <li><a href="_sources/groups.txt"
+           rel="nofollow">Mostra sorgente</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Ricerca veloce</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Vai" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Inserisci un termine di ricerca un modulo, classe o nome di funzione
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigazione</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="Indice generale"
+             >indice</a></li>
+        <li class="right" >
+          <a href="users.html" title="Gli utenti"
+             >precedente</a> |</li>
+        <li><a href="index.html">Plone: worfklow e sicurezza 0.1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2012, Luca Fabbri (keul).
+      Creato con <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>
