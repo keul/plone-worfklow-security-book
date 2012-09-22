@@ -7,8 +7,6 @@
 Plone: worfklow e sicurezza
 ===========================
 
-Indice dei contenuti:
-
 .. toctree::
    :maxdepth: 2
 
@@ -17,9 +15,4 @@ Indice dei contenuti:
    groups
    roles
 
-Indices and tables
-==================
-
-* :ref:`genindex`
-* :ref:`search`
 

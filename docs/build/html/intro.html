@@ -27,8 +27,8 @@
     <script type="text/javascript" src="_static/doctools.js"></script>
     <script type="text/javascript" src="_static/translations.js"></script>
     <link rel="top" title="Plone: worfklow e sicurezza 0.1 documentation" href="index.html" />
-    <link rel="next" title="Gli utenti" href="users.html" />
-    <link rel="prev" title="Plone: il Libro dei Workflow" href="index.html" /> 
+    <link rel="next" title="Gli Utenti" href="users.html" />
+    <link rel="prev" title="Plone: worfklow e sicurezza" href="index.html" /> 
   </head>
   <body>
     <div class="related">
@@ -38,10 +38,10 @@
           <a href="genindex.html" title="Indice generale"
              accesskey="I">indice</a></li>
         <li class="right" >
-          <a href="users.html" title="Gli utenti"
+          <a href="users.html" title="Gli Utenti"
              accesskey="N">successivo</a> |</li>
         <li class="right" >
-          <a href="index.html" title="Plone: il Libro dei Workflow"
+          <a href="index.html" title="Plone: worfklow e sicurezza"
              accesskey="P">precedente</a> |</li>
         <li><a href="index.html">Plone: worfklow e sicurezza 0.1 documentation</a> &raquo;</li> 
       </ul>
@@ -61,6 +61,10 @@ la configurazione e la gestione dei <strong>workflow</strong> e della <strong>si
 <p>Il sistema di workflow disponibile in Plone e tutto quello che concerne la sicurezza dei documenti
 nel CMS sono una tra le sue maggiori attrattive e una tra le caratteristiche più potenti, ma molto
 spesso incomprese.</p>
+<p>Non sono un grande fan della documentazione, poiché quest tende a diventare obsoleta molto
+velocemente ma questa parte della tecnologia del CMS è la stessa da quando ho iniziato a lavorarvi
+(o poco è cambiato) e non credo ci saranno grosse novità nel prossimo futuro.
+Questo a mio parere giustifica lo sforzo!</p>
 </div>
 <div class="section" id="per-chi-e-questo-libro">
 <h2>Per chi è questo libro<a class="headerlink" href="#per-chi-e-questo-libro" title="link permanente per questa intestazione">¶</a></h2>
@@ -68,12 +72,18 @@ spesso incomprese.</p>
 il potere di fare grandi cose e plasmare il funzionamento del sito al proprio volere, ma la
 documentazione è sparsa ed a volte assente.</p>
 <p>Questo libro è pensato per entrambi questi tipi di utente:</p>
-<ul class="simple">
-<li>ad uno <strong>sviluppatore Plone</strong> verrà mostrato che cosa è possibile fare senza ricorrere allo
-sviluppo e i limiti oltre i quali lo sviluppo può intervenire (e in che modo).</li>
-<li>ad un <strong>amministratore</strong> verrà mostrato tutto quello che è possibile fare senza ricorrere allo
+<ul>
+<li><p class="first">ad uno <strong>sviluppatore Plone</strong> verrà mostrato che cosa è possibile fare senza ricorrere allo
+sviluppo e i limiti oltre i quali lo sviluppo può intervenire (e in che modo).</p>
+<p>Questo vuole evitare situazioni in cui lo sviluppatore non esperto di Plone <em>non sa</em> di una
+determinata funzionalità, e quindi la reinventa in modo non corretto.</p>
+</li>
+<li><p class="first">ad un <strong>amministratore</strong> verrà mostrato tutto quello che è possibile fare senza ricorrere allo
 sviluppo, semplicemente usando prodotti già presenti o aggiuntivi, o configurado a dovere il
-sistema</li>
+sistema.</p>
+<p>Questo secondo scopo vuole far comprendere agli amministratori quante cose è possibile fare senza
+bisogno di richiedere sviluppo dall&#8217;esterno.</p>
+</li>
 </ul>
 </div>
 <div class="section" id="per-chi-non-e-questo-libro">
@@ -83,6 +93,8 @@ i minimi argomenti necessari per arrivare allo scopo.
 Quando l&#8217;argomento analizzato inizierà ad addentrarsi nei meandri della programmazione verranno
 date le minime informazioni necessarie, fornendo poi riferimenti esterni, nel caso il lettore
 volesse approfondire oltre.</p>
+<p>Qualche riga di codice potrebbe anche essere spiegata, ma sarà sempre ridotta all&#8217;osso e mai ben
+approfondita.</p>
 </div>
 <div class="section" id="che-cosa-verra-approfondito-in-questo-libro">
 <h2>Che cosa verrà approfondito in questo libro<a class="headerlink" href="#che-cosa-verra-approfondito-in-questo-libro" title="link permanente per questa intestazione">¶</a></h2>
@@ -106,16 +118,18 @@ sia già conosciuto dal lettore.</p>
 <h2>Come è strutturato questo libro<a class="headerlink" href="#come-e-strutturato-questo-libro" title="link permanente per questa intestazione">¶</a></h2>
 <p>Il libro parte dalla &#8220;superficie&#8221;, mostrando Plone come si presenta una volta installato e
 spiegandone il funzionamento (e la <em>configurazione</em>) di base.
-Da qui si prenderà lo spunto per le prime riflessioni e domane su cosa è possibile
-personalizzare, il ché ci porterà a scavare sotto la superficie e sarà trampolino di lancio
+Da qui si prenderà lo spunto per le prime riflessioni e domande su cosa è possibile
+personalizzare, il che ci porterà a scavare sotto la superficie e sarà trampolino di lancio
 per personalizzare lo strumento e spingersi quindi verso i confini con la programmazione.</p>
 <p>Sebbene il focus centrale degli argomenti è il CMS Plone, gran parte degli argomenti mostrati
-sono applicabili ale tecnologie sottostanti (<a class="reference external" href="http://zope.org/">Zope</a>, <a class="reference external" href="http://pypi.python.org/pypi/Products.CMFCore">CMF</a>, ...), ma per semplicità di lettura
+sono applicabili alle tecnologie sottostanti (<a class="reference external" href="http://zope.org/">Zope</a>, <a class="reference external" href="http://pypi.python.org/pypi/Products.CMFCore">CMF</a>, ...), ma per semplicità di lettura
 queste differenze di tecnologia <em>non</em> saranno evidenziate nel libro.</p>
 </div>
 <div class="section" id="riferimenti-alle-versioni-utilizzati">
 <h2>Riferimenti alle versioni utilizzati<a class="headerlink" href="#riferimenti-alle-versioni-utilizzati" title="link permanente per questa intestazione">¶</a></h2>
-<p>Quanto mostrato è applicabile alla versione 4 di Plone (specificatamente: <a class="reference external" href="http://plone.org/products/plone/releases/4.2">Plone 4.2.x</a>).</p>
+<p>Quanto mostrato è applicabile alla versione 4 di Plone (specificatamente: <a class="reference external" href="http://plone.org/products/plone/releases/4.2">Plone 4.2.x</a>), ma sono
+quasi certo che se la vostra versione di Plone è maggiore, una grossa percentuale di quanto qui
+riportato sarà comunque estremamente utile.</p>
 </div>
 </div>
 
@@ -144,10 +158,10 @@ queste differenze di tecnologia <em>non</em> saranno evidenziate nel libro.</p>
 
   <h4>Argomento precedente</h4>
   <p class="topless"><a href="index.html"
-                        title="capitolo precedente">Plone: il Libro dei Workflow</a></p>
+                        title="capitolo precedente">Plone: worfklow e sicurezza</a></p>
   <h4>Argomento successivo</h4>
   <p class="topless"><a href="users.html"
-                        title="capitolo successivo">Gli utenti</a></p>
+                        title="capitolo successivo">Gli Utenti</a></p>
   <h3>Questa pagina</h3>
   <ul class="this-page-menu">
     <li><a href="_sources/intro.txt"
@@ -177,10 +191,10 @@ queste differenze di tecnologia <em>non</em> saranno evidenziate nel libro.</p>
           <a href="genindex.html" title="Indice generale"
              >indice</a></li>
         <li class="right" >
-          <a href="users.html" title="Gli utenti"
+          <a href="users.html" title="Gli Utenti"
              >successivo</a> |</li>
         <li class="right" >
-          <a href="index.html" title="Plone: il Libro dei Workflow"
+          <a href="index.html" title="Plone: worfklow e sicurezza"
              >precedente</a> |</li>
         <li><a href="index.html">Plone: worfklow e sicurezza 0.1 documentation</a> &raquo;</li> 
       </ul>

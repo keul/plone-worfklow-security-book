@@ -52,9 +52,11 @@
 <h1>I Ruoli<a class="headerlink" href="#i-ruoli" title="link permanente per questa intestazione">¶</a></h1>
 <p>La miglior definizione di &#8220;ruolo Plone&#8221; che posso trovare è questa:</p>
 <blockquote>
-<div>I ruoli sono un accorpamento di <strong>permessi</strong></div></blockquote>
-<p>Non c&#8217;è altro da dire dal punto di vista tecnico: quando assegnate un ruolo ad un utente, state
-fornendo in realtà una serie di permessi.</p>
+<div>I ruoli sono un accorpamento di <strong>permessi</strong>. I ruoli sono i <strong>poteri</strong> di un utente.</div></blockquote>
+<p>Non c&#8217;è altro da dire dal punto di vista &#8220;tecnico&#8221;: quando assegnate un ruolo ad un utente, state
+fornendo in realtà una serie di permessi (il vero motore della sicurezza di Zope).
+Come già detto in precedenza infatti non potete in nessun modo assegnare permessi agli utenti o
+ai gruppi, ma potete solo assegnare ruoli.</p>
 <p>Questa è una delle prime caratteristiche che fanno assaporare la potenza del sistema sottostante.
 Prendiamo ad esempio in ruolo del <strong>Lettore</strong> (che verrà introdotto meglio in seguito).
 cosa significhi essere un &#8220;lettore&#8221; non è qualcosa scritto nella roccia; siti diversi (e senza
@@ -62,7 +64,63 @@ dover per forza sviluppare del codice) possono differire dalla sua definizione, 
 limitando i poteri (permessi) del ruolo.</p>
 <div class="section" id="i-ruoli-predefiniti">
 <h2>I ruoli predefiniti<a class="headerlink" href="#i-ruoli-predefiniti" title="link permanente per questa intestazione">¶</a></h2>
-<p>xxx</p>
+<p>Plone (e il framework Zope sottostante) forniscono una serie di ruoli predefiniti il cui
+funzionamento è bene approfondire e comprendere.
+Il motivo principale è che, sebbene sia possibile creare nuovi ruoli, l&#8217;eventualità di doverlo fare
+è meno frequente di quanto si pensi (anche se non impossibile).</p>
+<div class="section" id="i-ruoli-forniti-di-zope">
+<h3>I ruoli forniti di Zope<a class="headerlink" href="#i-ruoli-forniti-di-zope" title="link permanente per questa intestazione">¶</a></h3>
+<div class="figure">
+<img alt="I ruoli di Zope" src="_images/zmi-security-zope-roles.png" />
+<p class="caption"><em>I quattro ruoli Zope, visti da ZMI</em></p>
+</div>
+<p>I ruoli forniti da Zope sono quattro e non sono modificabili od eliminabili. Sulla loro presenza
+si basa il funzionamento della sicurezza dell&#8217;application server, e quindi di Plone.</p>
+<div class="section" id="anonimo-anonymous">
+<h4>Anonimo (Anonymous)<a class="headerlink" href="#anonimo-anonymous" title="link permanente per questa intestazione">¶</a></h4>
+<p><strong>Anonimo</strong> (<strong>Anonymous</strong>) è il ruolo assegnato agli utenti anonimi.
+E&#8217; un ruolo speciale ed ha un comportamento diverso da tutti gli altri ruoli.
+Non è infatti possibile definire un permesso accessibile dal ruolo Anonymous ma non da altri ruoli:
+un potere dato ad un anonimo è di certo fornito anche a <em>qualunque</em> utente del sito.</p>
+<p>Questo può sembrare scontato dal punto di vista logico, ma per gli altri ruoli può non essere così:
+con altri ruoli sarebbe possibile disegnare una policy di sicurezza che assegni un permesso ad un
+ruolo &#8220;poco importante&#8221; e non darlo ad un ruolo importante (un esempio: dare il permesso di vedere
+un contenuto ad un <em>Collaboratore</em> del sito ma non al <em>Manager</em>. Possibile, anche se totalmente
+illogico e sconsigliato).</p>
+<p>Il ruolo di Anonimo è per sua natura associato con il tipo di utente anonimo. Nel disegnare workflow
+per i vostri contenuti questo ruolo assume parecchia importanza: un errore nell&#8217;assegnare un
+permesso di troppo a questo utente e la sicurezza del vostro siti potrebbe risentirne.</p>
+</div>
+<div class="section" id="autenticato-authenticated">
+<h4>Autenticato (Authenticated)<a class="headerlink" href="#autenticato-authenticated" title="link permanente per questa intestazione">¶</a></h4>
+<p><strong>Autenticato</strong> (<strong>Authenticated</strong>) è il ruolo automaticamente assegnato ai visitatori del sito
+che hanno eseguito un qualunque tipo di autenticazione, anche tramite <a class="reference external" href="http://en.wikipedia.org/wiki/Basic_access_authentication">autenticazione basic</a> via
+ZMI.</p>
+<p>Un utente con ruolo <em>Autenticato</em> è quindi un utente a livello Zope.</p>
+<p>Questo ruolo non è solitamente molto utilizzato nei workflow di Plone, preferendovi, per
+correttezza, il ruolo di <em>Collaboratore</em>.</p>
+</div>
+<div class="section" id="manager">
+<h4>Manager<a class="headerlink" href="#manager" title="link permanente per questa intestazione">¶</a></h4>
+<p>L&#8217;Alpha e l&#8217;Omega dei ruoli. Chi ha ruolo <strong>Manager</strong> ha solitamente potere assoluto nel sito Plone
+ed entra senza restrizioni in ZMI.</p>
+<p>E&#8217; un ruolo ovviamente pericoloso e non va mai assegnato a sproposito. Come regola generale, se il
+vostro utente <em>non ha</em> bisogno di accedere alla ZMI, <em>Manager</em> non è il ruolo migliore da
+assegnargli, ma va preferito il ruolo di <em>Amministratore del Sito</em>.</p>
+<p>E&#8217; lecito avere installazioni di Plone dove esiste un solo utente con questo ruolo: <strong>admin</strong>,
+l&#8217;utente predefinito a livello Zope che è di solito il creatore dei siti Plone.</p>
+</div>
+<div class="section" id="owner">
+<h4>Owner<a class="headerlink" href="#owner" title="link permanente per questa intestazione">¶</a></h4>
+<p>Il concetto di <strong>Possessore</strong> (<strong>Owner</strong>), per quanto orribilmente tradotto in italiano, nasce a
+livello Zope.
+Un primo esempio: l&#8217;utente <em>admin</em>, introdotto poco fa, ha di solito il ruolo di <em>Owner</em>
+sull&#8216;&#8220;oggetto sito Plone&#8221;.</p>
+<p>E&#8217; un ruolo che va ben compreso e di solito deve essere assegnato ad un solo utente, per quanto è
+possibile fornirlo a più persone (ciò oggi è fortunatamente più difficile da farsi da interfaccia
+Plone, mentre in versioni precedenti del CMS era purtroppo un modo di operare molto comune).</p>
+</div>
+</div>
 </div>
 </div>
 
@@ -78,7 +136,16 @@ limitando i poteri (permessi) del ruolo.</p>
   <h3><a href="index.html">Tabella dei contenuti</a></h3>
   <ul>
 <li><a class="reference internal" href="#">I Ruoli</a><ul>
-<li><a class="reference internal" href="#i-ruoli-predefiniti">I ruoli predefiniti</a></li>
+<li><a class="reference internal" href="#i-ruoli-predefiniti">I ruoli predefiniti</a><ul>
+<li><a class="reference internal" href="#i-ruoli-forniti-di-zope">I ruoli forniti di Zope</a><ul>
+<li><a class="reference internal" href="#anonimo-anonymous">Anonimo (Anonymous)</a></li>
+<li><a class="reference internal" href="#autenticato-authenticated">Autenticato (Authenticated)</a></li>
+<li><a class="reference internal" href="#manager">Manager</a></li>
+<li><a class="reference internal" href="#owner">Owner</a></li>
+</ul>
+</li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>

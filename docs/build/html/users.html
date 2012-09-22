@@ -54,21 +54,27 @@
             
   <div class="section" id="gli-utenti">
 <h1>Gli Utenti<a class="headerlink" href="#gli-utenti" title="link permanente per questa intestazione">¶</a></h1>
-<p>Per quanto poco ci possa essere da dire sugli utenti, qualcosa vale la pena venga detto.</p>
-<p>Un utente è un visitatore del sito che ha eseguito l&#8217;autenticazione, che possiede quindi un account
-per accedere al sito.</p>
+<p>Per quanto poco ci possa essere da dire sugli utenti, qualcosa vale la pena venga definito.</p>
+<p>Un <strong>utente</strong> è un visitatore del sito che ha eseguito l&#8217;<strong>autenticazione</strong>, che possiede quindi un
+account per accedere al sito.</p>
 <p>In alcuni siti, dove è abilitata l&#8217;autoregistrazione degli utenti, chiunque può diventare utente
 del sito.</p>
 <p>Ogni utente del sito ha (di solito) il <strong>ruolo Collaboratore</strong> (<strong>Member</strong>).</p>
 <p>Ci possono essere eccezioni?
-Sì, un esempio molto comune è legato alle basi dati di utenti che non siano quella predefinita di
-Plone (<strong>plugin PAS</strong> che forniscono altri basi dati utente).
-La base dati LDAP più comune in Plone permette di configurare quali ruoli assegnare agli utenti
-che si autenticano attraverso quel sistema.
-In questo caso <em>Member</em> è solo il valore predefinito, ma sarebbe possibile fornire da subito altri
-ruoli o non fornire nemmeno <em>Member</em>.</p>
-<div class="section" id="che-poteri-ha-un-utente">
-<h2>Che poteri ha un utente?<a class="headerlink" href="#che-poteri-ha-un-utente" title="link permanente per questa intestazione">¶</a></h2>
+Sì.
+Altre basi dati di utenti che non siano quella predefinita di Plone (queste fonti si ottengono
+tramite <strong>plugin PAS</strong>) forniscono di solito questo ruolo, ma nessuno vieta di configurare a dovere
+il plugin per fornire anche altri ruoli, o nessun ruolo.</p>
+<div class="section" id="come-si-danno-poteri-agli-utenti">
+<h2>Come si danno poteri agli utenti?<a class="headerlink" href="#come-si-danno-poteri-agli-utenti" title="link permanente per questa intestazione">¶</a></h2>
+<blockquote>
+<div><p>Gli utenti acquisiscono diversi poteri perché vengono loro assegnati <strong>ruoli</strong> oppure perché,
+facendo parte di <strong>gruppi</strong>, acquisicono ruoli dati al gruppo.</p>
+<p>Gli utenti non possono avere direttamente <strong>permessi</strong>.</p>
+</div></blockquote>
+</div>
+<div class="section" id="che-poteri-predefiniti-ha-un-utente">
+<h2>Che poteri predefiniti ha un utente?<a class="headerlink" href="#che-poteri-predefiniti-ha-un-utente" title="link permanente per questa intestazione">¶</a></h2>
 <p>Ci si potrebbe aspettare che il possedere un account in un sito Plone fornisca qualche tipo di
 potere, ma questo <em>non è scontato</em>.</p>
 <p>L&#8217;utente autenticato ha di certo (a meno di personalizzazioni poco comuni) una differenza
@@ -87,6 +93,10 @@ ha di partenza nessun altro potere.</p>
 <p>In alcuni siti l&#8217;amministratore potrebbe aver abilitato l&#8217;uso delle <strong>cartelle personali</strong> degli
 utenti, una speciale posizione del sito da considerarsi come la &#8220;casa&#8221; dell&#8217;utente (un po&#8217; come
 la directory &#8220;home&#8221; comune in tutti i sistemi operativi odierni).</p>
+<div class="figure">
+<img alt="Link alla cartella personale" src="_images/user-home-link.png" />
+<p class="caption"><em>Il link per raggiungere la propria cartella personale</em></p>
+</div>
 <p>Questa impostazione ad oggi è disattivata nelle impostazioni predefinite ma può ancora essere
 attivata dalle <em>impostazioni di sicurezza</em> del sito.</p>
 <div class="figure">
@@ -96,7 +106,7 @@ attivata dalle <em>impostazioni di sicurezza</em> del sito.</p>
 <p>Che cosa può fare un utente comune nella propria cartella personale? Come ripeterò molto spesso
 nel resto del libro: dipende.
 L&#8217;unica cosa che succede sempre è che l&#8217;utente ha il ruolo di  <strong>Possessore</strong> (<strong>Owner</strong>) della
-cartella e quindi acquisisce tutti i poteri del ruolo.</p>
+cartella e quindi acquisisce tutti i poteri del ruolo quando lavora in quella sezione.</p>
 <p>In una installazione base questo significa che l&#8217;utente è in grado di creare qualunque contenuto
 egli voglia all&#8217;interno della propria cartella e, con i workflow che oggi sono predefiniti in
 Plone, pubblicare i contenuti.</p>
@@ -110,8 +120,8 @@ Nella mia esperienza (soprattutto con le vecchie versioni di Plone, precedenti a
 questa impostazione era di base abilitata e ci si dimenticata di disattivarla) questa impostazione
 provocava vari problemi.</p>
 <p>Quando si disegna un sito con un workflow per ospitare una redazione molto complessa, si passa
-diverso  tempo a disegnare una struttura del sito più o meno complessa, dove utenti e gruppi
-abbiano compiti ben definiti.
+diverso tempo ad ideare una struttura del sito più o meno complessa, dove utenti e gruppi abbiano
+compiti ben definiti.
 Ad esempio: l&#8217;ipotetico &#8220;Ufficio 5&#8221; può avere una sua cartella e si vuole che gli utenti
 scrivano lì dentro i contenuti relativi all&#8217;ufficio.</p>
 <p>Molto spesso gli utenti trovano la strada più semplice: si accorgono di avere una cartella
@@ -119,35 +129,44 @@ personale dove possono scrivere i propri documenti... e lì scrivono.
 Al termine del lavoro di solito viene chiesto agli amministratori di spostare i contenuti altrove.
 In questo modo non c&#8217;è bisogno di imparare come funziona il workflow del sito o dove si trova la
 propria area di lavoro.</p>
+<div class="section" id="quanto-usare-le-cartelle-personali">
+<h4>Quanto usare le cartelle personali<a class="headerlink" href="#quanto-usare-le-cartelle-personali" title="link permanente per questa intestazione">¶</a></h4>
 <p>La cartella personale è una bella funzionalità che va valutata e che può tornare utile, ma di
 solito va presa in considerazione assieme ad una modifica dei workflow e della sicurezza del sito.</p>
+<p>Se il vostro sito vuole creare una community dove però ogni utente deve avere il proprio spazio,
+la cartella personale può essere una strada molto comoda.</p>
+</div>
 </div>
 </div>
 <div class="section" id="l-utente-anonimo">
 <h2>L&#8217;utente anonimo<a class="headerlink" href="#l-utente-anonimo" title="link permanente per questa intestazione">¶</a></h2>
-<p>Anche <em>il visitatore anonimo è un utente</em> e che possiede un ruolo speciale: <strong>Anonimo</strong>
-(<strong>Anonymous</strong>). L&#8217;unica differenza con un utente autenticato è che non ha link agli strumenti
-personali o un&#8217;area dove salvare le proprie preferenze, e che non identifica un singolo visitatore
-ma una intera schiera di visitatori.</p>
+<p>Anche <em>il visitatore anonimo è un utente</em> e possiede un ruolo speciale: <strong>Anonimo</strong>
+(<strong>Anonymous</strong>).
+L&#8217;unica differenza con un utente autenticato è che non ha link agli strumenti personali o un&#8217;area
+dove salvare le proprie preferenze, e che non identifica un singolo visitatore ma una intera
+schiera di visitatori.</p>
 <p>Sia che stiate realizzando una sito pubblico o una intranet, <em>questo utente va previsto</em>.</p>
-<p>In un <strong>sito pubblico</strong> l&#8217;utente anonimo è quello che genera la maggior parte del traffico (i bot e
-crawler dei motori di ricerca sono utenti anonimi). Va capito cosa e cosa non possono vedere, e
+<p>In un <strong>sito pubblico</strong> l&#8217;utente anonimo è quello che genera la maggior parte del traffico (i <strong>bot
+e crawler</strong> dei motori di ricerca sono utenti anonimi). Va capito cosa e cosa non possono vedere, e
 la sicurezza del sito deve essere calibrata su questa idea.</p>
-<p>Per <strong>una intranet</strong> le cose possono sembrare più semplici e in certi contesti lo sono, ma non
+<p>Per <strong>una intranet</strong> le cose possono sembrare più semplici, e in certi contesti lo sono, ma non
 ignorate il problema.
-Ho visto un paio di casi dove il fatto che una intranet non sia accessibile al pubblico lasciava
-pensare di essere al sicuro, per poi accorgersi che una qualunque persona in grado di collegare il
-proprio computer alla rete dell&#8217;azienda o dell&#8217;ente potesse poi accedere a documenti importanti.</p>
+Ho visto casi dove il fatto che una intranet non sia accessibile al pubblico lasciava intendere
+di essere al sicuro, per poi accorgersi che una qualunque persona in grado di collegare il proprio
+computer alla rete dell&#8217;azienda o dell&#8217;ente potesse poi accedere a documenti importanti.</p>
 <p>In altri casi ho visto come l&#8217;obbligo di autenticazione di una intranet venisse ottenuto
 limitandosi a rendere privata la home page del sito.
-Ci si accorgeva poi col tempo che un utente fosse in grado si saltare la home page e accedere
-direttamente ad altre pagine (ad esempio: la pagina di ricerca di Plone), fosse in grado di vedere
-documenti che si credevano segreti.</p>
+Ci si accorgeva poi col tempo che un utente fosse in grado di saltare la home page e accedere
+direttamente ad altre pagine (ad esempio: la pagina di ricerca di Plone) e fosse quindi in grado
+di vedere documenti che si credevano segreti.</p>
 <div class="admonition note">
 <p class="first admonition-title">Nota</p>
-<p class="last">Il &#8220;<em>workflow intranet</em>&#8221; fornito da Plone non è ottimale!</p>
+<p class="last">Il &#8220;<em>workflow intranet</em>&#8221; fornito da Plone <strong>può non essere ottimale</strong> per i vostri scopi!</p>
 </div>
-<p>In questi casi la ricerca di Plone può darvi da subito un&#8217;idea della situazione (ma non basta).</p>
+<p>In questi casi la ricerca di Plone può darvi da subito un&#8217;idea della situazione ed aiuta molto
+a trovare potenziali problemi ma può non bastare poiché esistono tipi di contenuto che sono
+configurati per non essere &#8220;ricercabili&#8221;.
+La loro visibilità va comunque verificata</p>
 </div>
 </div>
 
@@ -163,8 +182,12 @@ documenti che si credevano segreti.</p>
   <h3><a href="index.html">Tabella dei contenuti</a></h3>
   <ul>
 <li><a class="reference internal" href="#">Gli Utenti</a><ul>
-<li><a class="reference internal" href="#che-poteri-ha-un-utente">Che poteri ha un utente?</a><ul>
-<li><a class="reference internal" href="#le-cartelle-personali">Le cartelle personali</a></li>
+<li><a class="reference internal" href="#come-si-danno-poteri-agli-utenti">Come si danno poteri agli utenti?</a></li>
+<li><a class="reference internal" href="#che-poteri-predefiniti-ha-un-utente">Che poteri predefiniti ha un utente?</a><ul>
+<li><a class="reference internal" href="#le-cartelle-personali">Le cartelle personali</a><ul>
+<li><a class="reference internal" href="#quanto-usare-le-cartelle-personali">Quanto usare le cartelle personali</a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li><a class="reference internal" href="#l-utente-anonimo">L&#8217;utente anonimo</a></li>

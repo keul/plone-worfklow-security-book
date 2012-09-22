@@ -2,7 +2,9 @@
 - variabili di worflow
 - worklist
 - protezioni degli script in ZMI tramite file metadata
-- ruoli Zope e ruoli Plone
-- gruppo virtuale authenticated users
+x ruoli Zope e ruoli Plone
+x gruppo virtuale authenticated users
 - dashboard
 - allowedRolesAndUSers, View e prodotti che usano lo stesso principio (per il revisore)
+- data di scadenza
+
