@@ -52,11 +52,12 @@
 <h1>I Ruoli<a class="headerlink" href="#i-ruoli" title="link permanente per questa intestazione">¶</a></h1>
 <p>La miglior definizione di &#8220;ruolo Plone&#8221; che posso trovare è questa:</p>
 <blockquote>
-<div>I ruoli sono un accorpamento di <strong>permessi</strong>. I ruoli sono i <strong>poteri</strong> di un utente.</div></blockquote>
-<p>Non c&#8217;è altro da dire dal punto di vista &#8220;tecnico&#8221;: quando assegnate un ruolo ad un utente, state
-fornendo in realtà una serie di permessi (il vero motore della sicurezza di Zope).
-Come già detto in precedenza infatti non potete in nessun modo assegnare permessi agli utenti o
-ai gruppi, ma potete solo assegnare ruoli.</p>
+<div>I ruoli sono un accorpamento di <strong>permessi</strong>.
+I sono direttamente associabili ai <strong>poteri</strong> di un utente nel sito.</div></blockquote>
+<p>Quando assegnate un ruolo ad un utente, state fornendo in realtà una serie di permessi (il vero
+motore della sicurezza di Zope).
+Come già detto in precedenza, <em>non potete in nessun modo assegnare permessi agli utenti</em> o ai
+gruppi, ma potete solo assegnare ruoli.</p>
 <p>Questa è una delle prime caratteristiche che fanno assaporare la potenza del sistema sottostante.
 Prendiamo ad esempio in ruolo del <strong>Lettore</strong> (che verrà introdotto meglio in seguito).
 cosa significhi essere un &#8220;lettore&#8221; non è qualcosa scritto nella roccia; siti diversi (e senza
@@ -67,15 +68,15 @@ limitando i poteri (permessi) del ruolo.</p>
 <p>Plone (e il framework Zope sottostante) forniscono una serie di ruoli predefiniti il cui
 funzionamento è bene approfondire e comprendere.
 Il motivo principale è che, sebbene sia possibile creare nuovi ruoli, l&#8217;eventualità di doverlo fare
-è meno frequente di quanto si pensi (anche se non impossibile).</p>
+è meno frequente di quanto si pensi (anche se non da escludere a priori).</p>
 <div class="section" id="i-ruoli-forniti-di-zope">
 <h3>I ruoli forniti di Zope<a class="headerlink" href="#i-ruoli-forniti-di-zope" title="link permanente per questa intestazione">¶</a></h3>
 <div class="figure">
 <img alt="I ruoli di Zope" src="_images/zmi-security-zope-roles.png" />
 <p class="caption"><em>I quattro ruoli Zope, visti da ZMI</em></p>
 </div>
-<p>I ruoli forniti da Zope sono quattro e non sono modificabili od eliminabili. Sulla loro presenza
-si basa il funzionamento della sicurezza dell&#8217;application server, e quindi di Plone.</p>
+<p>I ruoli forniti da Zope sono quattro e non sono modificabili o eliminabili. Sulla loro presenza si
+basa il funzionamento della sicurezza dell&#8217;application server, e quindi di Plone.</p>
 <div class="section" id="anonimo-anonymous">
 <h4>Anonimo (Anonymous)<a class="headerlink" href="#anonimo-anonymous" title="link permanente per questa intestazione">¶</a></h4>
 <p><strong>Anonimo</strong> (<strong>Anonymous</strong>) è il ruolo assegnato agli utenti anonimi.
@@ -87,9 +88,9 @@ con altri ruoli sarebbe possibile disegnare una policy di sicurezza che assegni 
 ruolo &#8220;poco importante&#8221; e non darlo ad un ruolo importante (un esempio: dare il permesso di vedere
 un contenuto ad un <em>Collaboratore</em> del sito ma non al <em>Manager</em>. Possibile, anche se totalmente
 illogico e sconsigliato).</p>
-<p>Il ruolo di Anonimo è per sua natura associato con il tipo di utente anonimo. Nel disegnare workflow
+<p>Il ruolo Anonimo è per sua natura associato con il tipo di utente anonimo. Nel disegnare workflow
 per i vostri contenuti questo ruolo assume parecchia importanza: un errore nell&#8217;assegnare un
-permesso di troppo a questo utente e la sicurezza del vostro siti potrebbe risentirne.</p>
+permesso di troppo a questo utente e la sicurezza del vostro sito potrebbe essere compromessa.</p>
 </div>
 <div class="section" id="autenticato-authenticated">
 <h4>Autenticato (Authenticated)<a class="headerlink" href="#autenticato-authenticated" title="link permanente per questa intestazione">¶</a></h4>
@@ -97,7 +98,7 @@ permesso di troppo a questo utente e la sicurezza del vostro siti potrebbe risen
 che hanno eseguito un qualunque tipo di autenticazione, anche tramite <a class="reference external" href="http://en.wikipedia.org/wiki/Basic_access_authentication">autenticazione basic</a> via
 ZMI.</p>
 <p>Un utente con ruolo <em>Autenticato</em> è quindi un utente a livello Zope.</p>
-<p>Questo ruolo non è solitamente molto utilizzato nei workflow di Plone, preferendovi, per
+<p>Questo ruolo non è solitamente molto utilizzato nei workflow di Plone preferendovi, per
 correttezza, il ruolo di <em>Collaboratore</em>.</p>
 </div>
 <div class="section" id="manager">
@@ -106,7 +107,7 @@ correttezza, il ruolo di <em>Collaboratore</em>.</p>
 ed entra senza restrizioni in ZMI.</p>
 <p>E&#8217; un ruolo ovviamente pericoloso e non va mai assegnato a sproposito. Come regola generale, se il
 vostro utente <em>non ha</em> bisogno di accedere alla ZMI, <em>Manager</em> non è il ruolo migliore da
-assegnargli, ma va preferito il ruolo di <em>Amministratore del Sito</em>.</p>
+assegnargli ma va preferito il ruolo di <em>Amministratore del Sito</em>.</p>
 <p>E&#8217; lecito avere installazioni di Plone dove esiste un solo utente con questo ruolo: <strong>admin</strong>,
 l&#8217;utente predefinito a livello Zope che è di solito il creatore dei siti Plone.</p>
 </div>
@@ -119,6 +120,50 @@ sull&#8216;&#8220;oggetto sito Plone&#8221;.</p>
 <p>E&#8217; un ruolo che va ben compreso e di solito deve essere assegnato ad un solo utente, per quanto è
 possibile fornirlo a più persone (ciò oggi è fortunatamente più difficile da farsi da interfaccia
 Plone, mentre in versioni precedenti del CMS era purtroppo un modo di operare molto comune).</p>
+<p>Innanzi tutto: nella maggior parte dei casi è un ruolo che è direttamente associato con il creatore
+del contenuto.
+Se &#8220;Utente 1&#8221; crea una pagina, esso diventa <em>Possessore</em> della pagina stessa.</p>
+<p>Questo si può vedere anche dal campo &#8220;<em>Creatori</em>&#8221; comune a tutti i contenuti Plone, ma non bisogna
+farsi trarre in inganno: il valore di questo campo è solo un&#8217;informazione testuale che può essere
+facilmente modificata.
+Cambiando il valore di &#8220;Creatori&#8221; con un altro utente del sito non assegna il ruolo di <em>Possessore</em>
+al nuovo utente specificato.
+Il fatto che tale campo sia nell&#8217;insieme dei campi raggruppati sotto la sezione &#8220;<em>Proprietario</em>&#8221;
+non fa altro che aumentare la confusione.</p>
+<div class="figure">
+<img alt="Metadato &quot;Creatori&quot;" src="_images/edit-form-creators.png" />
+<p class="caption"><em>La vista del campo &#8220;Creatori&#8221;, nelle informazioni di &#8220;Possessore&#8221;</em></p>
+</div>
+<p>Le recenti versioni di Plone hanno reso più difficile assegnare questo ruolo a sproposito a più
+utenti, eppure è possibile (e lecito) cambiare proprietario di un contenuto.</p>
+<p>Esiste una vista speciale, raggiungibile solo conoscendone l&#8217;URL (una particolarità introdotta a
+mio parere per errore in Plone 3): <tt class="docutils literal"><span class="pre">ownership_form</span></tt>.
+Questa vista va lanciata sul contesto del documento al quale si vuole cambiare proprietario e
+permette di modificare l&#8217;utente che ha ruolo di <em>Possessore</em> sul contenuto.</p>
+<div class="figure">
+<img alt="Vista &quot;change_ownership&quot;" src="_images/change_ownership.png" />
+<p class="caption"><em>La vista &#8220;change_ownership&#8221; lanciata su un contesto</em></p>
+</div>
+<p>Esiste un comodissimo prodotto che permette di manipolare in blocco il ruolo di <em>Possessore</em> e
+volendo anche il campo &#8220;Cratori&#8221; per più contenti del sito: <a class="reference external" href="http://plone.org/products/plone.app.changeownership">plone.app.changeownership</a>.</p>
+<p>Quanto è importante il ruolo <em>Possessore</em>?
+Dipende.</p>
+<p>Nel momento della creazione di un contenuto questo ruolo ha di certo importanza, perché è ovvio che
+la persona che sta salvando per la prima volta il documento deve avere i poteri di modifica.
+Nel seguito invece la sua importanza dipende dal contesto.</p>
+<p>Se state realizzando la sicurezza di un tipo di contenuto dove, per sua natura, il creatore è
+importante (ad esempio: il contenuto rappresenta la prenotazione di un&#8217;auto aziendale) allora
+il creatore continua ad avere una grande importanza per tutto il ciclo di vita del contenuto.</p>
+<p>Se i poteri che un utente deve avere su un contenuto dipendono dal suo stato o dalla sua
+appartenenza ad un gruppo allora il <em>dato</em> relativo al creatore può avere la sua importanza, ma la
+persona che ha creato il contenuto no.</p>
+<p>Un esempio: l&#8217;Utente 1 ha scritto un documento mentre lavorava per l&#8217;Ufficio 5. Poco importa chi
+ha creato il documento, ma dopo la sua creazione l&#8217;utente non deve avere permessi particolari sul
+contenuto, o di certo non deve continuare a mantenerli se in futuro lascerà l&#8217;Ufficio 5.</p>
+<div class="admonition warning">
+<p class="first admonition-title">Avvertimento</p>
+<p class="last">Anche in questo caso i workflow base di Plone non sono ottimali</p>
+</div>
 </div>
 </div>
 </div>
