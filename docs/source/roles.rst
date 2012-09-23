@@ -5,7 +5,7 @@ I Ruoli
 La miglior definizione di "ruolo Plone" che posso trovare è questa:
 
     I ruoli sono un accorpamento di **permessi**.
-    I sono direttamente associabili ai **poteri** di un utente nel sito.
+    I ruoli sono direttamente associabili ai **poteri** di un utente nel sito.
 
 Quando assegnate un ruolo ad un utente, state fornendo in realtà una serie di permessi (il vero
 motore della sicurezza di Zope).
@@ -87,35 +87,40 @@ Owner
 
 Il concetto di **Possessore** (**Owner**), per quanto orribilmente tradotto in italiano, nasce a
 livello Zope.
-Un primo esempio: l'utente *admin*, introdotto poco fa, ha di solito il ruolo di *Owner*
-sull'"oggetto sito Plone".
+Un primo esempio: l'utente *admin* ha di solito il ruolo di *Owner* sull'"oggetto sito Plone"
+poiché solitamente è questo utente che crea i nuovi siti all'interno del database di Zope.
 
-E' un ruolo che va ben compreso e di solito deve essere assegnato ad un solo utente, per quanto è
-possibile fornirlo a più persone (ciò oggi è fortunatamente più difficile da farsi da interfaccia
-Plone, mentre in versioni precedenti del CMS era purtroppo un modo di operare molto comune).
+E' un ruolo che va ben compreso:
 
-Innanzi tutto: nella maggior parte dei casi è un ruolo che è direttamente associato con il creatore
-del contenuto.
-Se "Utente 1" crea una pagina, esso diventa *Possessore* della pagina stessa.
+* di solito deve essere assegnato ad un solo utente
+* è possibile fornirlo a più utenti (ciò oggi è fortunatamente più difficile da farsi da
+  interfaccia Plone, mentre in versioni precedenti del CMS era purtroppo un modo di operare molto
+  comune).
+* è possibile avere a che fare con workflow dove il *Possessore* non ha importanza (o sarebbe
+  meglio non l'avesse).
+
+Nella maggior parte dei casi è un ruolo che è direttamente associato con il creatore del contenuto.
+Se "Utente 1" crea una pagina, Plone lo rende anche *Possessore* della pagina stessa.
 
 Questo si può vedere anche dal campo "*Creatori*" comune a tutti i contenuti Plone, ma non bisogna
 farsi trarre in inganno: il valore di questo campo è solo un'informazione testuale che può essere
 facilmente modificata.
-Cambiando il valore di "Creatori" con un altro utente del sito non assegna il ruolo di *Possessore*
-al nuovo utente specificato.
-Il fatto che tale campo sia nell'insieme dei campi raggruppati sotto la sezione "*Proprietario*"
-non fa altro che aumentare la confusione.
 
 .. figure:: _static/edit-form-creators.png
    :alt: Metadato "Creatori"
 
    *La vista del campo "Creatori", nelle informazioni di "Possessore"*
 
-Le recenti versioni di Plone hanno reso più difficile assegnare questo ruolo a sproposito a più
-utenti, eppure è possibile (e lecito) cambiare proprietario di un contenuto.
+Cambiando il valore di "Creatori" con un altro utente del sito non assegna il ruolo di *Possessore*
+al nuovo utente specificato.
+Il fatto che tale campo sia nell'insieme dei campi raggruppati sotto la sezione "*Proprietario*"
+non fa altro che aumentare la confusione.
 
-Esiste una vista speciale, raggiungibile solo conoscendone l'URL (una particolarità introdotta a
-mio parere per errore in Plone 3): ``ownership_form``.
+Le recenti versioni di Plone hanno reso più difficile assegnare questo ruolo a sproposito a più
+utenti ma rimane possibile (e lecito) cambiare proprietario di un contenuto.
+
+Esiste una vista speciale, raggiungibile solo conoscendone l'URL (una particolarità introdotta, a
+mio parere per errore, in Plone 3): ``ownership_form``.
 Questa vista va lanciata sul contesto del documento al quale si vuole cambiare proprietario e
 permette di modificare l'utente che ha ruolo di *Possessore* sul contenuto.
 

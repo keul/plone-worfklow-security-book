@@ -134,7 +134,7 @@ Ci si accorgeva poi col tempo che un utente fosse in grado di saltare la home pa
 direttamente ad altre pagine (ad esempio: la pagina di ricerca di Plone) e fosse quindi in grado
 di vedere documenti che si credevano segreti.
 
-.. note::
+.. Warning::
 
    Il "*workflow intranet*" fornito da Plone **può non essere ottimale** per i vostri scopi! 
 
