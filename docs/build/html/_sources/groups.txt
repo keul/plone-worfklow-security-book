@@ -80,7 +80,7 @@ Questo gruppo è un gruppo *virtuale*, non un vero gruppo e non può essere elim
 Rappresenta tutti gli utenti autenticati nel sito: non appena un utente esegue il login, diventa
 parte del gruppo.
 
-.. Note::
+.. Warning::
    Questa funzionalità è **pericolosa** e va capita fino in fondo
 
 Dare un qualunque potere a questo gruppo (soprattutto nel pannello di controllo dei gruppi, quindi

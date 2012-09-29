@@ -49,28 +49,70 @@
           <div class="body">
             
   <div class="section" id="i-ruoli">
-<h1>I Ruoli<a class="headerlink" href="#i-ruoli" title="link permanente per questa intestazione">¶</a></h1>
+<h1><a class="toc-backref" href="#id4">I Ruoli</a><a class="headerlink" href="#i-ruoli" title="link permanente per questa intestazione">¶</a></h1>
+<div class="contents topic" id="indice-della-sezione">
+<p class="topic-title first">Indice della sezione</p>
+<ul class="simple">
+<li><a class="reference internal" href="#i-ruoli" id="id4">I Ruoli</a><ul>
+<li><a class="reference internal" href="#i-ruoli-predefiniti" id="id5">I ruoli predefiniti</a><ul>
+<li><a class="reference internal" href="#i-ruoli-forniti-di-zope" id="id6">I ruoli forniti di Zope</a><ul>
+<li><a class="reference internal" href="#anonimo-anonymous" id="id7">Anonimo (Anonymous)</a></li>
+<li><a class="reference internal" href="#autenticato-authenticated" id="id8">Autenticato (Authenticated)</a></li>
+<li><a class="reference internal" href="#manager" id="id9">Manager</a></li>
+<li><a class="reference internal" href="#possessore-owner" id="id10">Possessore (Owner)</a><ul>
+<li><a class="reference internal" href="#possessore-e-creatore" id="id11">Possessore e Creatore</a></li>
+<li><a class="reference internal" href="#cambiare-possessore-di-un-contenuto-e-possibile" id="id12">Cambiare Possessore di un contenuto è possibile</a></li>
+<li><a class="reference internal" href="#quanto-e-importante-il-ruolo-possessore" id="id13">Quanto è importante il ruolo Possessore?</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#i-ruoli-definiti-da-plone" id="id14">I ruoli definiti da Plone</a><ul>
+<li><a class="reference internal" href="#contributore-contributor" id="id15">Contributore (Contributor)</a><ul>
+<li><a class="reference internal" href="#il-contributore-puo-modificare-i-propri-contenuti" id="id16">Il Contributore può modificare i propri contenuti?</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#editor" id="id17">Editor</a><ul>
+<li><a class="reference internal" href="#nella-mia-idea-sito-un-editor-deve-poter-aggiungere-e-modificare" id="id18">Nella mia idea sito un editor deve poter aggiungere <em>e</em> modificare</a></li>
+<li><a class="reference internal" href="#editor-e-le-collezioni" id="id19">Editor e le Collezioni</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#collaboratore-member" id="id20">Collaboratore (Member)</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
 <p>La miglior definizione di &#8220;ruolo Plone&#8221; che posso trovare è questa:</p>
 <blockquote>
 <div>I ruoli sono un accorpamento di <strong>permessi</strong>.
-I sono direttamente associabili ai <strong>poteri</strong> di un utente nel sito.</div></blockquote>
+I ruoli sono direttamente associabili ai <strong>poteri</strong> di un utente nel sito.</div></blockquote>
 <p>Quando assegnate un ruolo ad un utente, state fornendo in realtà una serie di permessi (il vero
 motore della sicurezza di Zope).
 Come già detto in precedenza, <em>non potete in nessun modo assegnare permessi agli utenti</em> o ai
 gruppi, ma potete solo assegnare ruoli.</p>
-<p>Questa è una delle prime caratteristiche che fanno assaporare la potenza del sistema sottostante.
-Prendiamo ad esempio in ruolo del <strong>Lettore</strong> (che verrà introdotto meglio in seguito).
+<p>La funzionalità dei ruoli è una delle prime caratteristiche che fanno assaporare la potenza del
+sistema sottostante.
+Prendiamo ad esempio in ruolo del <strong>Lettore</strong> (che verrà introdotto meglio in seguito):
 cosa significhi essere un &#8220;lettore&#8221; non è qualcosa scritto nella roccia; siti diversi (e senza
-dover per forza sviluppare del codice) possono differire dalla sua definizione, aumentando o
-limitando i poteri (permessi) del ruolo.</p>
+dover per forza sviluppare del codice) possono differire nella definizione, aumentando o limitando
+i poteri (permessi) del ruolo.</p>
 <div class="section" id="i-ruoli-predefiniti">
-<h2>I ruoli predefiniti<a class="headerlink" href="#i-ruoli-predefiniti" title="link permanente per questa intestazione">¶</a></h2>
+<h2><a class="toc-backref" href="#id5">I ruoli predefiniti</a><a class="headerlink" href="#i-ruoli-predefiniti" title="link permanente per questa intestazione">¶</a></h2>
 <p>Plone (e il framework Zope sottostante) forniscono una serie di ruoli predefiniti il cui
 funzionamento è bene approfondire e comprendere.
 Il motivo principale è che, sebbene sia possibile creare nuovi ruoli, l&#8217;eventualità di doverlo fare
 è meno frequente di quanto si pensi (anche se non da escludere a priori).</p>
+<div class="admonition warning">
+<p class="first admonition-title">Avvertimento</p>
+<p class="last">Uno errore molto comune nelle applicazioni Plone mal scritte è definire una grande serie di
+nuovi ruoli. <strong>Più ruoli aggiungete più complesso diventa gestire la sicurezza del sito</strong>.</p>
+</div>
 <div class="section" id="i-ruoli-forniti-di-zope">
-<h3>I ruoli forniti di Zope<a class="headerlink" href="#i-ruoli-forniti-di-zope" title="link permanente per questa intestazione">¶</a></h3>
+<h3><a class="toc-backref" href="#id6">I ruoli forniti di Zope</a><a class="headerlink" href="#i-ruoli-forniti-di-zope" title="link permanente per questa intestazione">¶</a></h3>
 <div class="figure">
 <img alt="I ruoli di Zope" src="_images/zmi-security-zope-roles.png" />
 <p class="caption"><em>I quattro ruoli Zope, visti da ZMI</em></p>
@@ -78,22 +120,17 @@ Il motivo principale è che, sebbene sia possibile creare nuovi ruoli, l&#8217;e
 <p>I ruoli forniti da Zope sono quattro e non sono modificabili o eliminabili. Sulla loro presenza si
 basa il funzionamento della sicurezza dell&#8217;application server, e quindi di Plone.</p>
 <div class="section" id="anonimo-anonymous">
-<h4>Anonimo (Anonymous)<a class="headerlink" href="#anonimo-anonymous" title="link permanente per questa intestazione">¶</a></h4>
+<h4><a class="toc-backref" href="#id7">Anonimo (Anonymous)</a><a class="headerlink" href="#anonimo-anonymous" title="link permanente per questa intestazione">¶</a></h4>
 <p><strong>Anonimo</strong> (<strong>Anonymous</strong>) è il ruolo assegnato agli utenti anonimi.
 E&#8217; un ruolo speciale ed ha un comportamento diverso da tutti gli altri ruoli.
 Non è infatti possibile definire un permesso accessibile dal ruolo Anonymous ma non da altri ruoli:
 un potere dato ad un anonimo è di certo fornito anche a <em>qualunque</em> utente del sito.</p>
-<p>Questo può sembrare scontato dal punto di vista logico, ma per gli altri ruoli può non essere così:
-con altri ruoli sarebbe possibile disegnare una policy di sicurezza che assegni un permesso ad un
-ruolo &#8220;poco importante&#8221; e non darlo ad un ruolo importante (un esempio: dare il permesso di vedere
-un contenuto ad un <em>Collaboratore</em> del sito ma non al <em>Manager</em>. Possibile, anche se totalmente
-illogico e sconsigliato).</p>
 <p>Il ruolo Anonimo è per sua natura associato con il tipo di utente anonimo. Nel disegnare workflow
 per i vostri contenuti questo ruolo assume parecchia importanza: un errore nell&#8217;assegnare un
 permesso di troppo a questo utente e la sicurezza del vostro sito potrebbe essere compromessa.</p>
 </div>
 <div class="section" id="autenticato-authenticated">
-<h4>Autenticato (Authenticated)<a class="headerlink" href="#autenticato-authenticated" title="link permanente per questa intestazione">¶</a></h4>
+<h4><a class="toc-backref" href="#id8">Autenticato (Authenticated)</a><a class="headerlink" href="#autenticato-authenticated" title="link permanente per questa intestazione">¶</a></h4>
 <p><strong>Autenticato</strong> (<strong>Authenticated</strong>) è il ruolo automaticamente assegnato ai visitatori del sito
 che hanno eseguito un qualunque tipo di autenticazione, anche tramite <a class="reference external" href="http://en.wikipedia.org/wiki/Basic_access_authentication">autenticazione basic</a> via
 ZMI.</p>
@@ -102,7 +139,7 @@ ZMI.</p>
 correttezza, il ruolo di <em>Collaboratore</em>.</p>
 </div>
 <div class="section" id="manager">
-<h4>Manager<a class="headerlink" href="#manager" title="link permanente per questa intestazione">¶</a></h4>
+<h4><a class="toc-backref" href="#id9">Manager</a><a class="headerlink" href="#manager" title="link permanente per questa intestazione">¶</a></h4>
 <p>L&#8217;Alpha e l&#8217;Omega dei ruoli. Chi ha ruolo <strong>Manager</strong> ha solitamente potere assoluto nel sito Plone
 ed entra senza restrizioni in ZMI.</p>
 <p>E&#8217; un ruolo ovviamente pericoloso e non va mai assegnato a sproposito. Come regola generale, se il
@@ -110,34 +147,58 @@ vostro utente <em>non ha</em> bisogno di accedere alla ZMI, <em>Manager</em> non
 assegnargli ma va preferito il ruolo di <em>Amministratore del Sito</em>.</p>
 <p>E&#8217; lecito avere installazioni di Plone dove esiste un solo utente con questo ruolo: <strong>admin</strong>,
 l&#8217;utente predefinito a livello Zope che è di solito il creatore dei siti Plone.</p>
+<div class="admonition note">
+<p class="first admonition-title">Nota</p>
+<p>A differenza del ruolo <em>Anonimo</em> (il ruolo con meno poteri), la sua natura di essere il
+ruolo &#8220;con i super poteri&#8221; non è predeterminata.</p>
+<p class="last">Un esempio: sarebbe possibile dare il permesso di vedere un contenuto ad un <em>Collaboratore</em> del
+sito ma non al <em>Manager</em>.
+Questo è possibile, anche se totalmente illogico e sconsigliato.
+Il <em>Manager</em>, avendo poi accesso alla ZMI e quindi al sistema di associazione di ruoli e
+permessi, potrebbe poi ri-assegnarsi il permesso mancante.</p>
 </div>
-<div class="section" id="owner">
-<h4>Owner<a class="headerlink" href="#owner" title="link permanente per questa intestazione">¶</a></h4>
+</div>
+<div class="section" id="possessore-owner">
+<h4><a class="toc-backref" href="#id10">Possessore (Owner)</a><a class="headerlink" href="#possessore-owner" title="link permanente per questa intestazione">¶</a></h4>
 <p>Il concetto di <strong>Possessore</strong> (<strong>Owner</strong>), per quanto orribilmente tradotto in italiano, nasce a
 livello Zope.
-Un primo esempio: l&#8217;utente <em>admin</em>, introdotto poco fa, ha di solito il ruolo di <em>Owner</em>
-sull&#8216;&#8220;oggetto sito Plone&#8221;.</p>
-<p>E&#8217; un ruolo che va ben compreso e di solito deve essere assegnato ad un solo utente, per quanto è
-possibile fornirlo a più persone (ciò oggi è fortunatamente più difficile da farsi da interfaccia
-Plone, mentre in versioni precedenti del CMS era purtroppo un modo di operare molto comune).</p>
-<p>Innanzi tutto: nella maggior parte dei casi è un ruolo che è direttamente associato con il creatore
-del contenuto.
-Se &#8220;Utente 1&#8221; crea una pagina, esso diventa <em>Possessore</em> della pagina stessa.</p>
+Un primo esempio: l&#8217;utente <em>admin</em> ha di solito il ruolo di <em>Owner</em> sull&#8216;&#8220;oggetto sito Plone&#8221;
+poiché solitamente è questo utente che crea i nuovi siti all&#8217;interno del database di Zope.</p>
+<p>E&#8217; un ruolo che va ben compreso:</p>
+<ul class="simple">
+<li>di solito deve essere assegnato ad un solo utente</li>
+<li>è possibile fornirlo a più utenti (ciò oggi è fortunatamente più difficile da farsi da
+interfaccia Plone, mentre in versioni precedenti del CMS era purtroppo un modo di operare molto
+comune).</li>
+<li>è possibile avere a che fare con workflow dove il <em>Possessore</em> non ha importanza (o sarebbe
+meglio non l&#8217;avesse).</li>
+</ul>
+<p>In una configurazione base, un <em>Possessore</em> mantiene un certo livello di potere sui propri
+contenuti.
+Detto in poche parole: può modificarli e poi sottoportli a revisione (ma questo dipende molto dal
+workflow).</p>
+<div class="section" id="possessore-e-creatore">
+<h5><a class="toc-backref" href="#id11">Possessore e Creatore</a><a class="headerlink" href="#possessore-e-creatore" title="link permanente per questa intestazione">¶</a></h5>
+<p>Nella maggior parte dei casi è un ruolo che è direttamente associato con il creatore del contenuto.
+Se &#8220;Utente 1&#8221; crea una pagina, Plone lo rende anche <em>Possessore</em> della pagina stessa.</p>
 <p>Questo si può vedere anche dal campo &#8220;<em>Creatori</em>&#8221; comune a tutti i contenuti Plone, ma non bisogna
 farsi trarre in inganno: il valore di questo campo è solo un&#8217;informazione testuale che può essere
-facilmente modificata.
-Cambiando il valore di &#8220;Creatori&#8221; con un altro utente del sito non assegna il ruolo di <em>Possessore</em>
-al nuovo utente specificato.
-Il fatto che tale campo sia nell&#8217;insieme dei campi raggruppati sotto la sezione &#8220;<em>Proprietario</em>&#8221;
-non fa altro che aumentare la confusione.</p>
+facilmente modificata.</p>
 <div class="figure">
 <img alt="Metadato &quot;Creatori&quot;" src="_images/edit-form-creators.png" />
 <p class="caption"><em>La vista del campo &#8220;Creatori&#8221;, nelle informazioni di &#8220;Possessore&#8221;</em></p>
 </div>
+<p>Cambiando il valore di &#8220;Creatori&#8221; con un altro utente del sito non assegna il ruolo di <em>Possessore</em>
+al nuovo utente specificato.
+Il fatto che tale campo sia nell&#8217;insieme dei campi raggruppati sotto la sezione &#8220;<em>Proprietario</em>&#8221;
+non fa altro che aumentare la confusione.</p>
+</div>
+<div class="section" id="cambiare-possessore-di-un-contenuto-e-possibile">
+<h5><a class="toc-backref" href="#id12">Cambiare Possessore di un contenuto è possibile</a><a class="headerlink" href="#cambiare-possessore-di-un-contenuto-e-possibile" title="link permanente per questa intestazione">¶</a></h5>
 <p>Le recenti versioni di Plone hanno reso più difficile assegnare questo ruolo a sproposito a più
-utenti, eppure è possibile (e lecito) cambiare proprietario di un contenuto.</p>
-<p>Esiste una vista speciale, raggiungibile solo conoscendone l&#8217;URL (una particolarità introdotta a
-mio parere per errore in Plone 3): <tt class="docutils literal"><span class="pre">ownership_form</span></tt>.
+utenti ma rimane possibile (e lecito) cambiare proprietario di un contenuto.</p>
+<p>Esiste una vista speciale, raggiungibile solo conoscendone l&#8217;URL (una particolarità introdotta, a
+mio parere per errore, in Plone 3): <tt class="docutils literal"><span class="pre">ownership_form</span></tt>.
 Questa vista va lanciata sul contesto del documento al quale si vuole cambiare proprietario e
 permette di modificare l&#8217;utente che ha ruolo di <em>Possessore</em> sul contenuto.</p>
 <div class="figure">
@@ -146,11 +207,13 @@ permette di modificare l&#8217;utente che ha ruolo di <em>Possessore</em> sul co
 </div>
 <p>Esiste un comodissimo prodotto che permette di manipolare in blocco il ruolo di <em>Possessore</em> e
 volendo anche il campo &#8220;Cratori&#8221; per più contenti del sito: <a class="reference external" href="http://plone.org/products/plone.app.changeownership">plone.app.changeownership</a>.</p>
-<p>Quanto è importante il ruolo <em>Possessore</em>?
-Dipende.</p>
-<p>Nel momento della creazione di un contenuto questo ruolo ha di certo importanza, perché è ovvio che
-la persona che sta salvando per la prima volta il documento deve avere i poteri di modifica.
-Nel seguito invece la sua importanza dipende dal contesto.</p>
+</div>
+<div class="section" id="quanto-e-importante-il-ruolo-possessore">
+<h5><a class="toc-backref" href="#id13">Quanto è importante il ruolo Possessore?</a><a class="headerlink" href="#quanto-e-importante-il-ruolo-possessore" title="link permanente per questa intestazione">¶</a></h5>
+<p>Dipende.</p>
+<p>Nel momento della creazione di un contenuto questo ruolo ha di certo importanza, poiché ovviamente
+l&#8217;utente che sta salvando per la prima volta il documento deve avere i poteri di modifica.
+Nel seguito invece la sua importanza dipende dalla natura del vostro sito.</p>
 <p>Se state realizzando la sicurezza di un tipo di contenuto dove, per sua natura, il creatore è
 importante (ad esempio: il contenuto rappresenta la prenotazione di un&#8217;auto aziendale) allora
 il creatore continua ad avere una grande importanza per tutto il ciclo di vita del contenuto.</p>
@@ -162,8 +225,74 @@ ha creato il documento, ma dopo la sua creazione l&#8217;utente non deve avere p
 contenuto, o di certo non deve continuare a mantenerli se in futuro lascerà l&#8217;Ufficio 5.</p>
 <div class="admonition warning">
 <p class="first admonition-title">Avvertimento</p>
-<p class="last">Anche in questo caso i workflow base di Plone non sono ottimali</p>
+<p class="last">Anche in questo caso i workflow base di Plone non sono ottimali per tutte le situazioni.</p>
 </div>
+<p>Se volete maggiori dettagli su questo argomento, l&#8217;ho affrontato lungamente nel mio articolo
+<a class="reference external" href="http://blog.keul.it/2011/09/plone-security-and-workflows-when-rely.html">Plone, security and workflows: when rely on Owner role is bad</a> (in lingua inglese).</p>
+</div>
+</div>
+</div>
+<div class="section" id="i-ruoli-definiti-da-plone">
+<h3><a class="toc-backref" href="#id14">I ruoli definiti da Plone</a><a class="headerlink" href="#i-ruoli-definiti-da-plone" title="link permanente per questa intestazione">¶</a></h3>
+<p>Plone è un&#8217;applicazione costruita sull&#8217;application server Zope.
+Per raggiungere i suoi scopi esso definisce di partenza alcuni ruoli aggiuntivi.</p>
+<p>La differenza principale con i ruoli di Zope visti alla sezione precedente è che questi ruoli <em>non</em>
+sono necessari per il funzionamento di Zope (e in realtà nemmeno di Plone).</p>
+<p>Plone dà alcuni &#8220;suggerimenti&#8221; su una configurazione ottimale, non troppo semplice né troppo
+complessa.
+I ruoli forniti di Plone sono ottimi per la maggior parte delle configurazioni e permettono di
+avere un minimo meccanismo di revisione e una buona suddivisione delle competenze.</p>
+<div class="section" id="contributore-contributor">
+<h4><a class="toc-backref" href="#id15">Contributore (Contributor)</a><a class="headerlink" href="#contributore-contributor" title="link permanente per questa intestazione">¶</a></h4>
+<p>Il <strong>Contributore</strong> (un altro ruolo la cui traduzione ufficiale italiana lascia a desiderare) è la
+persona che porta contributi al sito.
+Una traduzione migliore è probabilmente quella dell&#8217;<strong>Autore</strong>.</p>
+<p>Il <em>Contributore</em> è una persona che può inserire nuovi contenuti nel sito.
+Nella configurazione predefinita di Plone, questo include i permessi per inserire <em>tutti</em> i
+contenuti (ad esclusione delle <strong>Collezioni</strong>).</p>
+<div class="section" id="il-contributore-puo-modificare-i-propri-contenuti">
+<h5><a class="toc-backref" href="#id16">Il Contributore può modificare i propri contenuti?</a><a class="headerlink" href="#il-contributore-puo-modificare-i-propri-contenuti" title="link permanente per questa intestazione">¶</a></h5>
+<p>Nella configurazione iniziale di Plone, la risposta è sì.</p>
+<p>Questo potere però non dipende dal ruolo di <em>Contributore</em> e dai suoi poteri ma dal fatto che il
+<em>Contributore</em> che crea un contenuto ne diventa <em>Possessore</em>.</p>
+<p>Questo concetto è molto importante.</p>
+</div>
+</div>
+<div class="section" id="editor">
+<h4><a class="toc-backref" href="#id17">Editor</a><a class="headerlink" href="#editor" title="link permanente per questa intestazione">¶</a></h4>
+<p>L&#8217;<strong>Editor</strong> è un utente che ha poteri di <em>modifica</em> sui contenuti.
+E qui ci si ferma!</p>
+<p>Un <em>Editor</em> può modificare quindi <em>tutti</em> i contenuti su cui ha potere, ma non è nella sua natura
+creare nuovi contenuti.</p>
+<div class="section" id="nella-mia-idea-sito-un-editor-deve-poter-aggiungere-e-modificare">
+<h5><a class="toc-backref" href="#id18">Nella mia idea sito un editor deve poter aggiungere <em>e</em> modificare</a><a class="headerlink" href="#nella-mia-idea-sito-un-editor-deve-poter-aggiungere-e-modificare" title="link permanente per questa intestazione">¶</a></h5>
+<p>Non siete gli unici.
+Questo in Plone può essere fatto in due modi.</p>
+<p>Il primo sarebbe quello di modificare i poteri del ruolo <em>Editor</em> per fornirgli anche i poteri
+del <em>Contributore</em>.
+Il modo che però consiglio è quello di <strong>assegnare al vostro editor due ruoli</strong>: il ruolo di
+<em>Editor</em> e <strong>Contributore</strong>.</p>
+</div>
+<div class="section" id="editor-e-le-collezioni">
+<h5><a class="toc-backref" href="#id19">Editor e le Collezioni</a><a class="headerlink" href="#editor-e-le-collezioni" title="link permanente per questa intestazione">¶</a></h5>
+<p>Un editor può modificare anche le collezioni (che un <em>Contributore</em> non potrebbe normalmente
+creare.
+Questa particolarità non è ben spiegabile e credo crei un po&#8217; di confusione (ad ogni modo: è solo
+una configurazione di base, che può essere facilmente modificata).</p>
+<p>Per di più: prima di Plone 4.2 (con le vecchie Collezioni) la modifica si limitava ai soli campi
+del &#8220;contenuto collezione&#8221; ma non ai criteri, che comparivano in un&#8217;altro tab; nelle nuove
+collezioni chi può modificare una collezione ha potere anche sui criteri.</p>
+<div class="figure">
+<img alt="Il tab &quot;Criteri&quot;" src="_images/tab-criteri-vecchie-collezioni.png" />
+<p class="caption"><em>Come si presenta il tab dei &#8220;Criteri&#8221; nei cercatori vecchio stile</em></p>
+</div>
+</div>
+</div>
+<div class="section" id="collaboratore-member">
+<h4><a class="toc-backref" href="#id20">Collaboratore (Member)</a><a class="headerlink" href="#collaboratore-member" title="link permanente per questa intestazione">¶</a></h4>
+<p>Il <em>Collaboratore</em> è l&#8217;utente autenticato nella concezione di Plone (che si distingue dal ruolo
+di <em>Autenticato</em> definito da Zope, visto in precedenza).</p>
+<p>La presenza di questo doppio ruolo crea qualche confuzione.</p>
 </div>
 </div>
 </div>
@@ -186,7 +315,25 @@ contenuto, o di certo non deve continuare a mantenerli se in futuro lascerà l&#
 <li><a class="reference internal" href="#anonimo-anonymous">Anonimo (Anonymous)</a></li>
 <li><a class="reference internal" href="#autenticato-authenticated">Autenticato (Authenticated)</a></li>
 <li><a class="reference internal" href="#manager">Manager</a></li>
-<li><a class="reference internal" href="#owner">Owner</a></li>
+<li><a class="reference internal" href="#possessore-owner">Possessore (Owner)</a><ul>
+<li><a class="reference internal" href="#possessore-e-creatore">Possessore e Creatore</a></li>
+<li><a class="reference internal" href="#cambiare-possessore-di-un-contenuto-e-possibile">Cambiare Possessore di un contenuto è possibile</a></li>
+<li><a class="reference internal" href="#quanto-e-importante-il-ruolo-possessore">Quanto è importante il ruolo Possessore?</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#i-ruoli-definiti-da-plone">I ruoli definiti da Plone</a><ul>
+<li><a class="reference internal" href="#contributore-contributor">Contributore (Contributor)</a><ul>
+<li><a class="reference internal" href="#il-contributore-puo-modificare-i-propri-contenuti">Il Contributore può modificare i propri contenuti?</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#editor">Editor</a><ul>
+<li><a class="reference internal" href="#nella-mia-idea-sito-un-editor-deve-poter-aggiungere-e-modificare">Nella mia idea sito un editor deve poter aggiungere <em>e</em> modificare</a></li>
+<li><a class="reference internal" href="#editor-e-le-collezioni">Editor e le Collezioni</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#collaboratore-member">Collaboratore (Member)</a></li>
 </ul>
 </li>
 </ul>

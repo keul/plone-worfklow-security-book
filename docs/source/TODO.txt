@@ -8,4 +8,4 @@ x gruppo virtuale authenticated users
 - allowedRolesAndUSers, View e prodotti che usano lo stesso principio (per il revisore)
 - data di scadenza
 - assegnre ruoli non visibili da Plone via ZMI (e.g: Manager)
-
+- aggiungere nuove parole chiave (va per ruolo)

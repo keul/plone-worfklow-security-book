@@ -2,21 +2,24 @@
 I Ruoli
 =======
 
+.. contents:: Indice della sezione
+
 La miglior definizione di "ruolo Plone" che posso trovare è questa:
 
     I ruoli sono un accorpamento di **permessi**.
-    I sono direttamente associabili ai **poteri** di un utente nel sito.
+    I ruoli sono direttamente associabili ai **poteri** di un utente nel sito.
 
 Quando assegnate un ruolo ad un utente, state fornendo in realtà una serie di permessi (il vero
 motore della sicurezza di Zope).
 Come già detto in precedenza, *non potete in nessun modo assegnare permessi agli utenti* o ai
 gruppi, ma potete solo assegnare ruoli.
 
-Questa è una delle prime caratteristiche che fanno assaporare la potenza del sistema sottostante.
-Prendiamo ad esempio in ruolo del **Lettore** (che verrà introdotto meglio in seguito).
+La funzionalità dei ruoli è una delle prime caratteristiche che fanno assaporare la potenza del
+sistema sottostante.
+Prendiamo ad esempio in ruolo del **Lettore** (che verrà introdotto meglio in seguito):
 cosa significhi essere un "lettore" non è qualcosa scritto nella roccia; siti diversi (e senza
-dover per forza sviluppare del codice) possono differire dalla sua definizione, aumentando o
-limitando i poteri (permessi) del ruolo.
+dover per forza sviluppare del codice) possono differire nella definizione, aumentando o limitando
+i poteri (permessi) del ruolo.
 
 I ruoli predefiniti
 ===================
@@ -25,6 +28,10 @@ Plone (e il framework Zope sottostante) forniscono una serie di ruoli predefinit
 funzionamento è bene approfondire e comprendere.
 Il motivo principale è che, sebbene sia possibile creare nuovi ruoli, l'eventualità di doverlo fare
 è meno frequente di quanto si pensi (anche se non da escludere a priori).
+
+.. Warning::
+    Uno errore molto comune nelle applicazioni Plone mal scritte è definire una grande serie di
+    nuovi ruoli. **Più ruoli aggiungete più complesso diventa gestire la sicurezza del sito**.
 
 I ruoli forniti di Zope
 -----------------------
@@ -44,12 +51,6 @@ Anonimo (Anonymous)
 E' un ruolo speciale ed ha un comportamento diverso da tutti gli altri ruoli.
 Non è infatti possibile definire un permesso accessibile dal ruolo Anonymous ma non da altri ruoli:
 un potere dato ad un anonimo è di certo fornito anche a *qualunque* utente del sito.
-
-Questo può sembrare scontato dal punto di vista logico, ma per gli altri ruoli può non essere così:
-con altri ruoli sarebbe possibile disegnare una policy di sicurezza che assegni un permesso ad un
-ruolo "poco importante" e non darlo ad un ruolo importante (un esempio: dare il permesso di vedere
-un contenuto ad un *Collaboratore* del sito ma non al *Manager*. Possibile, anche se totalmente
-illogico e sconsigliato).
 
 Il ruolo Anonimo è per sua natura associato con il tipo di utente anonimo. Nel disegnare workflow
 per i vostri contenuti questo ruolo assume parecchia importanza: un errore nell'assegnare un
@@ -82,40 +83,66 @@ assegnargli ma va preferito il ruolo di *Amministratore del Sito*.
 E' lecito avere installazioni di Plone dove esiste un solo utente con questo ruolo: **admin**,
 l'utente predefinito a livello Zope che è di solito il creatore dei siti Plone.
 
-Owner
-~~~~~
+.. Note::
+    A differenza del ruolo *Anonimo* (il ruolo con meno poteri), la sua natura di essere il
+    ruolo "con i super poteri" non è predeterminata.
+    
+    Un esempio: sarebbe possibile dare il permesso di vedere un contenuto ad un *Collaboratore* del
+    sito ma non al *Manager*.
+    Questo è possibile, anche se totalmente illogico e sconsigliato.
+    Il *Manager*, avendo poi accesso alla ZMI e quindi al sistema di associazione di ruoli e
+    permessi, potrebbe poi ri-assegnarsi il permesso mancante.
+
+Possessore (Owner)
+~~~~~~~~~~~~~~~~~~
 
 Il concetto di **Possessore** (**Owner**), per quanto orribilmente tradotto in italiano, nasce a
 livello Zope.
-Un primo esempio: l'utente *admin*, introdotto poco fa, ha di solito il ruolo di *Owner*
-sull'"oggetto sito Plone".
+Un primo esempio: l'utente *admin* ha di solito il ruolo di *Owner* sull'"oggetto sito Plone"
+poiché solitamente è questo utente che crea i nuovi siti all'interno del database di Zope.
 
-E' un ruolo che va ben compreso e di solito deve essere assegnato ad un solo utente, per quanto è
-possibile fornirlo a più persone (ciò oggi è fortunatamente più difficile da farsi da interfaccia
-Plone, mentre in versioni precedenti del CMS era purtroppo un modo di operare molto comune).
+E' un ruolo che va ben compreso:
 
-Innanzi tutto: nella maggior parte dei casi è un ruolo che è direttamente associato con il creatore
-del contenuto.
-Se "Utente 1" crea una pagina, esso diventa *Possessore* della pagina stessa.
+* di solito deve essere assegnato ad un solo utente
+* è possibile fornirlo a più utenti (ciò oggi è fortunatamente più difficile da farsi da
+  interfaccia Plone, mentre in versioni precedenti del CMS era purtroppo un modo di operare molto
+  comune).
+* è possibile avere a che fare con workflow dove il *Possessore* non ha importanza (o sarebbe
+  meglio non l'avesse).
+
+In una configurazione base, un *Possessore* mantiene un certo livello di potere sui propri
+contenuti.
+Detto in poche parole: può modificarli e poi sottoportli a revisione (ma questo dipende molto dal
+workflow).
+
+Possessore e Creatore
+_____________________
+
+Nella maggior parte dei casi è un ruolo che è direttamente associato con il creatore del contenuto.
+Se "Utente 1" crea una pagina, Plone lo rende anche *Possessore* della pagina stessa.
 
 Questo si può vedere anche dal campo "*Creatori*" comune a tutti i contenuti Plone, ma non bisogna
 farsi trarre in inganno: il valore di questo campo è solo un'informazione testuale che può essere
 facilmente modificata.
-Cambiando il valore di "Creatori" con un altro utente del sito non assegna il ruolo di *Possessore*
-al nuovo utente specificato.
-Il fatto che tale campo sia nell'insieme dei campi raggruppati sotto la sezione "*Proprietario*"
-non fa altro che aumentare la confusione.
 
 .. figure:: _static/edit-form-creators.png
    :alt: Metadato "Creatori"
 
    *La vista del campo "Creatori", nelle informazioni di "Possessore"*
 
-Le recenti versioni di Plone hanno reso più difficile assegnare questo ruolo a sproposito a più
-utenti, eppure è possibile (e lecito) cambiare proprietario di un contenuto.
+Cambiando il valore di "Creatori" con un altro utente del sito non assegna il ruolo di *Possessore*
+al nuovo utente specificato.
+Il fatto che tale campo sia nell'insieme dei campi raggruppati sotto la sezione "*Proprietario*"
+non fa altro che aumentare la confusione.
 
-Esiste una vista speciale, raggiungibile solo conoscendone l'URL (una particolarità introdotta a
-mio parere per errore in Plone 3): ``ownership_form``.
+Cambiare Possessore di un contenuto è possibile
+_______________________________________________
+
+Le recenti versioni di Plone hanno reso più difficile assegnare questo ruolo a sproposito a più
+utenti ma rimane possibile (e lecito) cambiare proprietario di un contenuto.
+
+Esiste una vista speciale, raggiungibile solo conoscendone l'URL (una particolarità introdotta, a
+mio parere per errore, in Plone 3): ``ownership_form``.
 Questa vista va lanciata sul contesto del documento al quale si vuole cambiare proprietario e
 permette di modificare l'utente che ha ruolo di *Possessore* sul contenuto.
 
@@ -129,12 +156,14 @@ volendo anche il campo "Cratori" per più contenti del sito: `plone.app.changeow
 
 __ http://plone.org/products/plone.app.changeownership
 
-Quanto è importante il ruolo *Possessore*?
+Quanto è importante il ruolo Possessore?
+________________________________________
+
 Dipende.
 
-Nel momento della creazione di un contenuto questo ruolo ha di certo importanza, perché è ovvio che
-la persona che sta salvando per la prima volta il documento deve avere i poteri di modifica.
-Nel seguito invece la sua importanza dipende dal contesto.
+Nel momento della creazione di un contenuto questo ruolo ha di certo importanza, poiché ovviamente
+l'utente che sta salvando per la prima volta il documento deve avere i poteri di modifica.
+Nel seguito invece la sua importanza dipende dalla natura del vostro sito.
 
 Se state realizzando la sicurezza di un tipo di contenuto dove, per sua natura, il creatore è
 importante (ad esempio: il contenuto rappresenta la prenotazione di un'auto aziendale) allora
@@ -149,5 +178,92 @@ ha creato il documento, ma dopo la sua creazione l'utente non deve avere permess
 contenuto, o di certo non deve continuare a mantenerli se in futuro lascerà l'Ufficio 5. 
 
 .. Warning::
-   Anche in questo caso i workflow base di Plone non sono ottimali
+   Anche in questo caso i workflow base di Plone non sono ottimali per tutte le situazioni.
+
+Se volete maggiori dettagli su questo argomento, l'ho affrontato lungamente nel mio articolo
+`Plone, security and workflows: when rely on Owner role is bad`__ (in lingua inglese).
+
+__ http://blog.keul.it/2011/09/plone-security-and-workflows-when-rely.html
+
+I ruoli definiti da Plone
+-------------------------
+
+Plone è un'applicazione costruita sull'application server Zope.
+Per raggiungere i suoi scopi esso definisce di partenza alcuni ruoli aggiuntivi.
+
+La differenza principale con i ruoli di Zope visti alla sezione precedente è che questi ruoli *non*
+sono necessari per il funzionamento di Zope (e in realtà nemmeno di Plone).
+
+Plone dà alcuni "suggerimenti" su una configurazione ottimale, non troppo semplice né troppo
+complessa.
+I ruoli forniti di Plone sono ottimi per la maggior parte delle configurazioni e permettono di
+avere un minimo meccanismo di revisione e una buona suddivisione delle competenze.
+
+Contributore (Contributor)
+~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Il **Contributore** (un altro ruolo la cui traduzione ufficiale italiana lascia a desiderare) è la
+persona che porta contributi al sito.
+Una traduzione migliore è probabilmente quella dell'**Autore**.
+
+Il *Contributore* è una persona che può inserire nuovi contenuti nel sito.
+Nella configurazione predefinita di Plone, questo include i permessi per inserire *tutti* i
+contenuti (ad esclusione delle **Collezioni**).
+
+Il Contributore può modificare i propri contenuti?
+__________________________________________________
+
+Nella configurazione iniziale di Plone, la risposta è sì.
+
+Questo potere però non dipende dal ruolo di *Contributore* e dai suoi poteri ma dal fatto che il
+*Contributore* che crea un contenuto ne diventa *Possessore*.
+
+Questo concetto è molto importante.
+
+Editor
+~~~~~~
+
+L'**Editor** è un utente che ha poteri di *modifica* sui contenuti.
+E qui ci si ferma!
+
+Un *Editor* può modificare quindi *tutti* i contenuti su cui ha potere, ma non è nella sua natura
+creare nuovi contenuti.
+
+Nella mia idea sito un editor deve poter aggiungere *e* modificare
+__________________________________________________________________
+
+Non siete gli unici.
+Questo in Plone può essere fatto in due modi.
+
+Il primo sarebbe quello di modificare i poteri del ruolo *Editor* per fornirgli anche i poteri
+del *Contributore*.
+Il modo che però consiglio è quello di **assegnare al vostro editor due ruoli**: il ruolo di
+*Editor* e **Contributore**.
+
+Editor e le Collezioni
+______________________
+
+Un editor può modificare anche le collezioni (che un *Contributore* non potrebbe normalmente
+creare.
+Questa particolarità non è ben spiegabile e credo crei un po' di confusione (ad ogni modo: è solo
+una configurazione di base, che può essere facilmente modificata).
+
+Per di più: prima di Plone 4.2 (con le vecchie Collezioni) la modifica si limitava ai soli campi
+del "contenuto collezione" ma non ai criteri, che comparivano in un'altro tab; nelle nuove
+collezioni chi può modificare una collezione ha potere anche sui criteri.
+
+.. figure:: _static/tab-criteri-vecchie-collezioni.png
+   :alt: Il tab "Criteri"
+
+   *Come si presenta il tab dei "Criteri" nei cercatori vecchio stile*
+
+Collaboratore (Member)
+~~~~~~~~~~~~~~~~~~~~~~
+
+Il *Collaboratore* è l'utente autenticato nella concezione di Plone (che si distingue dal ruolo
+di *Autenticato* definito da Zope, visto in precedenza).
+
+La presenza di questo doppio ruolo crea qualche confuzione.
+
+
 
