@@ -252,7 +252,7 @@ Per di più: prima di Plone 4.2 (con le vecchie Collezioni) la modifica si limit
 del "contenuto collezione" ma non ai criteri, che comparivano in un'altro tab; nelle nuove
 collezioni chi può modificare una collezione ha potere anche sui criteri.
 
-.. figure:: _static/tab-criteri-vecchie-collezioni.png
+.. figure:: _static/criterion-tab-old-collections.png
    :alt: Il tab "Criteri"
 
    *Come si presenta il tab dei "Criteri" nei cercatori vecchio stile*
@@ -260,10 +260,107 @@ collezioni chi può modificare una collezione ha potere anche sui criteri.
 Collaboratore (Member)
 ~~~~~~~~~~~~~~~~~~~~~~
 
-Il *Collaboratore* è l'utente autenticato nella concezione di Plone (che si distingue dal ruolo
+Il **Collaboratore** è l'utente autenticato nella concezione di Plone (che si distingue dal ruolo
 di *Autenticato* definito da Zope, visto in precedenza).
 
-La presenza di questo doppio ruolo crea qualche confuzione.
+La presenza di questo doppio ruolo crea qualche confusione.
+Di base questo ruolo viene fornito automaticamente a tutti gli utenti del sito, come *ruolo
+globale*.
+
+.. figure:: _static/users-overview-member-role.png
+   :alt: Overview della vista utenti
+
+   *Il ruolo "Collaboratore" dato a tutti gli utenti* 
+
+Il *Collaboratore* non è un ruolo speciale.
+Basi dati utente aggiuntive (LDAP, RDBMS) di solito forniscono questo stesso ruolo.
+In pratica quando si vogliono dare poteri agli utenti autenticati nel sito Plone bisogna riferirsi
+a questo ruolo, che va preferito al ruolo *Autenticato* visto in precedenza. 
+
+Cosa succede se un utente non è Collaboratore?
+______________________________________________
+
+Per quanto detto dell'*Autenticato* e del *Collaboratore* si può concludere che *è possibile* avere
+utenti del sito sprovvisti del ruolo *Collaboratore* (non è possibile il contrario invece).
+
+Plone continua a funzionare a dovere (ci sono in effetti piccole differenze, funzionalità che in
+questa configurazione avrebbe solo il *Collaboratore*).
+
+Può servire una simile impostazione?
+In effetti sarebbe possibile definire in questo modo utenti del sito di primo e di secondo livello,
+dove gli utenti con ruolo *Autenticato* hanno minori poteri.
+
+Tenete sempre presente che si sta comunque parlando di due ruoli di basso livello (non creano
+contenuti, non gestiscono documenti, ...).
+
+La possibilità c'è.
+
+Lettore (Reader)
+~~~~~~~~~~~~~~~~
+
+Nel significato che Plone dà al ruolo **Lettore** c'è il poter "vedere", che si traduce (di base)
+in poter accedere a contenuti normalmente non visibili.
+Va usato per assegnare ad utenti del sito un'anteprima di un lavoro in corso o l'accesso permanente
+ad un'area privata.
+Tutto questo senza fornire poteri di modifica di nessun tipo.
+
+Il lettore è un ruolo interessante ed utile, ma non è detto che sia necessario nel vostro portale.
+Dal punto di vista della "scala dei poteri" questo ruolo è appena sopra la coppia
+*Autenticato*/*Collaboratore*.
+
+Revisore (Reviewer)
+~~~~~~~~~~~~~~~~~~~
+
+Il **Revisore** assume importanza solo in presenza di un processo di pubblicazione.
+Il *Revisore* normalmente non crea contenuti ma lavora sui contenuti altrui: li revisiona.
+
+Ha di solito il potere di accettare il lavoro svolto (di solito: la richiesta di pubblicazione)
+o rifiutarlo: agisce sul **worfklow**. 
+
+Un altro potere che (normalmente) gli viene assegnato è la **gestione delle parole chiave**.
+
+Anche questo ruolo potrebbe non servire nel vostro sito: come tutto in Plone, dipende dal vostro
+ambiente e dai vostri scopi.
+
+Amministratore del sito (Site Administrator)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Questo ruolo è stato introdotto con Plone 4.1, e per ottimi motivi.
+Il suo scopo e dare poteri assoluti agli utenti Plone, senza dar loro poteri definiti "di
+programmazione" (che si traduce normalmente con l'accesso alla ZMI).
+
+Di questo ruolo se ne sentiva la mancanza.
+E' normale che il vostro cliente, l'azienda che vi a commissionato un'applicazione basata su Plone
+voglia avere utenti con "poteri assoluti" (per l'appunto gli "amministratori del sito").
+
+Il problema un tempo era non dare poteri inutilmente pericolosi:
+Alla ZMI deve avere accesso solo un utente che ne abbia effettivamente bisogno.
+
+Attualmente: un ruolo poco supportato
+_____________________________________
+
+Spero che questo paragrafo diventi velocemente deprecato ma al momento le cose vanno così: molti
+prodotti vengono aggiornati senza fornire supporto al ruolo *Amministratore del sito*, oppure
+basandosi su permessi che questo ruolo non ha (ma che invece ha il *Manager*).
+
+Col tempo andrà meglio.
+
+Come usare i ruoli
+==================
+
+I ruoli globali
+---------------
+
+Il modo più facile per gestire i ruoli è direttamente dalla gestione "Utenti e gruppi".
+Da queste pagine infatti è possibile vedere tutti i ruoli ed è la prima cosa che un amministratore
+vede dopo aver aggiunto un utente o creato un gruppo.
+
+Questa "facilità" di lavoro trae in inganno e fa sì che gli amministratori *credano* che queste
+pagine siano il modo giusto di procedere.
+
+
+    **No!** Evitate i ruoli globali.
+
 
 
 

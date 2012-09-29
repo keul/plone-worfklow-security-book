@@ -9,3 +9,7 @@ x gruppo virtuale authenticated users
 - data di scadenza
 - assegnre ruoli non visibili da Plone via ZMI (e.g: Manager)
 - aggiungere nuove parole chiave (va per ruolo)
+- allowAnonymousShowAbout
+- capire come usare i ruoli (non ha senso dare "contributore" e "lettore")
+- grafico della "scala dei poteri"
+

@@ -77,9 +77,22 @@
 <li><a class="reference internal" href="#editor-e-le-collezioni" id="id19">Editor e le Collezioni</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#collaboratore-member" id="id20">Collaboratore (Member)</a></li>
+<li><a class="reference internal" href="#collaboratore-member" id="id20">Collaboratore (Member)</a><ul>
+<li><a class="reference internal" href="#cosa-succede-se-un-utente-non-e-collaboratore" id="id21">Cosa succede se un utente non è Collaboratore?</a></li>
 </ul>
 </li>
+<li><a class="reference internal" href="#lettore-reader" id="id22">Lettore (Reader)</a></li>
+<li><a class="reference internal" href="#revisore-reviewer" id="id23">Revisore (Reviewer)</a></li>
+<li><a class="reference internal" href="#amministratore-del-sito-site-administrator" id="id24">Amministratore del sito (Site Administrator)</a><ul>
+<li><a class="reference internal" href="#attualmente-un-ruolo-poco-supportato" id="id25">Attualmente: un ruolo poco supportato</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#come-usare-i-ruoli" id="id26">Come usare i ruoli</a><ul>
+<li><a class="reference internal" href="#i-ruoli-globali" id="id27">I ruoli globali</a></li>
 </ul>
 </li>
 </ul>
@@ -283,17 +296,92 @@ una configurazione di base, che può essere facilmente modificata).</p>
 del &#8220;contenuto collezione&#8221; ma non ai criteri, che comparivano in un&#8217;altro tab; nelle nuove
 collezioni chi può modificare una collezione ha potere anche sui criteri.</p>
 <div class="figure">
-<img alt="Il tab &quot;Criteri&quot;" src="_images/tab-criteri-vecchie-collezioni.png" />
+<img alt="Il tab &quot;Criteri&quot;" src="_images/criterion-tab-old-collections.png" />
 <p class="caption"><em>Come si presenta il tab dei &#8220;Criteri&#8221; nei cercatori vecchio stile</em></p>
 </div>
 </div>
 </div>
 <div class="section" id="collaboratore-member">
 <h4><a class="toc-backref" href="#id20">Collaboratore (Member)</a><a class="headerlink" href="#collaboratore-member" title="link permanente per questa intestazione">¶</a></h4>
-<p>Il <em>Collaboratore</em> è l&#8217;utente autenticato nella concezione di Plone (che si distingue dal ruolo
+<p>Il <strong>Collaboratore</strong> è l&#8217;utente autenticato nella concezione di Plone (che si distingue dal ruolo
 di <em>Autenticato</em> definito da Zope, visto in precedenza).</p>
-<p>La presenza di questo doppio ruolo crea qualche confuzione.</p>
+<p>La presenza di questo doppio ruolo crea qualche confusione.
+Di base questo ruolo viene fornito automaticamente a tutti gli utenti del sito, come <em>ruolo
+globale</em>.</p>
+<div class="figure">
+<img alt="Overview della vista utenti" src="_images/users-overview-member-role.png" />
+<p class="caption"><em>Il ruolo &#8220;Collaboratore&#8221; dato a tutti gli utenti</em></p>
 </div>
+<p>Il <em>Collaboratore</em> non è un ruolo speciale.
+Basi dati utente aggiuntive (LDAP, RDBMS) di solito forniscono questo stesso ruolo.
+In pratica quando si vogliono dare poteri agli utenti autenticati nel sito Plone bisogna riferirsi
+a questo ruolo, che va preferito al ruolo <em>Autenticato</em> visto in precedenza.</p>
+<div class="section" id="cosa-succede-se-un-utente-non-e-collaboratore">
+<h5><a class="toc-backref" href="#id21">Cosa succede se un utente non è Collaboratore?</a><a class="headerlink" href="#cosa-succede-se-un-utente-non-e-collaboratore" title="link permanente per questa intestazione">¶</a></h5>
+<p>Per quanto detto dell&#8217;<em>Autenticato</em> e del <em>Collaboratore</em> si può concludere che <em>è possibile</em> avere
+utenti del sito sprovvisti del ruolo <em>Collaboratore</em> (non è possibile il contrario invece).</p>
+<p>Plone continua a funzionare a dovere (ci sono in effetti piccole differenze, funzionalità che in
+questa configurazione avrebbe solo il <em>Collaboratore</em>).</p>
+<p>Può servire una simile impostazione?
+In effetti sarebbe possibile definire in questo modo utenti del sito di primo e di secondo livello,
+dove gli utenti con ruolo <em>Autenticato</em> hanno minori poteri.</p>
+<p>Tenete sempre presente che si sta comunque parlando di due ruoli di basso livello (non creano
+contenuti, non gestiscono documenti, ...).</p>
+<p>La possibilità c&#8217;è.</p>
+</div>
+</div>
+<div class="section" id="lettore-reader">
+<h4><a class="toc-backref" href="#id22">Lettore (Reader)</a><a class="headerlink" href="#lettore-reader" title="link permanente per questa intestazione">¶</a></h4>
+<p>Nel significato che Plone dà al ruolo <strong>Lettore</strong> c&#8217;è il poter &#8220;vedere&#8221;, che si traduce (di base)
+in poter accedere a contenuti normalmente non visibili.
+Va usato per assegnare ad utenti del sito un&#8217;anteprima di un lavoro in corso o l&#8217;accesso permanente
+ad un&#8217;area privata.
+Tutto questo senza fornire poteri di modifica di nessun tipo.</p>
+<p>Il lettore è un ruolo interessante ed utile, ma non è detto che sia necessario nel vostro portale.
+Dal punto di vista della &#8220;scala dei poteri&#8221; questo ruolo è appena sopra la coppia
+<em>Autenticato</em>/<em>Collaboratore</em>.</p>
+</div>
+<div class="section" id="revisore-reviewer">
+<h4><a class="toc-backref" href="#id23">Revisore (Reviewer)</a><a class="headerlink" href="#revisore-reviewer" title="link permanente per questa intestazione">¶</a></h4>
+<p>Il <strong>Revisore</strong> assume importanza solo in presenza di un processo di pubblicazione.
+Il <em>Revisore</em> normalmente non crea contenuti ma lavora sui contenuti altrui: li revisiona.</p>
+<p>Ha di solito il potere di accettare il lavoro svolto (di solito: la richiesta di pubblicazione)
+o rifiutarlo: agisce sul <strong>worfklow</strong>.</p>
+<p>Un altro potere che (normalmente) gli viene assegnato è la <strong>gestione delle parole chiave</strong>.</p>
+<p>Anche questo ruolo potrebbe non servire nel vostro sito: come tutto in Plone, dipende dal vostro
+ambiente e dai vostri scopi.</p>
+</div>
+<div class="section" id="amministratore-del-sito-site-administrator">
+<h4><a class="toc-backref" href="#id24">Amministratore del sito (Site Administrator)</a><a class="headerlink" href="#amministratore-del-sito-site-administrator" title="link permanente per questa intestazione">¶</a></h4>
+<p>Questo ruolo è stato introdotto con Plone 4.1, e per ottimi motivi.
+Il suo scopo e dare poteri assoluti agli utenti Plone, senza dar loro poteri definiti &#8220;di
+programmazione&#8221; (che si traduce normalmente con l&#8217;accesso alla ZMI).</p>
+<p>Di questo ruolo se ne sentiva la mancanza.
+E&#8217; normale che il vostro cliente, l&#8217;azienda che vi a commissionato un&#8217;applicazione basata su Plone
+voglia avere utenti con &#8220;poteri assoluti&#8221; (per l&#8217;appunto gli &#8220;amministratori del sito&#8221;).</p>
+<p>Il problema un tempo era non dare poteri inutilmente pericolosi:
+Alla ZMI deve avere accesso solo un utente che ne abbia effettivamente bisogno.</p>
+<div class="section" id="attualmente-un-ruolo-poco-supportato">
+<h5><a class="toc-backref" href="#id25">Attualmente: un ruolo poco supportato</a><a class="headerlink" href="#attualmente-un-ruolo-poco-supportato" title="link permanente per questa intestazione">¶</a></h5>
+<p>Spero che questo paragrafo diventi velocemente deprecato ma al momento le cose vanno così: molti
+prodotti vengono aggiornati senza fornire supporto al ruolo <em>Amministratore del sito</em>, oppure
+basandosi su permessi che questo ruolo non ha (ma che invece ha il <em>Manager</em>).</p>
+<p>Col tempo andrà meglio.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="come-usare-i-ruoli">
+<h2><a class="toc-backref" href="#id26">Come usare i ruoli</a><a class="headerlink" href="#come-usare-i-ruoli" title="link permanente per questa intestazione">¶</a></h2>
+<div class="section" id="i-ruoli-globali">
+<h3><a class="toc-backref" href="#id27">I ruoli globali</a><a class="headerlink" href="#i-ruoli-globali" title="link permanente per questa intestazione">¶</a></h3>
+<p>Il modo più facile per gestire i ruoli è direttamente dalla gestione &#8220;Utenti e gruppi&#8221;.
+Da queste pagine infatti è possibile vedere tutti i ruoli ed è la prima cosa che un amministratore
+vede dopo aver aggiunto un utente o creato un gruppo.</p>
+<p>Questa &#8220;facilità&#8221; di lavoro trae in inganno e fa sì che gli amministratori <em>credano</em> che queste
+pagine siano il modo giusto di procedere.</p>
+<blockquote>
+<div><strong>No!</strong> Evitate i ruoli globali.</div></blockquote>
 </div>
 </div>
 </div>
@@ -333,9 +421,22 @@ di <em>Autenticato</em> definito da Zope, visto in precedenza).</p>
 <li><a class="reference internal" href="#editor-e-le-collezioni">Editor e le Collezioni</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#collaboratore-member">Collaboratore (Member)</a></li>
+<li><a class="reference internal" href="#collaboratore-member">Collaboratore (Member)</a><ul>
+<li><a class="reference internal" href="#cosa-succede-se-un-utente-non-e-collaboratore">Cosa succede se un utente non è Collaboratore?</a></li>
 </ul>
 </li>
+<li><a class="reference internal" href="#lettore-reader">Lettore (Reader)</a></li>
+<li><a class="reference internal" href="#revisore-reviewer">Revisore (Reviewer)</a></li>
+<li><a class="reference internal" href="#amministratore-del-sito-site-administrator">Amministratore del sito (Site Administrator)</a><ul>
+<li><a class="reference internal" href="#attualmente-un-ruolo-poco-supportato">Attualmente: un ruolo poco supportato</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#come-usare-i-ruoli">Come usare i ruoli</a><ul>
+<li><a class="reference internal" href="#i-ruoli-globali">I ruoli globali</a></li>
 </ul>
 </li>
 </ul>
