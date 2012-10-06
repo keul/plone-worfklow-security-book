@@ -103,7 +103,7 @@ html_theme = 'default'
 
 # The name for this set of Sphinx documents.  If None, it defaults to
 # "<project> v<release> documentation".
-#html_title = None
+html_title = 'Plone: worfklow e sicurezza'
 
 # A shorter title for the navigation bar.  Default is the same as html_title.
 #html_short_title = None
@@ -229,7 +229,7 @@ man_pages = [
 texinfo_documents = [
   ('index', 'Ploneworfklowesicurezza', u'Plone: worfklow e sicurezza',
    u'Luca Fabbri (keul)', 'Ploneworfklowesicurezza',
-   "Una guida completa all'uso dei workflow e alla compresione della sicurezza in Plone",
+   "Una guida completa all'uso dei workflow e alla comprensione della sicurezza in Plone",
    'Manual'),
 ]
 
