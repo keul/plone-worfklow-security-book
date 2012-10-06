@@ -355,12 +355,88 @@ Il modo più facile per gestire i ruoli è direttamente dalla gestione "Utenti e
 Da queste pagine infatti è possibile vedere tutti i ruoli ed è la prima cosa che un amministratore
 vede dopo aver aggiunto un utente o creato un gruppo.
 
+.. figure:: _static/users-overview-global-roles.png
+   :alt: Ruoli globali
+
+   *La visione dei ruoli globali dal pannello di controllo degli utenti*
+
 Questa "facilità" di lavoro trae in inganno e fa sì che gli amministratori *credano* che queste
 pagine siano il modo giusto di procedere.
 
-
     **No!** Evitate i ruoli globali.
 
+I ruoli globali sono dannosi perché molto spesso nascondono una tra le più grandi funzionalità di
+Plone: il pannello della condivisione.
 
+Per di più, i ruoli globali sono **assoluti** e non possono in nessun modo essere bloccati.
+Questo significa che se assegnate un ruolo globale ad un utente o un gruppo, quell'utente o gruppo
+avrà il potere assegnatogli in tutto il sito, senza eccezioni.
 
+Per concludere: non usate mai i ruoli globali, soprattutto per i singoli utenti.
+
+Eccezioni utili
+~~~~~~~~~~~~~~~
+
+Le eccezioni ci sono.
+
+La prima eccezione è per l'assegnazione del ruolo di *Collaboratore* agli utenti, che in una
+configurazione normale diventa appunto una proprietà dell'utente che non ha limitazioni in nessuna
+sezione del sito: un utente del sito è utente del sito ovunque (nota bene: questo non significa che
+l'utente debba avere accesso a tutte le aree del sito).
+
+La seconda eccezione vale per alcuni gruppi, come indicato quando si sono presentati i gruppi
+predefiniti di Plone.
+Ci sono alcuni gruppi che, per natura, definiscono poteri globali: l'ipotetico gruppo dei "Redattori
+Ufficio 5" non deve probabilmente avere nessun potere globale, ma un gruppo come gli Amministratori
+del Sito la cosa è diversa.
+
+L'unica eccezione che sconsiglio sempre è l'assegnazione di altri poteri che non siano quelli di
+*Collaboratore* a qualunque utente.
+Se ci possono essere eccezioni per i gruppi, consiglio piuttosto di creare un gruppo dove porre
+questo utente e dare i poteri al gruppo.
+
+I ruoli locali (condivisione)
+-----------------------------
+
+Il modo che consiglio per gestire l'assegnazioni dei ruoli nel vostro sito è il pannello della
+condivisione.
+Proseguiamo l'esempio mostrando la condivisione di una cartella del sito che dovrebbe essere l'area
+di lavoro dell'"Ufficio 5", all'interno di una macro-area che racchiude tutti gli uffici.
+
+.. figure:: _static/sharing-view.png
+   :alt: Condivisione
+
+   *La vista della condivisione di un elemento*
+
+La descrizione "*Puoi controllare chi può visualizzare e modificare l'elemento usando l'elenco che
+segue.*" che leggete nell'immagine di certo facilita a comprendere che cosa si può fare in questa
+vista ma è limitativa perché vale solo con i ruoli predefiniti di Plone.
+Da questo modulo di possono controllare tutti i ruoli, anche quelli non compresi in una installazione
+base di Plone.
+
+Il pannello della condivisione mostra sempre una tabella riassuntiva sullo stato dei ruoli assegnati
+nel contesto.
+La lista può anche essere inizialmente vuota ma si popola automaticamente in presenza di impostazioni
+di condivisione, oppure non appena l'utente usa il campo di ricerca utenti e gruppi.
+
+A questo punto l'utente che ha accesso a questo modulo può assegnare permessi semplicemente
+selezionando le spunte disponobili.
+
+Come avrete notato, non tutte le spunte sono sempre attive.
+Il testo di aiuto in basso è molto utile a comprendere perché alcune spunte possono essere inattive.
+
+I **ruoli globali** (|global_role_icon|) sono quelli discussi alla sezione precedente. Se un dato
+utente o gruppo ha dei ruoli locali non avrebbe nessun effetto poter assegnare quello stesso ruolo
+anche nel contesto corrente, quindi l'azione è disabilitata.
+
+.. |global_role_icon| image:: _static/global_role_icon.png
+                      :align: bottom    
+
+I **ruoli ereditati** (|inherit_role_icon|) verranno discussi meglio tra poco.
+
+.. |inherit_role_icon| image:: _static/inherit_role_icon.png
+                       :align: bottom
+
+Ereditarietà dei ruoli locali
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 

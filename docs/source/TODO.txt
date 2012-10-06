@@ -7,9 +7,10 @@ x gruppo virtuale authenticated users
 - dashboard
 - allowedRolesAndUSers, View e prodotti che usano lo stesso principio (per il revisore)
 - data di scadenza
-- assegnre ruoli non visibili da Plone via ZMI (e.g: Manager)
+- assegnre ruoli locali non visibili da Plone via ZMI (e.g: Manager)
 - aggiungere nuove parole chiave (va per ruolo)
 - allowAnonymousShowAbout
 - capire come usare i ruoli (non ha senso dare "contributore" e "lettore")
 - grafico della "scala dei poteri"
-
+- grafico della struttura degli utenti, ruoli, permessi, ...
+- chi accede al tab "condivisione"? E cosa vede?

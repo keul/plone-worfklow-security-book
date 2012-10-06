@@ -14,10 +14,10 @@ Il sistema di workflow disponibile in Plone e tutto quello che concerne la sicur
 nel CMS sono una tra le sue maggiori attrattive e una tra le caratteristiche più potenti, ma molto
 spesso incomprese.
 
-Non sono un grande fan della documentazione, poiché quest tende a diventare obsoleta molto
-velocemente ma questa parte della tecnologia del CMS è la stessa da quando ho iniziato a lavorarvi
+Non sono un grande fan della documentazione, poiché questa tende a diventare obsoleta molto
+velocemente, ma questa parte della tecnologia Plone è la stessa da quando ho iniziato a lavorarvi
 (o poco è cambiato) e non credo ci saranno grosse novità nel prossimo futuro.
-Questo a mio parere giustifica lo sforzo!
+Questo a mio parere giustifica lo sforzo.
 
 Per chi è questo libro
 ======================
