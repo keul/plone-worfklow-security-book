@@ -1,4 +1,5 @@
 bin
+docs/build
 develop-eggs
 eggs
 parts
