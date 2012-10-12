@@ -519,13 +519,8 @@ La "traduzione" dei ruoli locali
 --------------------------------
 
 Fin'ora non abbiamo accennato nulla sul fatto che sembra esserci una grande differenza tra che
-cosa viene visualizzato nella gestione dei ruoli globali e nella vista di condivisione per
-assegnare ruoli locali.
-
-.. figure:: _static/roles-from-global.png
-   :alt: Ruoli dalla gestione gruppi e utenti
-
-   *I ruoli globali, come sono presentati dalla gestione utenti e gruppi*
+cosa viene visualizzato nella gestione dei ruoli globali e cosa invece nella vista di condivisione
+per assegnare ruoli locali.
 
 Avrete già notato come nella configurazione del sito vengano mostrati quasi tutti i ruoli che
 sono stati descritti nella relativa sezione.
@@ -533,6 +528,11 @@ Sono esclusi tutti i ruoli definiti da Zope tranne *Manager* ma sono inclusi tut
 a livello Plone.
 Questa vista ha quindi la particolarità di **mostrare automaticamente i nuovi ruoli** che potreste
 andare a definire.
+
+.. figure:: _static/roles-from-global.png
+   :alt: Ruoli dalla gestione gruppi e utenti
+
+   *I ruoli globali, come sono presentati dalla gestione utenti e gruppi*
 
 Lo stesso non succede per la vista di condivisione, dove potrebbe addittura sembrare che non siano
 mostrati *ruoli* ma *permessi*.
@@ -544,8 +544,8 @@ mostrati *ruoli* ma *permessi*.
 
 In realtà questo non è vero.
 Sempre per semplificare la vista agli utenti che si avvicinano a Plone per la prima volta e per
-aumentare l'usabilità del modulo, dalla versione 3 di Plone la condivisione è stata modificata nel
-seguente modo:
+aumentare l'usabilità della pagina, dalla versione 3 di Plone la condivisione è stata modificata
+nel seguente modo:
 
 * non mostra tutti i ruoli, ma solo quelli realmente utili per eseguire la condivisione
 * non mostra i nomi dei ruoli, ma una generica descrizione di "cosa il ruolo fa"
@@ -556,4 +556,96 @@ Quindi:
 * "**Può modificare**" è per "*Editor*"
 * "**Può revisionare**" è per il "*Revisore*"
 * "**Può vedere**" è per il "*Lettore*"
+
+Rimane quindi sempre valida la regola: in Plone si assegnano ruoli, non permessi.
+
+Creare nuovi ruoli: quando e perché
+===================================
+
+Nelle recenti versioni di Plone la necessità di avere nuovi ruoli è venuta largamente meno.
+Tutti le figure utili per quello che può essere un semplice sito, un enorme portale o una complessa
+intranet aziendale, sono forniti dall'installazione base di Plone.
+
+Quando *non* serve un nuovo ruolo
+---------------------------------
+
+Molto spesso si crede che nel proprio sito Plone serva un nuovo ruolo quando invece serve una
+modifica al workflow.
+
+Il problema principale è che **creare nuovi ruoli è facile**, mentre modificare i workflow è una cosa
+più complessa; alle volte la scelta sbagliata viene presa per pigrizia.
+
+Non è detto serva un nuovo ruolo Plone se serve che un utente debba fare "qualcosa di nuovo".
+
+Per semplicità seguono tre esempi di casi in cui *non* serve un nuovo ruolo.
+
+Non serve un nuovo ruolo se... 1
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Plone ti fornisce il ruolo di *Contributore* e *Editor* ma la tua installazione è semplice e senza
+fronzoli: ti basta avere un ruolo con entrambi i poteri: il *Redattore*.
+
+La soluzione: dare entrambi i ruoli ai tuoi utenti.
+
+Non serve un nuovo ruolo se... 2
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Hai appena installato `Ploneboard`__ e vuoi un nuovo ruolo che ti permetta di gestire i commenti: il
+*Moderatore*.
+
+__ http://plone.org/products/ploneboard
+
+La soluzione: il moderatore non sarebbe più o meno il *Revisore* dell'area forum?
+Perché quindi non usare quel ruolo?
+Quello che in questo caso ti serve è una modifica al workflow del forum o dei commenti e
+l'assegnazione di ruoli locali ai giusti utenti nell'area forum (bloccando ovviamente eventuali altri
+revisori del sito).
+
+Non serve un nuovo ruolo se... 3
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Hai una speciale sezione del sito dove una nuova super razza *Revisori* non solo devono essere in
+grado di revisionare i contenuti, ma anche di modificarli: il "*Super Revisore*".
+
+La soluzione: se in quella sezione hai bisogno che tutti i *Revisori* diventino *Super Revisori*,
+allora quello che ti serve è semplicemente un nuovo workflow, e probabilmente installare il
+*supporto per le politiche di workflow* (o `CMFPlacefulWorkflow`__, presente nelle installazioni
+Plone ma di base non attivato).
+
+__ http://pypi.python.org/pypi/Products.CMFPlacefulWorkflow
+
+Quando serve un nuovo ruolo
+---------------------------
+
+La creazione di nuovi ruoli è scoraggiata ma è inevitabile in vari casi.
+
+    Un ruolo ruolo diventa necessario quando un utente deve poter fare qualcosa che nessun altro
+    ruolo (o combinazione di ruoli) sia in grado di fare in quel contesto
+
+Ecco alcuni esempi in cui la creazione di un nuovo ruolo è inevitabile (sono tutti esempi di casi
+reali che ho potuto vedere):
+
+Serve un nuovo ruolo se... 1
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Ricollegandomi all'ultimo esempio della sezione precedente: se in quella speciale area del sito il
+avessero dovuto convivere il semplice *Revisore* (che poteva solo accettare/rifiutare i contenuti) e
+il *Super Revisore* (che in più modifica), allora anche in quel caso saremmo caduti nella necessità
+di avere un nuovo ruolo.
+
+Serve un nuovo ruolo se... 2
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Hai necessità di un meccanismo di revisione a due livelli: il normale *Revisore* approva i contenuti
+ma una seconda figura ha voce in capitolo per un'approvazione di secondo livello.
+
+Serve un nuovo ruolo se... 3
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+(gestione portlet)
+
+Serve un nuovo ruolo se... 4
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+(gestione ordini)
 
