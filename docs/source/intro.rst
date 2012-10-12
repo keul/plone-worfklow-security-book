@@ -91,7 +91,7 @@ queste differenze di tecnologia *non* saranno evidenziate nel libro.
 __ http://zope.org/
 __ http://pypi.python.org/pypi/Products.CMFCore
 
-Riferimenti alle versioni utilizzati
+Riferimenti alle versione utilizzata
 ====================================
 
 Quanto mostrato è applicabile alla versione 4 di Plone (specificatamente: `Plone 4.2.x`__), ma sono

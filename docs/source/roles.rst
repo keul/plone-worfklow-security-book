@@ -366,13 +366,13 @@ pagine siano il modo giusto di procedere.
     **No!** Evitate i ruoli globali.
 
 I ruoli globali sono dannosi perché molto spesso nascondono una tra le più grandi funzionalità di
-Plone: il pannello della condivisione.
+Plone: **la condivisione di un contenuto o una sezione del sito**.
 
 Per di più, i ruoli globali sono **assoluti** e non possono in nessun modo essere bloccati.
 Questo significa che se assegnate un ruolo globale ad un utente o un gruppo, quell'utente o gruppo
 avrà il potere assegnatogli in tutto il sito, senza eccezioni.
 
-Per concludere: non usate mai i ruoli globali, soprattutto per i singoli utenti.
+Per concludere: sconsiglio di usare i ruoli globali, soprattutto per i singoli utenti.
 
 Eccezioni utili
 ~~~~~~~~~~~~~~~
@@ -386,14 +386,14 @@ l'utente debba avere accesso a tutte le aree del sito).
 
 La seconda eccezione vale per alcuni gruppi, come indicato quando si sono presentati i gruppi
 predefiniti di Plone.
-Ci sono alcuni gruppi che, per natura, definiscono poteri globali: l'ipotetico gruppo dei "Redattori
-Ufficio 5" non deve probabilmente avere nessun potere globale, ma un gruppo come gli Amministratori
-del Sito la cosa è diversa.
+Ci sono alcuni gruppi che, per natura, definiscono poteri globali: l'ipotetico gruppo dei
+"Redattori Ufficio 5" non deve probabilmente avere nessun potere globale, ma per un gruppo come gli
+Amministratori del Sito la cosa è diversa.
 
 L'unica eccezione che sconsiglio sempre è l'assegnazione di altri poteri che non siano quelli di
 *Collaboratore* a qualunque utente.
-Se ci possono essere eccezioni per i gruppi, consiglio piuttosto di creare un gruppo dove porre
-questo utente e dare i poteri al gruppo.
+Se ci possono essere eccezioni per i gruppi, per gli utenti no. Consiglio piuttosto di creare un
+gruppo dove porre questo utente e dare i poteri al gruppo.
 
 I ruoli locali (condivisione)
 -----------------------------
@@ -408,25 +408,30 @@ di lavoro dell'"Ufficio 5", all'interno di una macro-area che racchiude tutti gl
 
    *La vista della condivisione di un elemento*
 
-La descrizione "*Puoi controllare chi può visualizzare e modificare l'elemento usando l'elenco che
-segue.*" che leggete nell'immagine di certo facilita a comprendere che cosa si può fare in questa
-vista ma è limitativa perché vale solo con i ruoli predefiniti di Plone.
-Da questo modulo di possono controllare tutti i ruoli, anche quelli non compresi in una installazione
-base di Plone.
+Fate particolare attenzione alle *briciole di pane* (breadcrumbs), che ci permettono sempre di
+comprendere la nostra posizione all'interno del sito.
 
-Il pannello della condivisione mostra sempre una tabella riassuntiva sullo stato dei ruoli assegnati
-nel contesto.
-La lista può anche essere inizialmente vuota ma si popola automaticamente in presenza di impostazioni
-di condivisione, oppure non appena l'utente usa il campo di ricerca utenti e gruppi.
+La descrizione "*Puoi controllare chi può visualizzare e modificare l'elemento usando l'elenco che
+segue.*" che leggete nell'immagine, di certo facilita a comprendere che cosa si può fare in questa
+vista ma è limitativa perché vale solo per la configurazione base di Plone.
+
+Nella realtà da questo modulo si possono controllare tutti i ruoli, anche quelli non compresi in
+una installazione base.
+
+Il pannello della condivisione mostra sempre una tabella riassuntiva sullo stato dei ruoli
+assegnati nel contesto.
+La lista può anche essere inizialmente vuota ma si popola automaticamente in presenza di
+impostazioni di condivisione, oppure non appena l'utente usa il campo di ricerca utenti e gruppi.
 
 A questo punto l'utente che ha accesso a questo modulo può assegnare permessi semplicemente
-selezionando le spunte disponobili.
+selezionando le caselle di spunta disponibili.
 
-Come avrete notato, non tutte le spunte sono sempre attive.
-Il testo di aiuto in basso è molto utile a comprendere perché alcune spunte possono essere inattive.
+Come avrete notato, non tutte le spunte sono sempre attive, ma vengono a volte sostituite da icone.
+Il testo di aiuto in basso è molto utile a comprendere perché alcune spunte possono essere
+inattive.
 
 I **ruoli globali** (|global_role_icon|) sono quelli discussi alla sezione precedente. Se un dato
-utente o gruppo ha dei ruoli locali non avrebbe nessun effetto poter assegnare quello stesso ruolo
+utente o gruppo ha dei ruoli globali non avrebbe nessun effetto poter assegnare quello stesso ruolo
 anche nel contesto corrente, quindi l'azione è disabilitata.
 
 .. |global_role_icon| image:: _static/global_role_icon.png
@@ -439,4 +444,116 @@ I **ruoli ereditati** (|inherit_role_icon|) verranno discussi meglio tra poco.
 
 Ereditarietà dei ruoli locali
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+I ruoli assegnati agli utenti in Plone vengono di norma ereditati.
+Questo permette di fornire ruoli locali ad utenti in una sezione e (ovviamente) avere questi stessi
+ruoli in tutto il sottoalbero.
+
+Nell'esempio di poco fa, il gruppo "*Direzione*" all'interno della cartella "*Ufficio 5*" ha un
+ruolo ereditato da un qualche livello superiore.
+Non possiamo sapere da questa pagina da quale livello si ottenga questa ereditarietà; la logica ci
+dice che molto probabilmente il gruppo ha un ruolo assegnato nella cartella padre (*Uffici*) ma
+questo non è importante.
+
+Anche in questo caso, come succede per i ruoli globali, il controllo per assegnare il ruolo può
+essere inaccessibile e sostituito da un'icona, e questo per lo stesso motivo: non avrebbe effetto
+assegnare lo stesso ruolo ad un utente o un gruppo che già lo possiede per effetto
+dell'ereditarietà
+
+C'è però un comportamento molto interessante, che è il motivo scatenante per cui consiglio i ruoli
+locali a discapito dei ruoli globali: i ruoli locali possono essere bloccati.
+
+.. figure:: _static/sharing-view-no-inherit.png
+   :alt: Condivisione (ereditarietà bloccata)
+
+   *La vista della condivisione di un elemento con blocco dell'ereditarietà dei ruoli*
+
+La spunta "*Eredita i permessi dai livelli superiori*" ha proprio l'effetto descritto: se viene
+rimossa si viene ad annullare l'ereditarietà dei ruoli *locali* (e non globali) da un qualunque
+livello superiore.
+
+A questo punto il gruppo "*Direzione*" diventa un gruppo come gli altri.
+Potremmo anche ri-assegnare lo stesso potere che aveva prima del blocco dell'ereditarietà e non
+sarebbe nemmeno un comportamento tanto bizzarro (perché magari era nel nostro interesse che il
+gruppo non avesse quel ruolo in altri uffici, ma non in questo).
+
+Il blocco dell'ereditarietà permette di creare sezioni protette all'interno di aree del sito:
+
+* una cartella altamente riservata, invisibile e inaccessibile a tutti gli utenti a cui abbiamo
+  dato poter di poter vedere la nostra sezione della intranet
+* un documento in sola lettura che nessun utente con potere di modificare possa toccare
+* una sezione dove gli amministratori del sito posizionano documentazione relativa ad un gruppo
+  di persone, ma non accessibile al gruppo stesso
+
+Condivisione del documento predefinito
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Un errore comune è quello di finire erroneamente nella condivisione di un documento usato come
+vista predefinita di una cartella e non nella cartella stessa.
+
+Visto che nel 90% dei casi questo è un errore, Plone ci avverte del problema con un messaggio.
+
+.. figure:: _static/sharing-view-default-page.png
+   :alt: Condivisione di una pagina predefinita
+
+   *Il messaggio di avvertimento in caso di condivisione dei permessi su una pagina predefinita*
+
+Questo comportamento potrebbe anche diventare un'opportunità, probabilmente legata al blocco dei
+ruoli locali descritti poco fa.
+
+Ruoli locali come fossero globali
+---------------------------------
+
+Verrà ora descritto come poter avere nel proprio sito Plone lo stesso comportamento relativo ai
+ruoli globali pur mantenendo la possibilità di bloccare l'ereditarietà.
+
+Quello che basta fare è usare la condivisione di Plone sulla radice del sito (come descritto alla
+sezione precedente: fate attenzione a non essere finiti in condivisione della pagina predefinita
+del sito).
+In questo modo avete il meglio dei due mondi:
+
+* I ruoli sono assegnati ad utenti o gruppi in tutto il sito
+* In qualunque momento potete bloccare l'ereditarietà dei ruoli in specifiche sezioni del sito
+
+La "traduzione" dei ruoli locali
+--------------------------------
+
+Fin'ora non abbiamo accennato nulla sul fatto che sembra esserci una grande differenza tra che
+cosa viene visualizzato nella gestione dei ruoli globali e nella vista di condivisione per
+assegnare ruoli locali.
+
+.. figure:: _static/roles-from-global.png
+   :alt: Ruoli dalla gestione gruppi e utenti
+
+   *I ruoli globali, come sono presentati dalla gestione utenti e gruppi*
+
+Avrete già notato come nella configurazione del sito vengano mostrati quasi tutti i ruoli che
+sono stati descritti nella relativa sezione.
+Sono esclusi tutti i ruoli definiti da Zope tranne *Manager* ma sono inclusi tutti i ruoli definiti
+a livello Plone.
+Questa vista ha quindi la particolarità di **mostrare automaticamente i nuovi ruoli** che potreste
+andare a definire.
+
+Lo stesso non succede per la vista di condivisione, dove potrebbe addittura sembrare che non siano
+mostrati *ruoli* ma *permessi*.
+
+.. figure:: _static/roles-from-sharing.png
+   :alt: Ruoli dalla condivisione
+
+   *I ruoli locali, come sono presentati dalla vista condivisione*
+
+In realtà questo non è vero.
+Sempre per semplificare la vista agli utenti che si avvicinano a Plone per la prima volta e per
+aumentare l'usabilità del modulo, dalla versione 3 di Plone la condivisione è stata modificata nel
+seguente modo:
+
+* non mostra tutti i ruoli, ma solo quelli realmente utili per eseguire la condivisione
+* non mostra i nomi dei ruoli, ma una generica descrizione di "cosa il ruolo fa"
+
+Quindi:
+
+* "**Può aggiungere**" è per il "*Contributore*"
+* "**Può modificare**" è per "*Editor*"
+* "**Può revisionare**" è per il "*Revisore*"
+* "**Può vedere**" è per il "*Lettore*"
 

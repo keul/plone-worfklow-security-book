@@ -1,0 +1,20 @@
+/**
+ * Custom HTML styles
+ */
+
+p.logo {
+    padding: 0.3em;
+    background-color: white;
+}
+
+.section p img {
+    margin: 0;
+}
+
+div.figure {
+    padding: 0.3em;
+    border: 1px dotted #e0e0e0;
+}
+div.figure p.caption {
+    text-align: center;
+}

@@ -35,3 +35,8 @@ Per generare il libro in PDF::
 
     % make latexpdf
 
+Versione HTML online
+====================
+
+La versione aggiornata e online del libro è ospitata all'indirizzo
+http://plone-worfklow-e-sicurezza.readthedocs.org
