@@ -14,5 +14,5 @@ Plone: worfklow e sicurezza
    users
    groups
    roles
-
+   credits
 
