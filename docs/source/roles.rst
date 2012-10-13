@@ -566,11 +566,53 @@ Nelle recenti versioni di Plone la necessità di avere nuovi ruoli è venuta lar
 Tutti le figure utili per quello che può essere un semplice sito, un enorme portale o una complessa
 intranet aziendale, sono forniti dall'installazione base di Plone.
 
+Perché creare ruoli aggiuntivi è sconsigliato
+---------------------------------------------
+
+    La creazione di nuovi ruoli complica i workflow e la gestione dei permessi
+
+Non si sono ancora affrontati i **workflow** o i **permessi** ma anticipiamo qualche cosa.
+Per ogni ruolo esistente in un sito Plone va considerato il suo effetto per ogni permesso e questo
+crea una specie di matrice (una tabella).
+Non c'è bisogno di immaginare questa tabella poiché esiste davvero.
+
+.. figure:: _static/zmi-security-roles-permissions-grid.png
+   :alt: Manage access in ZMI
+
+   *Un'anteprima parziale della vista della sicurezza in ZMI*
+
+Nell'immagine sopra troviamo in riga i permessi del sito (sono solo una piccola parte e non
+scenderemo nei dettagli per ora) e in colonna i ruoli.
+Potete ben immagina che più la tabella diventa grande, più è difficile da gestire ma non ci è davvero
+possibile limitare i permessi (o solo in minima parte).
+Un'installazione base di Plone ha comunque un numero enorme di permessi, quindi dobbiamo rassegnarci
+ad avere una tabella con tantissime righe.
+
+Capite quindi che aggiungere una colonna a questa tabella aumenta di molto il numero di permessi da
+gestire per questo ruolo.
+Nella maggior parte dei casi il valore predefinito del permesso andrà bene, ma particolare attenzione
+andrà ai permessi che sono poi gestiti tramite workflow... e questo ci obbliga anche a verificare i
+permessi gestiti dai workflow... per ogni stato.
+
+Se tutto questo non sembra ancora abbastanza chiaro, le cose miglioreranno dopo aver letto i
+rispettivi capitoli sui **permessi** e **workflow**.
+
+Un altro motivo sono i **prodotti aggiuntivi**.
+E' lecito pensare che la vostra installazione Plone utilizzerà alcuni tra le centinaia di add-on
+disponibili.
+I prodotti aggiuntivi non conoscono i vostri ruoli e contemporaneamente è possibile che aggiungano
+al vostro sito nuovi permessi; il prodotto quindi si prenderà in carico di configurare alcune
+impostazioni di sicurezza al momento dell'installazione.
+
+Quali, se non i ruoli predefiniti, saranno presi in considerazione?
+Ecco perché molto spesso è meglio cambiare i poteri di un ruolo esistente piuttosto che crearne uno
+nuovo.
+
 Quando *non* serve un nuovo ruolo
 ---------------------------------
 
 Molto spesso si crede che nel proprio sito Plone serva un nuovo ruolo quando invece serve una
-modifica al workflow.
+modifica ad un qualche workflow o alla sicurezza.
 
 Il problema principale è che **creare nuovi ruoli è facile**, mentre modificare i workflow è una cosa
 più complessa; alle volte la scelta sbagliata viene presa per pigrizia.
@@ -583,7 +625,8 @@ Non serve un nuovo ruolo se... 1
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Plone ti fornisce il ruolo di *Contributore* e *Editor* ma la tua installazione è semplice e senza
-fronzoli: ti basta avere un ruolo con entrambi i poteri: il *Redattore*.
+fronzoli: i tuoi utenti devono poter creare contenuti e modificare quelli di tutti. Chiamiamolo
+*Redattore*.
 
 La soluzione: dare entrambi i ruoli ai tuoi utenti.
 
@@ -622,30 +665,46 @@ La creazione di nuovi ruoli è scoraggiata ma è inevitabile in vari casi.
     Un ruolo ruolo diventa necessario quando un utente deve poter fare qualcosa che nessun altro
     ruolo (o combinazione di ruoli) sia in grado di fare in quel contesto
 
-Ecco alcuni esempi in cui la creazione di un nuovo ruolo è inevitabile (sono tutti esempi di casi
-reali che ho potuto vedere):
+Ricolleghiamoci all'ultimo caso appena affrontato (l'ipotesi del *Super Revisore*).
+
+Se in quella speciale area del sito la richiesta fosse stata di mantenere *anche* il ruolo di
+*Revisore* (col suo funzionamento predefinito, accettare/rifiutare i contenuti), allora il *Super
+Revisore* (che in più modifica) sarebbe stato per forza un nuovo ruolo.
+
+In presenza di una simile richiesta c'è poco da fare, se non tentare di far ragionare il committente,
+chiedergli se *davvero* c'è la necessità di una simile presenza di due diverse figure di revisori.
+
+Seguono tre esempi di casi in cui la creazione di un nuovo ruolo è inevitabile.
+Sono tutti e tre casi reali (decontestualizzati) che ho potuto vedere in questi anni.
 
 Serve un nuovo ruolo se... 1
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-Ricollegandomi all'ultimo esempio della sezione precedente: se in quella speciale area del sito il
-avessero dovuto convivere il semplice *Revisore* (che poteva solo accettare/rifiutare i contenuti) e
-il *Super Revisore* (che in più modifica), allora anche in quel caso saremmo caduti nella necessità
-di avere un nuovo ruolo.
-
-Serve un nuovo ruolo se... 2
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Hai necessità di un meccanismo di revisione a due livelli: il normale *Revisore* approva i contenuti
 ma una seconda figura ha voce in capitolo per un'approvazione di secondo livello.
 
+Serve un nuovo ruolo se... 2
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Ti viene chiesto che un certo gruppo di utenti debba poter gestire le portlet (riquadri) del sito.
+
+Le portlet sono un'attività ad oggi sotto il cotrollo dei *Manager* e degli *Amministratori del sito*
+e, a meno che la richiesta non sia di dare questo potere a tutti gli *Revisori* del sito, l'unica
+soluzione è creare un ruolo di *Gestore portlet*.
+
 Serve un nuovo ruolo se... 3
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-(gestione portlet)
+La tua installazione plone è in realtà un applicativo di gestione ordini (diciamo un DMS), dove in
+poche cartelle sono contenute decine di migliaia di ordini di acquisto.
+In più l'azienda che utilizza l'applicativo ha un enorme numero di ruoli interni e tutti devono
+mettere voce nell'approvazione dell'ordine per passare dalla sua fase iniziale all'evasione finale.
 
-Serve un nuovo ruolo se... 4
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+In questo caso siamo in presenza di una struttura del sito molto semplice ma anche di un organigramma
+molto complesso.
+L'unica soluzione è davvero quella di creare tutti i ruoli necessari.
 
-(gestione ordini)
+Come creare nuovi ruoli
+=======================
 
+xxx
