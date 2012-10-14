@@ -14,3 +14,5 @@ x gruppo virtuale authenticated users
 - grafico della "scala dei poteri"
 - grafico della struttura degli utenti, ruoli, permessi, ...
 - chi accede al tab "condivisione"? E cosa vede?
+- gruppi di gruppi
+- avvertimento sul fare tutto via ZMI

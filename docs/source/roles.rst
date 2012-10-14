@@ -707,4 +707,116 @@ L'unica soluzione è davvero quella di creare tutti i ruoli necessari.
 Come creare nuovi ruoli
 =======================
 
-xxx
+La creazione di nuovi ruoli è semplice, basta accedere alla ZMI del proprio sito Plone alla gestione
+della sicurezza (scheda **security**) il che ci porta alla pagina ``/manage_access``.
+
+.. figure:: _static/zmi-manage-security-link.png
+   :alt: Link alla manage access in ZMI
+
+   *Link per andare alla gestione della sicurezza del sito Plone, da ZMI*
+
+In fondo a questa pagina trovare il **form per aggiungere nuovi ruoli** (ed eliminarli).
+
+.. figure:: _static/zmi-security-add-form.png
+   :alt: Creazione nuovi ruoli da ZMI
+
+   *Form per la creazione di nuovi ruoli dalla gestione della sicurezza del sito Plone, da ZMI*
+
+Basta scegliere un nome per il nostro ruolo e premere *Add Role*.
+Immediatamente possiamo vederne gli effetti nella pagina stessa.
+
+.. figure:: _static/zmi-security-added-role.png
+   :alt: Il nuovo ruolo creato
+
+   *Il nuovo ruolo appena creato, inserito tra le colonne della matrice*
+
+Comportamenti del ruolo appena creato
+-------------------------------------
+
+Quando viene creato un nuovo ruolo, Plone non sa come gestirlo, quindi non gli viene assegnato
+nessun permesso (la colonna dei checkbox sarà inizialmente vuota).
+Sta a voi passare in rassegna tutti i permessi e fornire al ruolo tutti i permessi necessari,
+tenendo presente che:
+
+* alcuni permessi potrebbero essere gestiti dai workflow
+* gli utenti potrebbero avere altri ruoli oltre al nuovo venuto
+
+Date al ruolo il minor numero di permessi possibile, concentratevi su quello che il ruolo dovrà fare.
+Manteniamoci sull'esempio proposto in precedenza: il *Super Revisore* deve avere gli stessi poteri
+del *Revisore* ma poter modificare i contenuti pubblicati.
+
+Il primo passo sarà probabilmente copiare *tutti* i permessi associati al ruolo di *Revisore*, poi
+concentrarsi sulle differenze.
+Per poter modificare i documenti pubblicati sarà necessario lavorare col workflow.
+
+Non assegnate altri permessi se non sono necessari.
+
+Assegnare il nuovo ruolo
+------------------------
+
+Lasciamo la ZMI e torniamo all'interfaccia di Plone.
+
+Come fatto in precedenza, partiamo dalla gestione utenti e gruppi del sito.
+
+.. figure:: _static/users-overview-new-role.png
+   :alt: Il nuovo ruolo creato visto da Plone
+
+   *Il nuovo ruolo appena creato, visto dalla gestione utenti e gruppi di Plone*
+
+In questo caso possiamo vedere la facilità con cui saremmo in grado di assegnare questo ruolo in modo
+globale.
+Come già discusso, questo può essere giusto o sbagliato; magari nel vostro sito il gruppo
+**Direzione** deve possedere questo ruolo in modo globale e senza eccezioni e sarebbe quindi giusto
+fornirgli questo ruolo.
+
+L'esempio con cui abbiamo introdotto il concetto di *Super Revisore* parlava però di una specifica
+cartella del sito dove questi utenti dovevano poter lavorare (ammettiamo che questo avvenga nella
+cartella *News*).
+Per ottenere questo avrete capito che si sta invece parlando di ruoli locali, quindi andiamo a
+condividere il nuovo ruolo su quella cartella.
+
+.. figure:: _static/sharing-view-missing-role.png
+   :alt: La condivisione della cartella News
+
+   *Dalla condivisione della cartella news manca il nuovo ruolo appena definito*
+
+Che succede?
+Avremmo bisogno di vedere il nuovo ruolo nella condivisione ma questo non compare!
+
+Avevamo detto in precedenza come la condivisione non mostra tutti i ruoli, ma solo quelli realmente
+utili al funzionamento della convisidione di Plone.
+Il problema ora è che il nostro ruolo *dovrebbe* comparire in questa lista e siamo quindi costretti
+a dire esplicitamente a Plone di voler inserire il nuovo ruolo.
+
+Per fare questo purtroppo dobbiamo per la prima volta sporcarci davvero le mani con qualche riga di
+codice.
+
+.. Note::
+    
+    Ad oggi non c'è nessun modo di scegliere da interfaccia Plone o ZMI quali ruoli mostrare nella
+    pagina della condivisione
+
+Mostrare i nuovi ruoli nella condivisione
+-----------------------------------------
+
+La prima domanda che probabilmente ci si porrà: in quale prodotto inserire questo codice?
+
+In questa guida non si vuole affrontare nel dettaglio come creare nuovi prodotti in Plone ma una
+risposta va comunque quantomeno accennata.
+
+Il vostro nuovo ruolo è parte integrante di un prodotto che aggiunge una qualche funzionalità a
+Plone?
+In quel caso la risposta è semplice: il prodotto stesso dovrebbe fornirvi anche il nuovo ruolo.
+
+Se il vostro ruolo è necessario per il funzionamento di un workflow personalizzato è molto probabile
+che anche il workflow diventerà prima o poi parte di un prodotto, quindi tanto vale inserire in un
+ipotetico prodotto chiamato "*miaazienda*.worfklow" la registrazione del permesso.
+
+Questo stesso prodotto potrebbe poi essere necessario per ospitare anche le modifiche ai permessi
+del sito.
+
+Fingiamo quindi da questo punto che l'azienda per cui stiamo sviluppando questo workflow si chiami
+Lorem Ipsum.
+Ecco che un buon nome per questo prodotto sarà quindi **loremipsum.workflow** e la sua realizzazione
+ci accompagnerà nei prossimi capitoli.
+
