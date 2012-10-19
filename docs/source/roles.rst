@@ -728,6 +728,14 @@ L'unica soluzione è davvero quella di creare tutti i ruoli necessari.
 Come creare nuovi ruoli
 =======================
 
+.. Warning::
+    Quando segue, sebbene sia una descrizione di come creare nuovi ruoli tramite ZMI, non è
+    solitamente il comportamento corretto da tenere, soprattutto se si ha accesso al server dove
+    è installato Plone e si ha possibilità quindi di poter aggiungere prodotti.
+    
+    Per replicare la creazione di un nuovo ruolo con un prodotto, vedere la sezione
+    :ref:`section-product-add-new-role`.
+
 La creazione di nuovi ruoli è semplice, basta accedere alla ZMI del proprio sito Plone alla gestione
 della sicurezza (scheda **security**) il che ci porta alla pagina ``/manage_access``.
 
@@ -954,7 +962,10 @@ stesso permesso che protegge l'accesso generale alla pagina di condivisione.
 In pratica stiamo dicendo che chiunque acceda alla condivisione può delegare questo ruolo.
 In seguito sistemeremo questo problema.
 
+.. _section-product-add-new-role:
 
+Portare quanto fatto su un prodotto
+===================================
 
-
+TODO
 

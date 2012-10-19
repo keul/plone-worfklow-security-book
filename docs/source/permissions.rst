@@ -42,5 +42,37 @@ creato in precedenza un nuovo ruolo: il link **Security**.
 
    *Link per andare alla gestione della sicurezza del sito Plone, da ZMI*
 
+Un accesso diretto alla pagina (che permette anche di non aprirla nel solito frame HTML usato dalla
+ZMI) è richiamare manualmente ``/manage_access`` sul contesto del sito Plone.
 
+Ad esempio, se state provando un sito locale, dovrete probabilmente digitare:
+
+    http://localhost:8080/book/manage_access
+
+Quello che vi troverete davanti è una griglia la cui logica è riassunta nello schema seguente.
+
+.. figure:: _static/zmi-security-grid-for-dummies.png
+   :alt: Struttura generale della gestioned della sicurezza
+
+   *Schema generale della gestione della sicurezza del sito*
+
+In **riga** avrete disponibili i permessi, e come potete vedere in un sito Plone possono essere
+molti.
+
+In **colonna** ci sono i ruoli, tutti i ruoli definiti, che siano Zope, Plone o applicativi
+(anche il nostro *Super Revisore* si trova qui).
+
+Preso come riferimento un qualunque permesso e un qualunque ruolo, trovate all'incrocio della riga
+e della colonna una casella checkbox.
+Se il checkbox è *selezionato* quel ruolo ha il relativo permesso nel contesto (il sito Plone).
+Se il checkbox è *deselezionato* quel ruolo non ha il permesso.
+
+Capire "Acquire permission settings?"
+-------------------------------------
+
+Avrete notato la presenta di una serie di checkbox in prima colonna con intestazione "**Acquire
+permission settings?**".
+
+Il loro significato è estremamente importante e diventerà vitale per la realizzazione di buoni
+workflow.
 
