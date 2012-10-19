@@ -5,7 +5,7 @@ Crediti
 Questo libro è distribuito con licenza **Creative Commons**. Attribuzione - Condividi allo stesso
 modo 3.0 Unported (CC BY-SA 3.0).
 
-.. image:: _static/ccommons.png
+.. figure:: _static/ccommons.png
    :alt: Creative Commons logo
    :target: http://creativecommons.org/licenses/by-sa/3.0/deed.it
 

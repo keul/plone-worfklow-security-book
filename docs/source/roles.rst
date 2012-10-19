@@ -2,7 +2,9 @@
 I Ruoli
 =======
 
-.. contents:: Indice della sezione
+.. only:: not latex
+
+    .. contents:: Indice della sezione
 
 La miglior definizione di "ruolo Plone" che posso trovare è questa:
 
@@ -559,6 +561,25 @@ Quindi:
 
 Rimane quindi sempre valida la regola: in Plone si assegnano ruoli, non permessi.
 
+Quando non assegnare inutilmente ruoli
+--------------------------------------
+
+C'è un comportamento scorretto piuttosto comune che ho potuto vedere spesso (che si parli di ruoli
+globali o locali).
+Si ha la necessità di dare "*tutti i permessi*" (qualunque cosa significhi, ma è una frase
+ricorrente) ad un utente in una certa sezione e pigramente si sceglie di "*selezionare tutto*",
+ossia assegnare all'utente tutti i permessi possibili... e non pensarci più.
+
+Va invece tenuto presente che alcuni ruoli, per loro natura, "incapsulano" i poteri di altri ruoli.
+Nella configurazione base di Plone il problema si presenta spesso col ruolo *Lettore*.
+
+E' inutile assegnare ad un utente il permesso di *Lettore* se questo utente possiede già uno di
+altri ruoli quali *Contributore*, *Revisore* o *Editor* poiché questi ruoli per loro natura
+possiedono già i poteri del *Lettore*.
+
+Ovviamente questo potrebbe non essere vero in presenza di modifiche ai workflow o con workflow
+particolari.
+
 Creare nuovi ruoli: quando e perché
 ===================================
 
@@ -730,8 +751,8 @@ Immediatamente possiamo vederne gli effetti nella pagina stessa.
 
    *Il nuovo ruolo appena creato, inserito tra le colonne della matrice*
 
-Comportamenti del ruolo appena creato
--------------------------------------
+Comportamenti di un ruolo appena creato
+---------------------------------------
 
 Quando viene creato un nuovo ruolo, Plone non sa come gestirlo, quindi non gli viene assegnato
 nessun permesso (la colonna dei checkbox sarà inizialmente vuota).
@@ -742,14 +763,14 @@ tenendo presente che:
 * gli utenti potrebbero avere altri ruoli oltre al nuovo venuto
 
 Date al ruolo il minor numero di permessi possibile, concentratevi su quello che il ruolo dovrà fare.
+
 Manteniamoci sull'esempio proposto in precedenza: il *Super Revisore* deve avere gli stessi poteri
 del *Revisore* ma poter modificare i contenuti pubblicati.
-
-Il primo passo sarà probabilmente copiare *tutti* i permessi associati al ruolo di *Revisore*, poi
+Il primo passo sarà quello di copiare *tutti* i permessi associati al ruolo di *Revisore*, poi
 concentrarsi sulle differenze.
 Per poter modificare i documenti pubblicati sarà necessario lavorare col workflow.
 
-Non assegnate altri permessi se non sono necessari.
+    Non assegnate altri permessi se non sono necessari.
 
 Assegnare il nuovo ruolo
 ------------------------
@@ -767,7 +788,7 @@ In questo caso possiamo vedere la facilità con cui saremmo in grado di assegnar
 globale.
 Come già discusso, questo può essere giusto o sbagliato; magari nel vostro sito il gruppo
 **Direzione** deve possedere questo ruolo in modo globale e senza eccezioni e sarebbe quindi giusto
-fornirgli questo ruolo.
+fornirgli questo ruolo da questa pagina.
 
 L'esempio con cui abbiamo introdotto il concetto di *Super Revisore* parlava però di una specifica
 cartella del sito dove questi utenti dovevano poter lavorare (ammettiamo che questo avvenga nella
@@ -778,7 +799,7 @@ condividere il nuovo ruolo su quella cartella.
 .. figure:: _static/sharing-view-missing-role.png
    :alt: La condivisione della cartella News
 
-   *Dalla condivisione della cartella news manca il nuovo ruolo appena definito*
+   *Dalla condivisione della cartella "News" manca il nuovo ruolo appena definito*
 
 Che succede?
 Avremmo bisogno di vedere il nuovo ruolo nella condivisione ma questo non compare!
@@ -794,12 +815,22 @@ codice.
 .. Note::
     
     Ad oggi non c'è nessun modo di scegliere da interfaccia Plone o ZMI quali ruoli mostrare nella
-    pagina della condivisione
+    pagina della condivisione.
+    
+    Questo viene fatto registrano delle **utility**.
 
 Mostrare i nuovi ruoli nella condivisione
 -----------------------------------------
 
-La prima domanda che probabilmente ci si porrà: in quale prodotto inserire questo codice?
+La prima domanda che probabilmente ci si porrà: dove inserire il codice?
+
+Il codice di Plone, quando non fa parte del core, va in prodotti aggiuntivi. Non è necessario siano
+uno dei prodotti `liberamente scaricabili dal sito ufficiale`__, ma può essere un vostro prodotto
+ad uso interno.
+
+__ http://plone.org/products/
+
+In quale prodotto inserire questo codice?
 
 In questa guida non si vuole affrontare nel dettaglio come creare nuovi prodotti in Plone ma una
 risposta va comunque quantomeno accennata.
@@ -815,8 +846,115 @@ ipotetico prodotto chiamato "*miaazienda*.worfklow" la registrazione del permess
 Questo stesso prodotto potrebbe poi essere necessario per ospitare anche le modifiche ai permessi
 del sito.
 
-Fingiamo quindi da questo punto che l'azienda per cui stiamo sviluppando questo workflow si chiami
-Lorem Ipsum.
-Ecco che un buon nome per questo prodotto sarà quindi **loremipsum.workflow** e la sua realizzazione
-ci accompagnerà nei prossimi capitoli.
+Ammettiamo che l'azienda per cui stiamo sviluppando questo workflow si chiami **Lorem Ipsum S.r.L**.
+Ecco quindi che il buon nome per questo prodotto potrebbe diventare **loremipsum.workflow** (la
+convenzione dei nomi di prodotti Zope&Plone di solito rispecchia il namespace Python della
+libreria) e la sua realizzazione ci accompagnerà nei prossimi capitoli.
+
+La registrazione del ruolo
+~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+La prima cosa che ci serve è la modifica del ``configure.zcml`` del nostro prodotto, per registrare
+una nuova *utility* (`sorgente online`__)::
+
+    ...
+    
+    <utility
+      name="Super Revisore"
+      factory=".localroles.SuperRevisoreRole"
+      />
+      
+    ...
+
+__ https://github.com/keul/loremipsum.workflow/blob/308485eea30fb752732f7eb6eca5318b8f03202e/loremipsum/workflow/configure.zcml
+
+Questo necessita della presenza del modulo ``localroles`` all'interno della directory dove è presente
+il file ``configure.zcml``.
+
+Il file ``localroles.py`` è il seguente (`sorgente online`__):
+
+.. literalinclude:: src/localroles_01.py
+
+__ https://github.com/keul/loremipsum.workflow/blob/308485eea30fb752732f7eb6eca5318b8f03202e/loremipsum/workflow/localroles.py
+
+Non scendiamo in nessun dettaglio di quanto mostrato nel codice sopra, se non il titolo (attributo
+``title``) che abbiamo scelto di visualizzare.
+Come ricorderete, la pagina di condivisione "traduce" i ruoli in azioni; ammetto che il nome scelto
+"*Può super revisionare*" sia assolutamente poco sensato, ma ci farà capire al volo a quale ruolo
+ci stiamo riferendo.
+
+Ora torniamo all'interfaccia Plone.
+
+.. figure:: _static/sharing-view-show-role.png
+   :alt: La condivisione della cartella News
+
+   *Dalla condivisione della cartella "News" finalmente si vede il nuovo ruolo*
+
+Sembra che il nostro scopo sia raggiunto!
+Assegnando il nuovo ruolo ad utenti e gruppi sulla cartella possiamo finalmente imbastire dei *Super
+Revisori* locali.
+
+Chi può assegnare i ruoli, e quali
+==================================
+
+In questa sezione analizzeremo un'altro aspetto spesso tralasciato della configurazione della
+sicurezza: limitare (o per lo meno: conoscere) chi può fornire nuovi ruoli... e quali.
+
+L'accesso alla pagina di condivisione
+-------------------------------------
+
+In una installazione base di Plone la pagina di condivisione non è visibile a tutti gli utenti:
+
+* Il *Lettore* non accede alla vista
+* Il *Contributore* non accede alla vista
+* Il *Possessore* accede alla condivisione e può dare ad altri i ruoli di *Contributore*, *Editor*
+  e *Lettore*
+* Il *Contributore* non ha accesso alla scheda, se non sui contenuti da lui creati (poiché vale la
+  regola del *Possessore* sopra descritta)
+* L'*Editor* accede alla condivisione e può fornire il ruolo di *Editor* e *Lettore*
+* Il *Revisore* accede alla condivisione e può fornire il ruolo di *Revisore* e *Lettore*
+* *Manager* e *Amministratore del sito* accedono, ed ovviamente possono fornire tutti i ruoli
+
+Leggendo l'elenco qui sopra potreste avere molte obiezioni ma è probabilmente impossibile in questo
+caso trovare una configurazione di base che vada bene a tutti.
+
+Una delle cose contro mi sono trovato più spesso a modificare è il comportamento del *Possessore*:
+solo perché io ho creato un documento, magari in una sezioen privata, mi da il diritto di fornire
+l'accesso ad altri utenti?
+
+Altro esempio: è giusto che ogni utente con un determinato ruolo che ha accesso alla vista possa
+fornire il ruolo stesso?
+Magari un amministratore ha fornito all'utente A il ruolo di revisore, e questi "subappalta" lo
+stesso ruolo ad altre persone!
+
+Per fortuna questa è solo una configurazione di base che può essere modificata.
+
+L'accesso alla pagina è controllato da un singolo permesso, ma il poter assegnare o meno un
+determinato ruolo è controllato da uno specifico **permesso di delega**, diverso per ogni ruolo.
+
+Questi permessi verranno analizzati e spiegati nell'apposita sezione.
+
+Comportamento del Super Revisore nella pagina di condivisione
+-------------------------------------------------------------
+
+Il comportamento del nostro nuovo ruolo nella condivisione è quantomai bizzarro.
+Pare che tutti i ruoli che possono accedere a questa pagina siano in grado di fornire questo ruolo!
+
+Questo logicamente assurdo, anche volendo mantenere l'opinabile standard usato da Plone,
+significherebbe limitare comunque l'assegnazione di questo ruolo agli utenti con il ruolo stesso
+(più ovviamente i ruoli di gestione del sito).
+
+Tornando al nostro codice di esempio, c'è l'utilizzo dell'attributo ``required_permission`` il
+cui valore viene importato da uno dei moduli base di Plone.
+
+Non essendo ancora in possesso di un permesso specifico per delegare il nostro ruolo, ci siamo
+limitati ad importare il permesso più generale ossia **Sharing page: Delegate roles**, che è lo
+stesso permesso che protegge l'accesso generale alla pagina di condivisione.
+
+In pratica stiamo dicendo che chiunque acceda alla condivisione può delegare questo ruolo.
+In seguito sistemeremo questo problema.
+
+
+
+
 

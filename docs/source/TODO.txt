@@ -7,12 +7,17 @@ x gruppo virtuale authenticated users
 - dashboard
 - allowedRolesAndUSers, View e prodotti che usano lo stesso principio (per il revisore)
 - data di scadenza
-- assegnre ruoli locali non visibili da Plone via ZMI (e.g: Manager)
+- assegnare ruoli locali non visibili da Plone via ZMI (e.g: Manager)
 - aggiungere nuove parole chiave (va per ruolo)
 - allowAnonymousShowAbout
-- capire come usare i ruoli (non ha senso dare "contributore" e "lettore")
+x capire come usare i ruoli (non ha senso dare "contributore" e "lettore")
 - grafico della "scala dei poteri"
 - grafico della struttura degli utenti, ruoli, permessi, ...
-- chi accede al tab "condivisione"? E cosa vede?
+x chi accede al tab "condivisione"? E cosa vede?
 - gruppi di gruppi
 - avvertimento sul fare tutto via ZMI
+- cancellazione (know-how)
+- miniform ZMI per vedere i permessi di un utente su un contesto
+
+- appendice A --> riferimenti all'esempio e come installare
+- appendice B --> analisi di tutti i permessi
