@@ -891,6 +891,9 @@ Come ricorderete, la pagina di condivisione "traduce" i ruoli in azioni; ammetto
 "*Può super revisionare*" sia assolutamente poco sensato, ma ci farà capire al volo a quale ruolo
 ci stiamo riferendo.
 
+Notate che l'associazione tra il nome del ruolo come lo abbiamo scelto (*Super Revisore*) e la
+classe che lo rappresenta data dall'attributo ``name``, nella registrazione dell'utility.
+
 Ora torniamo all'interfaccia Plone.
 
 .. figure:: _static/sharing-view-show-role.png
@@ -962,10 +965,55 @@ stesso permesso che protegge l'accesso generale alla pagina di condivisione.
 In pratica stiamo dicendo che chiunque acceda alla condivisione può delegare questo ruolo.
 In seguito sistemeremo questo problema.
 
-.. _section-product-add-new-role:
-
-Portare quanto fatto su un prodotto
-===================================
+Verificare i ruoli di un utente
+===============================
 
 TODO
+
+.. _section-product-add-new-role:
+
+Portare quanto fatto in un prodotto
+===================================
+
+Anche se è possibile effettuare alcune modifiche al proprio sito via ZMI, questo non vuole
+assolutamente dire che sia giusto farlo.
+
+Il problema è rendere *replicabili* delle operazioni svolte.
+
+Se le vostre configurazioni fosse da replicare in un sito gemello di quello che state impostando,
+o se voleste rendere disponobile ad altri il vostor lavoro, obblighereste queste persone a
+ripetere il vostro lavoro.
+Alle volte il problema diventa anche ricordarsi tutto quello che viene fatto.
+
+I puristi dicono che tutto deve essere fatto tramite installazione di prodotti o **esecuzione di
+profili di Generic Setup**.
+I puristi questa volta hanno ragione, ciononostante è molto più facile imparare a configurare Plone
+via Web, poi sistemare le cose non appena la nostra modifica diventa definitiva.
+
+La situazione attuale
+---------------------
+
+L'unica configurazione non ancora coperta da codice che abbiamo eseguito è la creazione del nuovo
+ruolo *Super Revisore*.
+
+Siamo infatti in una situazione un po' strana.
+Ammettiamo che nella vostra installazione coesistano *due siti Plone*, con nome "*Plone*" e
+"*Plonetest*" (sebbene sarebbe meglio che i siti di test abbiano una loro installazione a parte).
+
+Nel secondo sito *non avete* creato il ruolo di *Super Revisore*, quindi andando nella gestione
+utenti e gruppi il ruolo ovviamente non si trova.
+Se però andaste nella condivisione di un contenuto, trovereste comunque il ruolo.
+
+Cosa succederebbe quindi se quel ruolo venisse assegnato localmente?
+Nulla, poiché il ruolo non sarebbe davvero presente nel sito e non potremmo fornire alcun tipo di
+permesso.
+Capirete però come questo crei una cerca confusione, una situazione poco pulita ed incline ad
+errori.
+
+Creare automaticamente il nuovo ruolo
+-------------------------------------
+
+TODO
+
+
 
