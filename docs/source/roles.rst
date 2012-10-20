@@ -968,7 +968,56 @@ In seguito sistemeremo questo problema.
 Verificare i ruoli di un utente
 ===============================
 
-TODO
+Quando si disegnano complessi workflow o si ricevono segnalazioni dagli utenti del tipo "non
+riesco ad accedere alla sezione" oppure "non riesco a fare un'operazione che dovrei poter fare"
+vi troverete nella situazione di dover capire che cosa non funziona.
+
+Recentemente Plone ha intodotto un utilissimo form che permette di verificare quali ruoli (e
+permessi) un utente possegga in un certo contesto.
+
+Il form è accessibile dalla scheda *Security* della ZMI.
+
+.. figure:: _static/zmi-show-roles-and-permissions.png
+   :alt: Mostra ruoli e permessi nel contesto
+
+   *Il form che permette di visualizzare ruoli e permessi nel contesto*
+
+Sebbene questo utilissimo form mostri anche i permessi, al momento ci concentriamo sui ruoli.
+Ci basta inserire lo userid di un utente esistente ed otterremo qualcosa del genere:
+
+.. figure:: _static/zmi-show-roles-and-permissions-results.png
+   :alt: I ruoli di un utente nel contesto
+
+   *Il risultato della ricerca di ruoli e permessi dell'utente*
+
+Da notare come vengamo mostrati i "ruoli" (**Roles**) ossia i ruoli globali e i ruoli nel
+contesto specifico (**Roles in context**).
+
+La prima osservazione dopo aver visto questo form potrebbe essere relativa alla sua effettiva
+utilità, in quanto da ZMI la pagina "*Security*" è visibile solo nella radice del sito, mentre
+invece sarebbe estremamente utile avere questo strumento sul singolo contenuto o su una cartella.
+
+C'è un trucco.
+In pratica la pagina *Security* è stata nascosta solo nelle recenti versioni di Plone, ma è ancora
+richiamabile manualmente così:
+
+    http://urldelsito/percorso/al/contesto/*manage_access*
+
+.. Warning::
+    Modificare le impostazioni di sicurezza via ZMI in sezioni che non siano la radice del sito
+    Plone può portare a problemi difficili da capire.
+    
+    Le modifiche qui fatte potrebbero poi essere sovrascritte.
+
+Questo è anche messo in evidenza da un ben visibile avvertimento ad inizio pagina.
+
+.. figure:: _static/zmi-show-roles-and-permissions-warning.png
+   :alt: Avvertimento
+
+   *La pagina di gestione ruoli e permessi in sezioni diverse dalla radice del sito Plone*
+
+Quindi: limitatevi all'uso del form per trovare ruoli e permessi degli utenti a meno che non
+sappiate davvero quello che fate!
 
 .. _section-product-add-new-role:
 
@@ -1013,7 +1062,47 @@ errori.
 Creare automaticamente il nuovo ruolo
 -------------------------------------
 
-TODO
+Il nostro *loremipsum.workflow* ha bisogno di avere un profilo di installazione e diventare
+quindi un prodotto Plone installabile dal pannello di gestione dei prodotti aggiuntivi.
 
+.. figure:: _static/install-product.png
+   :alt: Il prodotto è installabile
 
+   *Col profilo definito il nostro prodotto è installabile*
+
+Per fare questo è necessario che il prodotto registi un profilo di **Generic Setup**, il modo in
+cui i prodotti Plone eseguono operazioni standard usando file in formato XML.
+
+La registrazione del profilo avviene tramite una modifica al file ``configure.zcml`` già visto in
+precedenza (`sorgente online`__)::
+
+    ...
+      
+      <genericsetup:registerProfile
+          name="default"
+          title="loremipsum.workflow"
+          directory="profiles/default"
+          description="Installazione del workflow della Lorem Ipsum S.r.L."
+          provides="Products.GenericSetup.interfaces.EXTENSION"
+          /> 
+    ...
+
+__ https://github.com/keul/loremipsum.workflow/blob/0a6ba2d069eae8174d6ace5b5c48657be3f74246/loremipsum/workflow/configure.zcml
+
+A questo punto Zope si aspetta di trovare un folder ``profiles`` (che ospiterà tutti i profili
+del prodotto, se più di uno) con all'interno un folder ``default``.
+Nella convenzione, "default" è usato per il profilo predefinito.
+
+Per registrare il nostro ruolo il profilo deve contenere un file ``rolemap.xml`` così fatto
+(`sorgente online`__):
+
+.. literalinclude:: src/rolemap_01.xml
+
+__ https://github.com/keul/loremipsum.workflow/blob/0a6ba2d069eae8174d6ace5b5c48657be3f74246/loremipsum/workflow/profiles/default/rolemap.xml
+
+Notate come la sezione ``roles`` serva a definire nuovi ruoli, mentre la sezione ``permissions``
+sia riservata per creare permessi (anche se vuota, deve essere presente).
+
+A questo punto se il nostro prodotto venisse installato in un sito dove il ruolo *Super Revisore*
+non fosse presente, questo verrebbe creato.
 
