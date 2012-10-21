@@ -17,7 +17,7 @@ x chi accede al tab "condivisione"? E cosa vede?
 - gruppi di gruppi
 - avvertimento sul fare tutto via ZMI
 - cancellazione (know-how)
-- miniform ZMI per vedere i permessi di un utente su un contesto
+x miniform ZMI per vedere i permessi di un utente su un contesto
 
 - appendice A --> riferimenti all'esempio e come installare
 - appendice B --> analisi di tutti i permessi

@@ -10,16 +10,17 @@ Se un utente con ruolo di *Editor* può fare alcune delle cose possibili anche a
 (accedere alla vista dei contenuti di una cartella, modificare un documento, ...) è dovuto al fatto
 che condividono uno o più permessi.
 
-I permessi sono il vero cuore della sicurezza di Zope, e quindi di Plone poiché controllano una
-singola azione o un singolo comportamento del sistema.
+I permessi sono il vero cuore della sicurezza di Zope, e quindi di Plone, poiché controllano una
+singola azione o un singolo comportamento del CMS.
 
 Sappiate però che agiscono a basso livello; fin'ora ci siamo abituati a lavorare sull'interfaccia
-di Plone, per poi muoverci brevemente a livelli più bassi (in ZMI) e vedere poco codice.
+di Plone, per poi muoverci brevemente a livelli più bassi (in ZMI) e vedere pochissimo codice.
 I permessi invece *non sono visibili o gestiti a livello Plone*, per questo motivo non sono nemmeno
 tradotti.
 
-Visto che i permessi sono utilizzati in tantissimi contesti e controllano numerose funzionalità del
-CMS, non sarebbe utile scendere in un eccessivo dettaglio.
+In questo capitolo non scenderemo ad un livello di dettaglio eccessivo poiché non risulta utile a
+meno che la vostra intenzione non sia diventare uno sviluppatore di prodotti Plone.
+
 Sappiate ad esempio che la singola chiamata ad un metodo di una classe Python potrebbe essere
 protetta da un permesso, il che significa che quando quel metodo viene chiamato per reagire ad
 un'azione di un utente, viene verificato se l'utente possiede il permesso.
@@ -30,6 +31,10 @@ di solito genera la classica pagina di permessi insufficienti di Plone.
    :alt: Non autorizzato
 
    *La classica pagina di errore di Plone per permessi insufficienti*
+
+In altri casi, alcuni comportamenti controllabili da ZMI (come ad esempio l'accesso a vari aspetti
+dell'interfaccia grafica di Plone) sono controllati da permessi: avere il permesso richiesto
+determina se l'elemento grafico compaia o meno. 
 
 La gestione dei permessi
 ========================
@@ -75,4 +80,31 @@ permission settings?**".
 
 Il loro significato è estremamente importante e diventerà vitale per la realizzazione di buoni
 workflow.
+
+Noterete infatti come per tantissimi permessi non ci sia nessuno dei checkbox della griglia
+selezionati ma solo quello dell'acquisizione (che è quasi sempre selezionato, in ogni permesso).
+
+Il suo significato è "*acquisire permessi dal livello superiore/dal contenitore*".
+
+Ci si potrebbe chiedere quale possa essere il "contenitore" del sito Plone e la risposa è semplice:
+la **radice di Zope**.
+Anche questa infatti è una specie di cartella, dove i siti Plone diventano dei semplici contenuti e
+da dove è possibile accedere alla scheda "*Security*".
+
+.. figure:: _static/zmi-security-zope-root.png
+   :alt: La gestione della sicurezza alla radice di Zope
+
+   *Come si presenta la gestione della sicurezza sulla radice di Zope*
+
+I permessi che trovere qui sono gli stessi che trovate nel sito Plone.
+L'unica differenza sono i *ruoli*: qui troverete solo i ruoli predefinti di Zope e non quelli Plone
+o il nostro *Super Revisore*.
+
+Di tutti i permessi definiti troverete come sia assegnato al ruolo *Manager* (ovviamente), a volte
+al ruolo *Anonimo* (poiché gli anonimi devono poter fare determinate cose) e *Owner*
+(*Possessore*, ma in questo caso la scelta è meno ovvia e può creare problemi in certi workflow,
+come discusso in precedenza).
+
+A parità di permesso, le impostazioni di sicurezza definite qui si vanno a sommare a quelle
+definite nello stesso permesso del sito Plone *se* il checkbox "*Acquire*" è selezionato.
 

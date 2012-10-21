@@ -968,11 +968,11 @@ In seguito sistemeremo questo problema.
 Verificare i ruoli di un utente
 ===============================
 
-Quando si disegnano complessi workflow o si ricevono segnalazioni dagli utenti del tipo "non
-riesco ad accedere alla sezione" oppure "non riesco a fare un'operazione che dovrei poter fare"
-vi troverete nella situazione di dover capire che cosa non funziona.
+Quando si disegnano complessi workflow o si ricevono segnalazioni dagli utenti del tipo "*non
+riesco ad accedere alla sezione*" oppure "*pare io non possa fare quest'operazione, perché?*" vi
+troverete nella situazione di dover capire che cosa non funziona.
 
-Recentemente Plone ha intodotto un utilissimo form che permette di verificare quali ruoli (e
+Recentemente Plone ha introdotto un utilissimo form che permette di verificare quali ruoli (e
 permessi) un utente possegga in un certo contesto.
 
 Il form è accessibile dalla scheda *Security* della ZMI.
@@ -982,24 +982,26 @@ Il form è accessibile dalla scheda *Security* della ZMI.
 
    *Il form che permette di visualizzare ruoli e permessi nel contesto*
 
-Sebbene questo utilissimo form mostri anche i permessi, al momento ci concentriamo sui ruoli.
-Ci basta inserire lo userid di un utente esistente ed otterremo qualcosa del genere:
+Ora ci concentriamo suo ruoli, ma come potrete vedere questo utilissimo form mostri anche i
+permessi.
+Per usarlo basta inserire lo *userid* di un utente esistente ed otterremo qualcosa del genere:
 
 .. figure:: _static/zmi-show-roles-and-permissions-results.png
    :alt: I ruoli di un utente nel contesto
 
    *Il risultato della ricerca di ruoli e permessi dell'utente*
 
-Da notare come vengamo mostrati i "ruoli" (**Roles**) ossia i ruoli globali e i ruoli nel
+Da notare come vengano mostrati i "ruoli" (**Roles**) ossia i ruoli globali e i ruoli nel
 contesto specifico (**Roles in context**).
 
 La prima osservazione dopo aver visto questo form potrebbe essere relativa alla sua effettiva
 utilità, in quanto da ZMI la pagina "*Security*" è visibile solo nella radice del sito, mentre
-invece sarebbe estremamente utile avere questo strumento sul singolo contenuto o su una cartella.
+invece sarebbe estremamente utile avere questo strumento sul singolo contenuto o su una cartella
+del nostro sito.
 
 C'è un trucco.
-In pratica la pagina *Security* è stata nascosta solo nelle recenti versioni di Plone, ma è ancora
-richiamabile manualmente così:
+In pratica la pagina *Security* è accessibile ovunque, su qualunque contenuto ma è stata di recente
+nascosta nelle recenti versioni di Plone; è però ancora richiamabile manualmente così:
 
     http://urldelsito/percorso/al/contesto/*manage_access*
 
@@ -1027,17 +1029,20 @@ Portare quanto fatto in un prodotto
 Anche se è possibile effettuare alcune modifiche al proprio sito via ZMI, questo non vuole
 assolutamente dire che sia giusto farlo.
 
-Il problema è rendere *replicabili* delle operazioni svolte.
+.. Note::
+    E' sconveniente agire via ZMI poiché diventa problematico rendere *replicabili* le operazioni
+    svolte.
 
-Se le vostre configurazioni fosse da replicare in un sito gemello di quello che state impostando,
-o se voleste rendere disponobile ad altri il vostor lavoro, obblighereste queste persone a
-ripetere il vostro lavoro.
-Alle volte il problema diventa anche ricordarsi tutto quello che viene fatto.
+Se le vostre configurazioni fossere da replicare in un sito gemello di quello che state impostando,
+o se voleste rendere disponibile ad altri il vostor lavoro, obblighereste queste persone a
+ripetere manualmente i passi da voi eseguiti.
+Alle volte il problema diventa anche ricordarsi tutto quello che è stato fatto.
 
 I puristi dicono che tutto deve essere fatto tramite installazione di prodotti o **esecuzione di
 profili di Generic Setup**.
-I puristi questa volta hanno ragione, ciononostante è molto più facile imparare a configurare Plone
-via Web, poi sistemare le cose non appena la nostra modifica diventa definitiva.
+Lasciatemi dire che i puristi questa volta hanno ragione.
+Ciononostante è molto più facile imparare a configurare Plone via Web, poi sistemare le cose non
+appena la nostra modifica diventa definitiva.
 
 La situazione attuale
 ---------------------
@@ -1047,15 +1052,19 @@ ruolo *Super Revisore*.
 
 Siamo infatti in una situazione un po' strana.
 Ammettiamo che nella vostra installazione coesistano *due siti Plone*, con nome "*Plone*" e
-"*Plonetest*" (sebbene sarebbe meglio che i siti di test abbiano una loro installazione a parte).
+"*Plonetest*" (sebbene è sempre meglio che i siti di test abbiano una loro installazione a parte).
 
 Nel secondo sito *non avete* creato il ruolo di *Super Revisore*, quindi andando nella gestione
 utenti e gruppi il ruolo ovviamente non si trova.
 Se però andaste nella condivisione di un contenuto, trovereste comunque il ruolo.
 
+Il problema nasce dal fatto che le utility registrate, sebbene presenti dentro al codice di
+uno specifico prodotto, non dipendono dalla sua reale attivazione: basta siano presenti
+nell'installazione Zope.
+
 Cosa succederebbe quindi se quel ruolo venisse assegnato localmente?
-Nulla, poiché il ruolo non sarebbe davvero presente nel sito e non potremmo fornire alcun tipo di
-permesso.
+Nei fatti nulla, poiché il ruolo non sarebbe *davvero* presente nel sito e non potremmo fornire
+alcun tipo di permesso.
 Capirete però come questo crei una cerca confusione, una situazione poco pulita ed incline ad
 errori.
 
