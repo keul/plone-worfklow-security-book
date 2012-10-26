@@ -241,3 +241,7 @@ texinfo_documents = [
 
 # How to display URL addresses: 'footnote', 'no', or 'inline'.
 #texinfo_show_urls = 'footnote'
+
+html_show_sourcelink = False
+html_show_sphinx = False
+latex_show_urls = 'footnote'
