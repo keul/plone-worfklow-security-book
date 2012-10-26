@@ -247,10 +247,10 @@ ______________________
 
 Un editor può modificare anche le collezioni (che un *Contributore* non potrebbe normalmente
 creare.
-Questa particolarità non è ben spiegabile e credo crei un po' di confusione (ad ogni modo: è solo
-una configurazione di base, che può essere facilmente modificata).
+Questa particolarità non è ben giustificabile e credo crei un po' di confusione (ad ogni modo: è
+solo una configurazione di base, che può essere facilmente modificata).
 
-Per di più: prima di Plone 4.2 (con le vecchie Collezioni) la modifica si limitava ai soli campi
+Per di più: prima di Plone 4.2 (con le vecchie collezioni) la modifica si limitava ai soli campi
 del "contenuto collezione" ma non ai criteri, che comparivano in un'altro tab; nelle nuove
 collezioni chi può modificare una collezione ha potere anche sui criteri.
 
@@ -258,6 +258,9 @@ collezioni chi può modificare una collezione ha potere anche sui criteri.
    :alt: Il tab "Criteri"
 
    *Come si presenta il tab dei "Criteri" nei cercatori vecchio stile*
+
+Il motivo sarà discusso in seguito nel
+:ref:`capitolo dei permessi <section-old-topic-permissions>`.
 
 Collaboratore (Member)
 ~~~~~~~~~~~~~~~~~~~~~~
@@ -964,6 +967,8 @@ stesso permesso che protegge l'accesso generale alla pagina di condivisione.
 
 In pratica stiamo dicendo che chiunque acceda alla condivisione può delegare questo ruolo.
 In seguito sistemeremo questo problema.
+
+.. _section-check-user-roles:
 
 Verificare i ruoli di un utente
 ===============================

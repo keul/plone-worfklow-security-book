@@ -16,6 +16,9 @@ Tu sei libero:
 * di modificare quest'opera
 * di usare quest'opera per fini commerciali 
 
+Il sorgente del libro è liberamente scaricabile al seguente indirizzo:
+https://github.com/keul/plone-worfklow-security-book/
+
 Autore
 ======
 
@@ -24,9 +27,10 @@ Realizzato da Luca Fabbri.
 Segnalazioni e contatti
 =======================
 
-Per domande o segnalazioni di errori, non esitate a contattarmi all'indirizzo:
+Per domande o segnalazioni di errori, non esitate a contattarmi all'indirizzo **luca@keul.it**.
 
-    **luca AT keul.it**
+Strettamente per segnalazioni, siete i benvenuti anche ad usare l'issue tracker del progetto:
+https://github.com/keul/plone-worfklow-security-book/issues
 
 Plone e il logo Plone
 =====================

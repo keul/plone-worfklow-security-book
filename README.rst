@@ -19,10 +19,6 @@ Lanciare inizializzare e lanciare buildout::
     % python2.7 bootstrap.py
     % ./bin/buildout
 
-Inizializzare la documentazione::
-
-    % ./bin/sphinx-quickstart
-
 Successivamente si consiglia di lavorare nella directory ``docs``::
 
     % cd docs
