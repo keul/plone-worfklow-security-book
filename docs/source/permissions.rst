@@ -698,3 +698,68 @@ comportamenti.
 
    *Come si presenta il menù vista*
 
+Per impostazione predefinita i seguenti ruoli posseggono questo permesso:
+
+* *Manager*
+* *Amministratore del sito*
+* *Possessore*
+* *Editor*
+
+    
+Plone Site Setup: *...*
+-----------------------
+
+Senza bisogno di scendere in ulteriori dettagli, Plone offre una serie di permessi che servono a
+gestire in modo puntuale le voci nella *configurazione del sito*.
+
+Per ogni pannello di configurazione c'è un permesso con prefisso "*Plone Site Setup:*".
+
+Mettiamo solo in una minima evidenza due permessi in particolare:
+
+`Plone Site Setup: Overview`
+    E' il permesso principale, per accedere al pannello di controllo generale.
+`Plone Site Setup: Users and Groups`
+    Questo permesso serve ad accedere alla sezione di gestione gruppi e utenti e pare quindi aver
+    sostituito i vecchi permessi "*Manage groups*" e "*Manage users*".
+    
+    **Questo permesso permette davvero di gestire utenti e gruppi** se assegnato ad altri ruoli
+    (purtroppo, ancora una volta, non è possibile limitarsi ad uno dei due poteri).
+
+Per impostazione predefinita i seguenti ruoli posseggono questo permesso:
+
+* *Manager*
+* *Amministratore del sito*
+
+E' possibile quindi facilmente escludere uno dei pannelli di configurazione di Plone a qualunque
+modifica, togliendo il permesso associato.
+
+Portlets: Manage portlets
+-------------------------
+
+E' il permesso che permette di accedere alla gestione delle portlet laterali ed è per questo motivo
+assegnato al *Manager* e all'*Amministratore del sito*.
+
+In assenza di un permesso specifico per gestire una nuova portlet (magari in seguito
+all'installazione di un prodotto agiuntivo), questo è il permesso che andrebbe utilizzato.
+
+Portlets: View dashboard
+------------------------
+
+Permesso per poter vedere la propria **dashboard**.
+Rimuovendo questo permesso però il link dal menù personale alla *dashboard* non viene rimosso, ma
+si ottiene un errore per permessi insufficienti una cliccato.
+
+.. figure:: _static/dashboard-link.png
+   :alt: Link alla Dashboard
+
+   *Link alla Dashboard dal menù personale*
+
+Per impostazione predefinita i seguenti ruoli posseggono questo permesso:
+
+* *Manager*
+* *Amministratore del sito*
+* *Collaboratore*
+
+In pratica a tutti gli utenti del sito.
+
+
