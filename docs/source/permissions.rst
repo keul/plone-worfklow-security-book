@@ -618,6 +618,8 @@ al *Collaboratore* (quindi in pratica tutti gli utenti del sito possono vedere g
 
 Vale la pena modificarlo in presenza di stringenti motivi di privacy.
 
+.. _section-permissions-mail-forgotten-password:
+
 Mail forgotten password
 -----------------------
 
@@ -760,6 +762,124 @@ Per impostazione predefinita i seguenti ruoli posseggono questo permesso:
 * *Amministratore del sito*
 * *Collaboratore*
 
-In pratica a tutti gli utenti del sito.
+In pratica: a tutti gli utenti del sito.
+
+Reply to item
+-------------
+
+Questo permesso identifica il potere di poter **commentare**.
+
+Il Plone i commenti sono ora controllati dal prodotto `plone.app.discussion`__ e possono anche
+essere sottoposti a workflow.
+
+__ http://pypi.python.org/pypi/plone.app.discussion
+
+Tenete presente che il permesso controlla i commenti *se i commenti sono abilitati* sul contenuto.
+
+Nella pratica infatti il permesso è dato a tutti gli *Autenticati*, ma di base nessun contenuto
+Plone è di per se automaticamente commentabile.
+
+.. _section-permissions-request-review:
+
+Request review
+--------------
+
+E' il permesso che identifica il potere di un utente di sottoporre un documento alla richiesta
+di revisione (di solito effettuata dal *Revisore*).
+
+E' utilizzata in tutti i workflow base, ma se avete intenzione di creare un vostro workflow e
+vi serve questa funzionalità, tenete presente questo permesso prima di volerne creare altri.
+
+Per impostazione predefinita i seguenti ruoli posseggono questo permesso:
+
+* *Manager*
+* *Amministratore del sito*
+* *Editor*
+* *Possessore*
+
+Review comments
+---------------
+
+Quando la revisione dei commenti è attivata, chi possiede questo permesso può effettuarne la
+revisione.
+
+Questo comportamento viene innanzi tutto abilitato dal pannello di controllo Plone, alla voce
+"*Commenti*".
+
+.. figure:: _static/comment-configuration-review.png
+   :alt: L'abilitazione della revisione dei commenti
+
+   *L'abilitazione della revisione dei commenti, dal pannello "Impostazioni dei commenti"*
+
+Per impostazione predefinita i seguenti ruoli posseggono questo permesso:
+
+* *Manager*
+* *Amministratore del sito*
+* *Revisore*
+
+Il motivo per cui esista un permesso separato per la revisione dei commenti (e non venga usato
+invece il permesso ":ref:`section-permissions-review-portal-content`" è opinabile.
+Sarebbe stato possibile usare quello stesso permesso, applicato al workflow dei commenti.
+
+.. _section-permissions-review-portal-content:
+
+Review portal content
+---------------------
+
+.. Note::
+    E' il permesso di riferimento del ruolo **Revisore**
+
+Questo permesso identifica il potere di poter revisionare un contenuto del sito, di solito legato
+ad una precedente richiesta di revisione ottenuta tramite uso di workfklow.
+
+Come già discusso per il permesso ":ref:section-permissions-request-review", vale la pena
+riutilizzare il permesso anche in presenza di workflow personalizzati.
+
+Per impostazione predefinita i seguenti ruoli posseggono questo permesso:
+
+* *Manager*
+* *Amministratore del sito*
+* *Revisore*
+
+Set own password
+----------------
+
+E' il permesso associato alla funzionalità di poter cambiare la propria password dalla vista
+"*Azzera la password*", accessibile tramite le proprie preferenze personali.
+
+E' differente dal permesso ":ref:`section-permissions-mail-forgotten-password`" perché in questo
+caso l'utente è autenticato nel sistema.
+Anche in questo caso però potreste voler togliere questo permesso in casi di fonti dati utente
+esterne (quali LDAP).
+
+Il permesso è dato a tutti gli utenti *Autenticati*
+
+Set own properties
+------------------
+
+E' il permesso legato al potere dell'utente di modificare le proprie informazioni personali.
+
+Togliendo questo permesso (assegnato a tutti gli *Autenticati*) l'utente non è più in grado di
+accedere alla voce "*Preferenze personali*" nel proprio menù di autenticazione.
+
+Purtroppo non è la voce in se a sparire ma si ottiene un errore di permessi insufficienti nel caso
+si clicchi sulla voce.
+
+Sharing page: *...*
+-------------------
+
+Questa serie di permessi controlla l'accesso alla **pagina di condivisione** e la possibilità di
+assegnare ad utenti e gruppi i singoli permessi disponibili in questa pagina.
+
+Questi permessi sono già stati introdotti brevemente alla sezione
+":ref:`section-access-sharing-page`" nel capitolo sui ruoli, ma il loro comportamento necessita
+di una sezione apposita in seguito.
+
+Use mailhost services
+---------------------
+
+...todo...
 
 
+
+  

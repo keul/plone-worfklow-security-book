@@ -917,6 +917,8 @@ Chi può assegnare i ruoli, e quali
 In questa sezione analizzeremo un'altro aspetto spesso tralasciato della configurazione della
 sicurezza: limitare (o per lo meno: conoscere) chi può fornire nuovi ruoli... e quali.
 
+.. _section-access-sharing-page:
+
 L'accesso alla pagina di condivisione
 -------------------------------------
 
