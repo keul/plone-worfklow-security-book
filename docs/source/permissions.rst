@@ -2,6 +2,10 @@
 I Permessi
 ==========
 
+.. only:: not latex
+
+    .. contents:: Indice della sezione
+
 Al capitolo precedente è stata data la definizione di ruolo e si è visto come questo sia associato
 direttamente con i **permessi**.
 Si è anzi detto come *il ruolo non sia altro che un raggruppamento di permessi*.
@@ -392,6 +396,17 @@ del documento.
 
 __ http://pypi.python.org/pypi/Products.CMFEditions
 
+Il prodotto è in qualche modo legato ad un'altro dei componenti di Plone (disattivato di default
+ma presente in ogni installazione) che è il supporto alla `copia di lavoro`__ (*Working Copy*).
+Questo prodotto aggiunge numerose opzioni nel menù "*Azioni*".
+
+__ http://pypi.python.org/pypi/plone.app.iterate
+
+Va detto che il codice che si occupa del versionamento di Plone è piuttosto confuso e non sempre è
+facile capirne il funzionamento.
+Anche analizzando il codice si rischia spesso di trovarsi a verificare librerie sempre diverse,
+tutte in qualche modo collegate.
+
 .. Note::
     Non va confusa la storia di un documento Plone con le transazioni dello ZODB.
     L'esecuzione dell'operazione di *pack dello ZODB* di un sito Plone *non* interferisce col
@@ -399,7 +414,8 @@ __ http://pypi.python.org/pypi/Products.CMFEditions
 
 Il prodotto definisce quindi una serie di permessi aggiuntivi, tutti raccolti sotto il prefisso
 *CMFEditions*.
-A noi interessa anlizzare solo un sotto-insieme di questi permessi.
+A noi interessa anlizzare solo un sotto-insieme di questi permessi poiché altri permessi sono solo
+usati a basso livello.
 
 CMFEditions: Access previous versions
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -415,15 +431,270 @@ la comparsa del link "*Cronologia*" e l'effettivo potere di utilizzarne le funzi
 CMFEditions: Apply version control
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-usato ma sembra non fare nulla
+Questo permesso viene qui documentato solo perché *sembra* usato da uno dei metodi che si occupano
+del versionamento dei contenuti (``applyVersionControl``, nel tool
+``CopyModifyMergeRepositoryTool``).
+Dovrebbe essere utilizzato e verificato quando la storia del documento inizia (quindi alla sua
+creazione).
+
+In più un'installazione base di Plone imposta questo permesso ai ruoli *Contributore*, *Manager*,
+*Possessore*, *Editor*, *Revisore* e *Amministratore del sito*.
+
+Leggendo il codice, *sembrerebbe* che una verifica di questo permesso venga fatta se il metodo di
+versionamento del contenuto è impostato su "Manuale" (una funzionalità di Plone usata piuttosto
+raramente).
+
+Dopo una prova empirica: anche rimuovendo il permesso a tutti i ruoli non sembra esserci nessun
+effetto sul comportamento del versionamento.
+
+Il consiglio è: tenete i ruoli predefiniti ma per sicurezza assegnate questo permesso anche ad
+ipotetici nuovi ruoli che vorrete andare a creare e che possono avere poteri di modifica di
+qualunque tipo sui contenuti.
 
 CMFEditions: Checkout to location
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
+Ci si potrebbe aspettare che questo permesso controlli la funzionalità del supporto alla copia di
+lavoro di effettuare il **checkout** (la creazione della copia di lavoro) in una certa posizione.
+
+Sbagliato... questo permesso non fa assolutamente nulla.
+Eppure sono quasi certo che l'intenzione iniziale fosse esattamente questa.
+
 CMFEditions: Revert to previous versions
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Questo permesso è collegato alla possibilità di tornare alla versione precedente di un contenuto.
+
+Il problema è che nelle versioni moderne di Plone i template che controllano la storia sono
+cambiati.
+
+Oggi il controllo delle versioni avviene tramite un moderno popup.
+
+.. figure:: _static/document-history-popup.png
+   :alt: Popup della storia del documento
+
+   *Come compare oggi la storia del documento, dopo aver cliccato sul link "Cronologia"*
+
+Rimuovendo quel permesso agli utenti, visivamente non cambia nulla, il form rimane tale e quale.
+Premendo però il pulsante "*Ripristina questa versione*" si ottiene il permesso di permessi
+insufficienti.
+
+Nei vecchi template di Plone, quando i controlli della versione del documento erano fatti tramite
+il tab aggiuntivo "*Storia*" (oggi disabilitato) le cose vanno meglio.
+La pagina è ancora oggi disponibile chiamando ``/versions_history_form`` sul contesto.
+
+.. figure:: _static/document-history-old-template.png
+   :alt: Vecchio template della storia del documento
+
+   *Vecchia pagina della storia del documento*
+
+In questo vecchio template anche il pulsante "*Ripristina a questa versione*" sparisce
+(comportamento ovviamente migliore).
+Il comportamento attuale è molto probabilmente un piccolo bug, ma l'importante è che questo
+permesso controlli davvero questo potere.
+
+Per impostazione predefinita i seguenti ruoli posseggono questo permesso:
+
+* *Manager*
+* *Amministratore del sito*
+* *Possessore*
+* *Editor*
+* *Revisore*
 
 CMFEditions: Save new version
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
+Questo permesso controlla il poter salvare una nuova versione di un documento, quindi in caso del
+semplice versionamento (automatico o manuale che sia) è un permesso necessario anche per salvare
+il documento.
+Se il prodotto per il supporto alla "Copia di lavoro" è attivo, questo permesso controlla anche il
+**checkin** del documento.
+
+Nel caso del versionamento del contenuto Plone ha un comportamento che potrebbe non esse chiaro.
+Se l'utente corrente ha il potere di modificare il documento, egli può entrare nella pagina di
+modifica, ma se il versionamento è attivato e l'utente non possiede questo permesso, ottiene un
+errore al salvataggio (poiché salvando si sta tentando di creare anche una nuova versione).
+
+Forse la cosa andrebbe gestita in un altro modo (non creando una versione, oppure segnalando il
+problema all'utente in un modo alternativo).
+
+Se l'estensione per la copia di lavoro è attiva e si tenta di eseguire il *checkin*, la cosa sembra
+funzionare ma non appena l'utente inserisce il commento alla modifica ottiene di nuovo l'errore
+di permessi insufficienti.
+
+Anche in questo caso il comportamento non è ottimale: sarebbe meglio che all'utente fosse inibita
+la voce di menù che scatena il *checkin*.
+
+Per impostazione predefinita i seguenti ruoli posseggono questo permesso:
+
+* *Manager*
+* *Amministratore del sito*
+* *Possessore*
+* *Contributore*
+* *Editor*
+* *Revisore*
+
+La presenza del ruolo *Contributore* è dubbia (perché il *Contributore* ha il diritto di generare
+una nuova versione di un documento?).
+
+.. _section-permissions-change-portal-events:
+
+Change portal events
+--------------------
+
+Questo permesso, per ragioni storiche, è il **permesso di modifica degli eventi**.
+
+E' da gestire allo stesso modo con cui viene usato il più famoso *Modify portal content*.
+
+Per impostazione predefinita i seguenti ruoli posseggono questo permesso:
+
+* *Manager*
+* *Amministratore del sito*
+* *Possessore*
+
+Change portal topics
+--------------------
+
+Questo permesso è storicamente associato al permesso di modifica delle *Collezioni*.
+
+Se le *Collezioni* che state gestendo sono quelle introdotte con Plone 4.2, questo stesso permesso
+è diventato inutile, poiché ora il permesso di riferimento è *Modify portal content*, come per
+tutti gli altri tipi.
+
+Questo permesso vale ancora la pena essere gestito se avete a che fare con le vecchie collezioni.
+Vedere quanto detto per i
+:ref:`vecchi permessi di gestione dei criteri <section-old-topic-permissions>`.
+
+* *Manager*
+* *Amministratore del sito*
+* *Possessore*
+
+Copy or Move 
+------------
+
+Questo permesso è legato alle operazioni di **copia** e **taglia**.
+
+Non è nei fatti un permesso molto importante; per impostazione predefinita è infatti dato gli
+*Anonimi* quindi a chiunque.
+Il motivo è perché il vero "lavoro" viene fatto con l'operazione di *incolla*, che non è gestito
+da questo permesso.
+
+Vale la pena gestire questo permesso (magari in un workflow specifico) se per qualche motivo volete
+rendere impossibile la copia o lo spostamento di un documento.
+In questi casi il fatto che il permesso sia unificato per copia e taglia a volte crea problemi.
+
+Delete objects
+--------------
+
+Questo permesso controlla il potere di cancellare contenuti ma vista la sua complessità e il suo
+comportamento non sempre chiaro, verrà gestito in seguito in una sezione dedicata.
+
+List folder contents
+--------------------
+
+Questo permesso è quello che permette agli utenti di vedere i contenuti di una cartella, quindi la
+sua modifica ha effetti solo sui contenuti di tipo simil-cartella, e controlla la presenza del tab
+"*Contenuti*".
+
+Per impostazione predefinita i seguenti ruoli posseggono questo permesso:
+
+* *Manager*
+* *Amministratore del sito*
+* *Possessore*
+* *Contributore*
+* *Editor*
+* *Revisore*
+
+In pratica tutti i ruoli che di solito hanno qualche tipo di potere dalla vista dei contenti della
+cartella.
+
+List portal members
+-------------------
+
+E' il permesso che controlla la possibilità di accedere alla lista degli utenti del sito.
+
+Per impostazione predefinita questo permesso è dato ai *Manager*, all'*Amministratore del sito* e
+al *Collaboratore* (quindi in pratica tutti gli utenti del sito possono vedere gli altri).
+
+Vale la pena modificarlo in presenza di stringenti motivi di privacy.
+
+Mail forgotten password
+-----------------------
+
+Anche se letteralmente la traduzione del permesso è *invio della password per e-mail* (in ricordo
+dei tempi in cui Plone memorizzata le password in chiaro e le inviata agli utenti), oggi questo
+permesso controlla il potere di ricevere il link per eseguire il reset della password in caso si
+sia dimenticata.
+
+Se volete disabilitare la funzionalità (magari perché le password non sono gestire in Plone ma in
+un LDAP esterno) vale la pena togliere questo permesso a chiunque.
+
+E' ovviamente dato agli utenti *Anonimi*.
+
+.. _section-permissions-manage-groups:
+
+Manage Groups
+-------------
+
+Era il permesso generale per poter gestire i gruppi di Plone.
  
+Il permesso è in gran parte inutilizzato (alcune verifiche di questo sono ancora esistenti in
+vecchi template di gestione gruppi e utenti, ora deprecati e che verranno rimossi con Plone 4.3.
+
+.. _section-permissions-manage-portal:
+
+Manage portal
+-------------
+
+.. Note::
+    E' il permesso di riferimento del ruolo **Manager**
+
+Questo permesso determina tantissimi poteri, tutti legati ad azioni che di solito può fare solo
+il ruolo Manager.
+
+Ad oggi può creare problemi di incompatibilità col ruolo "*Amministratore del sito*" in presenza
+di prodotti che ancora non lo supportano
+(vedere :ref:`la discussione relativa <section-roles-site-administrator-notes>`).
+
+Un esempio classico è l'**uso delle portlet**.
+In Plone le portlet sono sempre state gestire dal *Manager* e di recente dal nuovo ruolo
+*Amministratore del sito* ma è possibile ancora oggi trovare prodotti aggiuntivi che forniscono
+nuove portlet usando questo permesso e quindi inutilizzabili dal nuovo ruolo.
+
+Manage users 
+------------
+
+Vedere quanto detto per ":ref:`section-permissions-manage-groups`".
+
+Modify portal content
+---------------------
+
+.. Note::
+    E' il permesso di riferimento del ruolo **Editor**
+
+A parte qualche :ref:`eccezione degna di nota <section-permissions-change-portal-events>`, questo
+è *il* permesso che identifica il potere di modificare i contenuti.
+
+Per impostazione predefinita i seguenti ruoli posseggono questo permesso:
+
+* *Manager*
+* *Amministratore del sito*
+* *Possessore*
+* *Editor*
+
+Ma il potere viene in realtà gestito altrove, nei workflow.
+
+Modify view template
+--------------------
+
+Questo permesso controlla la comparsa del menù "*Vista*" e le funzionalità di poter scegliere una
+vista per una cartella e un documento come vista predefinita.
+
+C'è un solo permesso per entrambe le funzionalità, non è possibile quindi differenziare i
+comportamenti.
+
+.. figure:: _static/view-menu.png
+   :alt: Menù "Vista"
+
+   *Come si presenta il menù vista*
+

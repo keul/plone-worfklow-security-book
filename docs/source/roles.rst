@@ -341,12 +341,15 @@ voglia avere utenti con "poteri assoluti" (per l'appunto gli "amministratori del
 Il problema un tempo era non dare poteri inutilmente pericolosi:
 Alla ZMI deve avere accesso solo un utente che ne abbia effettivamente bisogno.
 
+.. _section-roles-site-administrator-notes:
+
 Attualmente: un ruolo poco supportato
 _____________________________________
 
 Spero che questo paragrafo diventi velocemente deprecato ma al momento le cose vanno così: molti
 prodotti vengono aggiornati senza fornire supporto al ruolo *Amministratore del sito*, oppure
 basandosi su permessi che questo ruolo non ha (ma che invece ha il *Manager*).
+Vedere la descrizione del permesso ":ref:`section-permissions-manage-portal`".
 
 Col tempo andrà meglio.
 
