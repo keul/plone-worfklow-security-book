@@ -160,38 +160,26 @@ accedervi (ed otterrà l'errore permessi insufficienti).
 
 Chi però governa questi permessi sulla news è il **workflow ad essa associato**.
 
-Analisi puntuale dei permessi
-=============================
+Analisi dei permessi esistenti
+==============================
 
 Se fin'ora vi siete spaventati di fronte alla grande quantità di permessi che Plone offre,
 e alla mancanza di una descrizione dettagliata sul loro significato, sappiate che le cose non
 stanno così male.
 
-Molti dei permessi che vedere sono definiti dagli strati software più bassi e **non serve gestirli
+Molti dei permessi che vedete sono definiti dagli strati software più bassi e **non serve gestirli
 in Plone**.
-Per questi permessi potete lasciare il valore predefinito e dimenticarvi di loro.
+Per questi permessi potete lasciare il valore predefinito e dimenticarvi di loro (e così faremo
+qui)
 
-E' però vera la seconda osservazione: non ci sono descrizioni del funzionamenti dei permessi ma è
-importante sapere a cosa servono.
-Per questo analizzeremo in ordine tutti i permessi Plone che vale la pena conoscere.
+Rimane però vera la seconda osservazione: non ci sono descrizioni del funzionamenti dei permessi
+ma è importante sapere a cosa servono.
 
-.. _section-old-topic-permissions:
+Di seguito analizzeremo una piccola serie di permessi che sono davvero molto importanti per il
+funzionamento di Plone e che necessitano di essere compresi.
 
-ATContentTypes Topic: Add *...Criterion*
-----------------------------------------
-
-Questa grande serie di permessi è storicamente collegata alle **vecchie collezioni**, ancora
-presenti in Plone ma disabilitate e sostituite con una nuova versione a partire da Plone 4.2. 
-
-Se vi ritrovate a gestire versioni di Plone più vecchie di questa o se siete di fronte ad un sito
-Plone migrato da una vecchia versione (le vecchie collezioni non vengono trasformate nelle nuove
-versioni nel processo di migrazione) vale la pena continuare la lettura.
-
-Questi permessi controllavano il potere di un utente di poter usare uno specifico criterio.
-Per fortuna ora non serve più occuparsene.
-
-Per impostazione predefinita: solo *Manager* e *Amministratore del sito* posseggono questi
-permessi.
+Se state cercando una **lista completa dei permessi utilizzati da Plone** potete trovarla andando
+all':ref:`Appendice A <chapter-appendix-a>`.
 
 .. _section-permissions-atct-add-all:
 
@@ -316,11 +304,14 @@ Per impostazione predefinita i seguenti ruoli posseggono questo permesso:
 Add portal content
 ------------------
 
+.. Note::
+    E' il permesso di riferimento del ruolo **Contributore**
+
 Storicamente questo permesso era *il* permesso per aggiungere contenuti nel sito.
 Prima di Plone 2.1 esisteva solo questo permesso per controllare l'aggiungibilità dei contenuti e
 controllava *tutti* i contenuti.
 
-I limiti si un simile approccio si solo rivelati molti presto e si è poi arrivati ad avere un
+I limiti di un simile approccio si solo rivelati molti presto e si è poi arrivati ad avere un
 permesso per ogni contenuto, come descritto nella sezione
 ":ref:`section-permissions-atct-add-all`".
 
@@ -339,55 +330,6 @@ Per impostazione predefinita i seguenti ruoli posseggono questo permesso:
 * *Amministratore del sito*
 * *Possessore*
 * *Contributore*
-
-Add portal member
------------------
-
-E' il permesso che controlla il potere di creare nuovi utenti nel sito.
-
-Oltre al *Manager* e all'*Amministratore del sito* se viene aggiunto anche il ruolo *Anonimo* si
-abilita la libertà dei visitatori di iscriversi al sito.
-
-Oggi è raramente manipolato manualmente poiché è stato aggiunto un controllo specifico nella
-sezione "*Sicurezza*" della configurazione del sito.
-
-.. figure:: _static/site-security-free-registration.png
-   :alt: Il controllo per abilitare l'autoregistrazione
-
-   *Il controllo nella gestione della "Sicurezza" del sito, che permette di abilitare
-   l'auto-registrazione degli utenti*
-
-.. _section-permissions-add-portal-topic:
-
-Add portal topics
------------------
-
-E' il permesso che determina il potere di aggiungere le vecchie **Collezioni** nel sito Plone
-(*Topic* è stato il primo nome del tipo di contenuto, poi diventato *Cercatore* ed infine ha
-preso il nome odierno).
-
-Vale quanto detto per gli altri
-:ref:`permessi di aggiungibilità dei contenuti <section-permissions-atct-add-all>` Plone, ma i
-ruoli che lo posseggono sono solo i seguenti *Manager* e *Amministratore del sito*.
-
-Ignorate questo permesso se non dovete gestire le vecchie collezioni.
-
-.. _section-permissions-allow-sento:
-
-Allow sendto
-------------
-
-E' il permesso che permette di utilizzare una vista che permette di inviare un collegamento al
-documento corrente per e-mail.
-
-Il link a questa pagina è stato disabilitato di default nelle recenti versioni di Plone (in realtà
-non è una funzionalità così utile e probabilmente il link così esposto era facile preda di crawler
-malevoli).
-
-E' ancora utilizzabile conoscendone l'URL (inserendo ``/sendto_form`` dopo l'URL di un documento)
-o riabilitando il link dal ``portal_actions`` in ZMI.
-
-Il permesso è dato al ruolo *Anonimo*, quindi chiunque può utilizzare questo form. 
 
 .. _section-permissions-cmfeditions-set:
 
@@ -558,37 +500,6 @@ Per impostazione predefinita i seguenti ruoli posseggono questo permesso:
 * *Amministratore del sito*
 * *Possessore*
 
-Change portal topics
---------------------
-
-Questo permesso è storicamente associato al permesso di modifica delle *Collezioni*.
-
-Se le *Collezioni* che state gestendo sono quelle introdotte con Plone 4.2, questo stesso permesso
-è diventato inutile, poiché ora il permesso di riferimento è *Modify portal content*, come per
-tutti gli altri tipi.
-
-Questo permesso vale ancora la pena essere gestito se avete a che fare con le vecchie collezioni.
-Vedere quanto detto per i
-:ref:`vecchi permessi di gestione dei criteri <section-old-topic-permissions>`.
-
-* *Manager*
-* *Amministratore del sito*
-* *Possessore*
-
-Copy or Move 
-------------
-
-Questo permesso è legato alle operazioni di **copia** e **taglia**.
-
-Non è nei fatti un permesso molto importante; per impostazione predefinita è infatti dato gli
-*Anonimi* quindi a chiunque.
-Il motivo è perché il vero "lavoro" viene fatto con l'operazione di *incolla*, che non è gestito
-da questo permesso.
-
-Vale la pena gestire questo permesso (magari in un workflow specifico) se per qualche motivo volete
-rendere impossibile la copia o lo spostamento di un documento.
-In questi casi il fatto che il permesso sia unificato per copia e taglia a volte crea problemi.
-
 Delete objects
 --------------
 
@@ -614,41 +525,6 @@ Per impostazione predefinita i seguenti ruoli posseggono questo permesso:
 In pratica tutti i ruoli che di solito hanno qualche tipo di potere dalla vista dei contenti della
 cartella.
 
-List portal members
--------------------
-
-E' il permesso che controlla la possibilità di accedere alla lista degli utenti del sito.
-
-Per impostazione predefinita questo permesso è dato ai *Manager*, all'*Amministratore del sito* e
-al *Collaboratore* (quindi in pratica tutti gli utenti del sito possono vedere gli altri).
-
-Vale la pena modificarlo in presenza di stringenti motivi di privacy.
-
-.. _section-permissions-mail-forgotten-password:
-
-Mail forgotten password
------------------------
-
-Anche se letteralmente la traduzione del permesso è *invio della password per e-mail* (in ricordo
-dei tempi in cui Plone memorizzata le password in chiaro e le inviata agli utenti), oggi questo
-permesso controlla il potere di ricevere il link per eseguire il reset della password in caso si
-sia dimenticata.
-
-Se volete disabilitare la funzionalità (magari perché le password non sono gestire in Plone ma in
-un LDAP esterno) vale la pena togliere questo permesso a chiunque.
-
-E' ovviamente dato agli utenti *Anonimi*.
-
-.. _section-permissions-manage-groups:
-
-Manage Groups
--------------
-
-Era il permesso generale per poter gestire i gruppi di Plone.
- 
-Il permesso è in gran parte inutilizzato (alcune verifiche di questo sono ancora esistenti in
-vecchi template di gestione gruppi e utenti, ora deprecati e che verranno rimossi con Plone 4.3.
-
 .. _section-permissions-manage-portal:
 
 Manage portal
@@ -669,11 +545,6 @@ In Plone le portlet sono sempre state gestire dal *Manager* e di recente dal nuo
 *Amministratore del sito* ma è possibile ancora oggi trovare prodotti aggiuntivi che forniscono
 nuove portlet usando questo permesso e quindi inutilizzabili dal nuovo ruolo.
 
-Manage users 
-------------
-
-Vedere quanto detto per ":ref:`section-permissions-manage-groups`".
-
 Modify portal content
 ---------------------
 
@@ -690,58 +561,7 @@ Per impostazione predefinita i seguenti ruoli posseggono questo permesso:
 * *Possessore*
 * *Editor*
 
-Ma il potere viene in realtà gestito altrove, nei workflow.
-
-Modify view template
---------------------
-
-Questo permesso controlla la comparsa del menù "*Vista*" e le funzionalità di poter scegliere una
-vista per una cartella e un documento come vista predefinita.
-
-C'è un solo permesso per entrambe le funzionalità, non è possibile quindi differenziare i
-comportamenti.
-
-.. figure:: _static/view-menu.png
-   :alt: Menù "Vista"
-
-   *Come si presenta il menù vista*
-
-Per impostazione predefinita i seguenti ruoli posseggono questo permesso:
-
-* *Manager*
-* *Amministratore del sito*
-* *Possessore*
-* *Editor*
-
-    
-Plone Site Setup: *...*
------------------------
-
-Senza bisogno di scendere in ulteriori dettagli, Plone offre una serie di permessi che servono a
-gestire in modo puntuale le voci nella *configurazione del sito*.
-
-Per ogni pannello di configurazione c'è un permesso con prefisso "*Plone Site Setup:*".
-
-Mettiamo solo in una minima evidenza due permessi in particolare:
-
-`Plone Site Setup: Overview`
-    E' il permesso principale, per accedere al pannello di controllo generale.
-`Plone Site Setup: Users and Groups`
-    Questo permesso serve ad accedere alla sezione di gestione gruppi e utenti e pare quindi aver
-    sostituito i vecchi permessi "*Manage groups*" e "*Manage users*".
-    
-    **Questo permesso permette davvero di gestire utenti e gruppi** se assegnato ad altri ruoli
-    (purtroppo, ancora una volta, non è possibile limitarsi ad uno dei due poteri).
-
-Per impostazione predefinita i seguenti ruoli posseggono questo permesso:
-
-* *Manager*
-* *Amministratore del sito*
-
-E' possibile quindi facilmente escludere uno dei pannelli di configurazione di Plone a qualunque
-modifica, togliendo il permesso associato.
-
-.. _section-permissions-manage-portlets:
+Ma il potere viene in realtà gestito altrove: nei **workflow**.
 
 Portlets: Manage portlets
 -------------------------
@@ -753,31 +573,11 @@ In assenza di un permesso specifico per gestire una nuova portlet (magari in seg
 all'installazione di un prodotto agiuntivo), questo è il permesso che andrebbe utilizzato, anche
 se la cosa migliore sarebbe sempre quella di avere un permesso per ogni tipo di portlet.
 
-Purtroppo questo non succede: tutte le portlet sono gestite da questo permesso a parte due
-eccezioni degne di note:
+Purtroppo questo non succede: tutte le portlet sono gestite da quest'unico permesso, eccezione
+fatta per due casi:
 
-* :ref:`section-permissions-plone-portlet-collection-add`
-* :ref:`section-permissions-plone-portlet-static-add`
-
-Portlets: View dashboard
-------------------------
-
-Permesso per poter vedere la propria **dashboard**.
-Rimuovendo questo permesso però il link dal menù personale alla *dashboard* non viene rimosso, ma
-si ottiene un errore per permessi insufficienti una cliccato.
-
-.. figure:: _static/dashboard-link.png
-   :alt: Link alla Dashboard
-
-   *Link alla Dashboard dal menù personale*
-
-Per impostazione predefinita i seguenti ruoli posseggono questo permesso:
-
-* *Manager*
-* *Amministratore del sito*
-* *Collaboratore*
-
-In pratica: a tutti gli utenti del sito.
+* ":ref:`section-permissions-plone-portlet-collection-add`" (per gestire le **portlet collezione**)
+* ":ref:`section-permissions-plone-portlet-static-add`" (per gestire le **portlet statiche**)
 
 Reply to item
 -------------
@@ -856,32 +656,6 @@ Per impostazione predefinita i seguenti ruoli posseggono questo permesso:
 * *Amministratore del sito*
 * *Revisore*
 
-.. _section-permissions-set-own-password:
-
-Set own password
-----------------
-
-E' il permesso associato alla funzionalità di poter cambiare la propria password dalla vista
-"*Azzera la password*", accessibile tramite le proprie preferenze personali.
-
-E' differente dal permesso ":ref:`section-permissions-mail-forgotten-password`" perché in questo
-caso l'utente è autenticato nel sistema.
-Anche in questo caso però potreste voler togliere questo permesso in casi di fonti dati utente
-esterne (quali LDAP).
-
-Il permesso è dato a tutti gli utenti *Autenticati*
-
-Set own properties
-------------------
-
-E' il permesso legato al potere dell'utente di modificare le proprie informazioni personali.
-
-Togliendo questo permesso (assegnato a tutti gli *Autenticati*) l'utente non è più in grado di
-accedere alla voce "*Preferenze personali*" nel proprio menù di autenticazione.
-
-Purtroppo non è la voce in se a sparire ma si ottiene un errore di permessi insufficienti nel caso
-si clicchi sulla voce.
-
 Sharing page: *...*
 -------------------
 
@@ -891,25 +665,6 @@ assegnare ad utenti e gruppi i singoli permessi disponibili in questa pagina.
 Questi permessi sono già stati introdotti brevemente alla sezione
 ":ref:`section-access-sharing-page`" nel capitolo sui ruoli, ma il loro comportamento necessita
 di una sezione apposita in seguito.
-
-Use mailhost services
----------------------
-
-Questo permesso è collegato all'utilizzo del sistema di invio e-mail interno di Plone.
-
-Normalmente l'unico punto di contatto tra gli utenti del sito e le e-mail inviate dal sito si hanno
-per l'invio del resert della password (":ref:`section-permissions-set-own-password`") e per l'invio
-di un link alla pagina corrente (":ref:`section-permissions-allow-sento`").
-In entrambi i casi Plone verifica due permessi specifici.
-
-Se però un prodotto aggiuntivo, o una vostra funzionalità specifica, dovessere tentare di invare un
-messaggio e-mail, questo permesso verrebbe verificato, quindi in questi casi vale la pena
-verificarne le impostazioni.
-
-Per impostazione predefinita i seguenti ruoli posseggono questo permesso:
-
-* *Manager*
-* *Amministratore del sito*
 
 View
 ----
@@ -921,36 +676,7 @@ Il permesso più semplice, eppure il più importante tra tutti i permessi.
 Ci sono varie cose da dire relativamente al permesso di *View*, quindi verrà affrontato in una
 sezione apposita in seguito.
 
-View Groups
------------
-
-E' un permesso collegato a vari metodi di basso livello per accedere ai gruppi
-
-E' assegnato ai *Manager*, *Amministratori del sito* e *Collaboratori*, quindi a tutti gli utenti
-autenticati.
-
-Da test eseguiti, se si rimuove il permesso per il *Collaboratore*, gli utenti sono comunque in
-grado di accedere alla pagina di *Condivisione* e ricercare gruppi. 
-
-View management screens
------------------------
-
-Vale la pena dire due parole su questo permesso, assegnato solo al *Manager* (e al *Possessore*, ma
-il proprietario del "sito" è sempre un Manager) ma non all'*Amministratore del sito*.
-
-Questo permesso permette agli utenti di entrare in ZMI ed è stato uno dei motivi scatenanti per
-la creazione del ruolo separato "*Amministratore del sito*".
-
-iterate : Check *...*
----------------------
-
-I due permessi *iterate : Check in content* e *iterate : Check out content* sono forniti dal
-prodotto che si occupa del supporto alla *copia di lavoro*.
- 
-Abbiamo già visto alcuni permessi che si occupano del versionamento e che lavorano con questo
-prodotto (vedere i :ref:`permessi relativi a CMFEditions <section-permissions-cmfeditions-set>`).
-
-Questi due permessi sono definiti, ma sembrano non usati da nessun componente Plone.
+.. _section-permissions-plone-app-collection-add:
 
 plone.app.collection: Add Collection
 ------------------------------------
@@ -981,5 +707,6 @@ plone.portlet.static: Add static portlet
 
 Questo permesso è simile al permesso ":ref:`section-permissions-manage-portlets`", ma è specifico
 per poter creare nuove **portlet statiche**.
+
 
 

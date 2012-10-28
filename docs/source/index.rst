@@ -16,4 +16,9 @@ Plone: worfklow e sicurezza
    roles
    permissions
    credits
+   
+.. toctree::
+   :maxdepth: 1
+   
+   appendix-a
 

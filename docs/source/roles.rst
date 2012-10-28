@@ -260,7 +260,7 @@ collezioni chi può modificare una collezione ha potere anche sui criteri.
    *Come si presenta il tab dei "Criteri" nei cercatori vecchio stile*
 
 Il motivo sarà discusso in seguito nel
-:ref:`capitolo dei permessi <section-old-topic-permissions>`.
+:ref:`capitolo dei permessi <section-permissions-old-topic>`.
 
 Collaboratore (Member)
 ~~~~~~~~~~~~~~~~~~~~~~
