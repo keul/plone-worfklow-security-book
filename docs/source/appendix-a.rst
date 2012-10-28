@@ -286,6 +286,8 @@ il proprietario del "sito" è sempre un Manager) ma non all'*Amministratore del 
 Questo permesso permette agli utenti di entrare in ZMI ed è stato uno dei motivi scatenanti per
 la creazione del ruolo separato "*Amministratore del sito*".
 
+.. _section-permissions-iterate-all:
+
 iterate : Check *...*
 =====================
 

@@ -78,8 +78,8 @@ e della colonna un checkbox:
 * se il checkbox è *selezionato* quel ruolo ha il relativo permesso nel contesto (il sito Plone).
 * Se il checkbox è *deselezionato* quel ruolo non ha il permesso.
 
-Capire "Acquire permission settings?"
--------------------------------------
+Capire "*Acquire permission settings?*"
+---------------------------------------
 
 Avrete notato la presenta di una serie di checkbox in prima colonna con intestazione "**Acquire
 permission settings?**".
@@ -163,14 +163,14 @@ Chi però governa questi permessi sulla news è il **workflow ad essa associato*
 Analisi dei permessi esistenti
 ==============================
 
-Se fin'ora vi siete spaventati di fronte alla grande quantità di permessi che Plone offre,
-e alla mancanza di una descrizione dettagliata sul loro significato, sappiate che le cose non
-stanno così male.
+Se fin'ora vi siete spaventati di fronte alla grande quantità di permessi che Plone offre e alla
+mancanza di una descrizione dettagliata sul loro significato, sappiate che le cose non stanno così
+male.
 
-Molti dei permessi che vedete sono definiti dagli strati software più bassi e **non serve gestirli
-in Plone**.
+Molti dei permessi che vedete sono definiti dagli strati software più bassi (CMF, Zope, ...)e
+**non serve gestirli in Plone**.
 Per questi permessi potete lasciare il valore predefinito e dimenticarvi di loro (e così faremo
-qui)
+qui).
 
 Rimane però vera la seconda osservazione: non ci sono descrizioni del funzionamenti dei permessi
 ma è importante sapere a cosa servono.
@@ -187,14 +187,17 @@ ATContentTypes: Add *tipo di contenuto*
 ---------------------------------------
 
 Questa serie di permessi controllano il potere di **poter aggiungere un tipo di contenuto** e ne
-esiste uno per ogniuno dei tipi base di Plone.
+esiste uno per ognuno dei tipi base di Plone.
 
 Il prefisso *ATContentTypes* identifica uno dei prodotti Plone centrali che è per l'appunto
 `Products.ATContentTypes`__.
-Questo prodotto è quello che fornisce i tipi base di Plone basati sul framework `Archetypes`__.
+Questo prodotto è quello che fornisce attualmente i tipi base di Plone basati sul framework
+`Archetypes`__.
+Nelle prossime versioni di Plone il framework di riferimento cambierà, sostituito da `Dexterity`__.
 
 __ http://pypi.python.org/pypi/Products.ATContentTypes
 __ http://pypi.python.org/pypi/Products.Archetypes
+__ http://plone.org/products/dexterity
 
 Segue uno a uno la lista dei permessi e una brevissima spiegazione.
 
@@ -233,7 +236,8 @@ __ http://pypi.python.org/pypi/plone.app.folder
     Aggiunta di una *News*
 
 Noterete come da questa lista sia assente la *Collezione*, poiché per ragioni storiche la sua
-aggiungibilità è gestita dal permesso ":ref:`section-permissions-add-portal-topic`".
+aggiungibilità è gestita da altri permessi (vedere
+":ref:`section-permissions-plone-app-collection-add`").
 
 Manipolare questi permessi si traduce letteralmente nel far sparire dal menù per l'aggiunta di
 nuovi elementi il tipo relativo.
@@ -248,8 +252,8 @@ Per impostazione predefinita i seguenti ruoli posseggono questi permessi:
 * *Contributore*
 
 .. Note::
-    Il fatto che in questa lista compaia il *Possessore* ci dice una cosa importante (e molto
-    spesso sbagliata).
+    Il fatto che in questa lista compaia il *Possessore* ci dice una cosa importante (e che molto
+    spesso vale la pena modificare).
     Un utente che sia in grado di creare una cartella avrà il potere di inserirvi all'interno
     tutti i contenuti che vuole.
 
@@ -261,7 +265,7 @@ Access contents information
 Questo permesso è tanto difficile da spiegare quanto importante, letteralmente tradotto in
 "*accedere alle informazioni dei contenuti*".
 
-Il suo uso è sparso qua è là nel codice Plone senza che sia esattamento chieato il suo scopo.
+Il suo uso è sparso qua è là nel codice Plone senza che sia esattamento chiarito il suo scopo.
 
 Nella pratica è un permesso che solitamente viaggia a stretto contatto col più famoso permesso
 **View** e di solito viene assegnato e negato agli stessi ruoli negli stessi contesti.
@@ -369,7 +373,7 @@ CMFEditions: Access previous versions
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Questo permesso determina il potere dell'utente di accedere alla storia del documento e controlla
-la comparsa del link "*Cronologia*" e l'effettivo potere di utilizzarne le funziomalità.
+la comparsa del link "*Cronologia*" e l'effettivo potere di utilizzarne le funzionalità.
 
 .. figure:: _static/history-link.png
    :alt: Link alla cronologia
@@ -393,7 +397,7 @@ versionamento del contenuto è impostato su "Manuale" (una funzionalità di Plon
 raramente).
 
 Dopo una prova empirica: anche rimuovendo il permesso a tutti i ruoli non sembra esserci nessun
-effetto sul comportamento del versionamento.
+effetto negativo sul comportamento del versionamento.
 
 Il consiglio è: tenete i ruoli predefiniti ma per sicurezza assegnate questo permesso anche ad
 ipotetici nuovi ruoli che vorrete andare a creare e che possono avere poteri di modifica di
@@ -408,11 +412,14 @@ lavoro di effettuare il **checkout** (la creazione della copia di lavoro) in una
 Sbagliato... questo permesso non fa assolutamente nulla.
 Eppure sono quasi certo che l'intenzione iniziale fosse esattamente questa.
 
+Un permesso simile potrebbe essere
+":ref:`iterate : Check out content <section-permissions-iterate-all>`" (ma anche questo sembrerebbe
+inutilizzato).
+
 CMFEditions: Revert to previous versions
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Questo permesso è collegato alla possibilità di tornare alla versione precedente di un contenuto.
-
 Il problema è che nelle versioni moderne di Plone i template che controllano la storia sono
 cambiati.
 
@@ -428,7 +435,7 @@ Premendo però il pulsante "*Ripristina questa versione*" si ottiene il permesso
 insufficienti.
 
 Nei vecchi template di Plone, quando i controlli della versione del documento erano fatti tramite
-il tab aggiuntivo "*Storia*" (oggi disabilitato) le cose vanno meglio.
+il tab aggiuntivo "*Storia*" (oggi disabilitato) le cose andavano meglio.
 La pagina è ancora oggi disponibile chiamando ``/versions_history_form`` sul contesto.
 
 .. figure:: _static/document-history-old-template.png
@@ -436,8 +443,8 @@ La pagina è ancora oggi disponibile chiamando ``/versions_history_form`` sul co
 
    *Vecchia pagina della storia del documento*
 
-In questo vecchio template anche il pulsante "*Ripristina a questa versione*" sparisce
-(comportamento ovviamente migliore).
+In questo vecchio template in assenza del permesso il pulsante "*Ripristina a questa versione*"
+sparisce (comportamento ovviamente migliore).
 Il comportamento attuale è molto probabilmente un piccolo bug, ma l'importante è che questo
 permesso controlli davvero questo potere.
 
@@ -504,7 +511,57 @@ Delete objects
 --------------
 
 Questo permesso controlla il potere di cancellare contenuti ma vista la sua complessità e il suo
-comportamento non sempre chiaro, verrà gestito in seguito in una sezione dedicata.
+comportamento non sempre chiaro, c'è molto da dire.
+
+Innanzi tutto: in Plone ci sono due modi in cui è possibile eliminare un contenuto:
+
+1. Dal **menù "Azioni"** (cancellazione del documento corrente)
+
+    .. figure:: _static/delete-from-view-menu.png
+       :alt: Eliminare dal menù "Azioni"
+
+       *Come eliminare il contesto corrente*
+    
+2. Dalla **vista contenuti** (cancellazione di uno o più contenuti figli)
+
+    .. figure:: _static/delete-from-folder-contents.png
+       :alt: Eliminare dalla vista contenuti
+
+       *Come eliminare i contenuti di una cartella*
+
+Nel primo caso il codice Plone richiama lo script ``delete_confirmation.cpy`` che a sua volta
+richiama il metodo di basso livello ``manage_delObjects`` sul padre dell'elemento che si vuole
+cancellare.
+
+Nel secondo caso si passa invece per lo script ``folder_delete.cpy`` che, in modo indiretto, arriva
+sempre a richiamare lo stesso metodo ``manage_delObjects`` (questa volta: sul contesto corrente in
+quanto già padre degli elementi che si vogliono cancellare) fornendo una serie di id, che verranno
+tutti cancellati.
+
+Anche gli elementi grafici dell'interfaccia Plone (la voce "*Elimina*" nel menù "*Azioni*" e il
+pulsante "*Elimina*" nella vista contenuti) sono mostrati o nascosti in presenza dello stesso
+permesso.
+
+Problema
+~~~~~~~~
+
+Questo approccio purtroppo è a volte limitante: se un utente ha il potere di cancellare i
+contenuti di una cartella allora *può cancellarli tutti*.
+Non è possibile rendere cancellabili alcuni contenuti in base al loro stato di revisione del
+workflow poiché la verifica viene fatta comunque sul padre.
+
+Un comportamento che a mio avviso dovrebbe essere rispettato di base è che un utente non possa
+cancellare elementi che non è in grado di modificare (così come funziona un filesystem).
+
+Per raggiungere questo obbiettivo è necessario modificare parte del codice Plone (in realtà
+un'operazione fattibile direttamente da ZMI), oppure rimanere ad un livello superficiale:
+modificare solo l'interfaccia grafica.
+
+Questa è quella che viene detta "sicurezza tramite oscuramento", il che vuol dire che non è vera
+e propria sicurezza: se l'utente infatti conosce Plone e modifica a mano i form o richiama gli
+URL corretti potrà comunque bypassare la vostra modifica.
+
+Nella maggior parte dei casi è comunque una scelta tutto sommano accettabile.
 
 List folder contents
 --------------------
