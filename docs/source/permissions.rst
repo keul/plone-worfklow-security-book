@@ -370,6 +370,8 @@ Vale quanto detto per gli altri
 :ref:`permessi di aggiungibilità dei contenuti <section-permissions-atct-add-all>` Plone, ma i
 ruoli che lo posseggono sono solo i seguenti *Manager* e *Amministratore del sito*.
 
+.. _section-permissions-allow-sento:
+
 Allow sendto
 ------------
 
@@ -841,6 +843,8 @@ Per impostazione predefinita i seguenti ruoli posseggono questo permesso:
 * *Amministratore del sito*
 * *Revisore*
 
+.. _section-permissions-set-own-password:
+
 Set own password
 ----------------
 
@@ -878,8 +882,57 @@ di una sezione apposita in seguito.
 Use mailhost services
 ---------------------
 
-...todo...
+Questo permesso è collegato all'utilizzo del sistema di invio e-mail interno di Plone.
 
+Normalmente l'unico punto di contatto tra gli utenti del sito e le e-mail inviate dal sito si hanno
+per l'invio del resert della password (":ref:`section-permissions-set-own-password`") e per l'invio
+di un link alla pagina corrente (":ref:`section-permissions-allow-sento`").
+In entrambi i casi Plone verifica due permessi specifici.
 
+Se però un prodotto aggiuntivo, o una vostra funzionalità specifica, dovessere tentare di invare un
+messaggio e-mail, questo permesso verrebbe verificato, quindi in questi casi vale la pena
+verificarne le impostazioni.
 
-  
+Per impostazione predefinita i seguenti ruoli posseggono questo permesso:
+
+* *Manager*
+* *Amministratore del sito*
+
+View
+----
+
+.. Note::
+    E' il permesso di riferimento del ruolo **Lettore**
+
+Il permesso più semplice, eppure il più importante tra tutti i permessi.
+Ci sono varie cose da dire relativamente al permesso di *View*, quindi verrà affrontato in una
+sezione apposita in seguito.
+
+View Groups
+-----------
+
+E' un permesso collegato a vari metodi di basso livello per accedere ai gruppi
+
+E' assegnato ai *Manager*, *Amministratori del sito* e *Collaboratori*, quindi a tutti gli utenti
+autenticati.
+
+Da test eseguiti, se si rimuove il permesso per il *Collaboratore*, gli utenti sono comunque in
+grado di accedere alla pagina di *Condivisione* e ricercare gruppi. 
+
+View management screens
+-----------------------
+
+Vale la pena dire due parole su questo permesso, assegnato solo al *Manager* (e al *Possessore*, ma
+il proprietario del "sito" è sempre un Manager) ma non all'*Amministratore del sito*.
+
+Questo permesso permette agli utenti di entrare in ZMI ed è stato uno dei motivi scatenanti per
+la creazione del ruolo separato "*Amministratore del sito*".
+
+iterate : Check *...*
+---------------------
+
+I due permessi *iterate : Check in content* e *iterate : Check out content* sono forniti dal
+prodotto che si occupa del supporto alla *copia di lavoro*.
+ 
+.. todo ..
+
