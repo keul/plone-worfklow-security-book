@@ -362,13 +362,15 @@ sezione "*Sicurezza*" della configurazione del sito.
 Add portal topics
 -----------------
 
-E' il permesso che determina il potere di aggiungere nuove **Collezioni** nel sito Plone (*Topic*
-è stato il primo nome del tipo di contenuto, poi diventato *Cercatore* ed infine ha preso il nome
-odierno).
+E' il permesso che determina il potere di aggiungere le vecchie **Collezioni** nel sito Plone
+(*Topic* è stato il primo nome del tipo di contenuto, poi diventato *Cercatore* ed infine ha
+preso il nome odierno).
 
 Vale quanto detto per gli altri
 :ref:`permessi di aggiungibilità dei contenuti <section-permissions-atct-add-all>` Plone, ma i
 ruoli che lo posseggono sono solo i seguenti *Manager* e *Amministratore del sito*.
+
+Ignorate questo permesso se non dovete gestire le vecchie collezioni.
 
 .. _section-permissions-allow-sento:
 
@@ -386,6 +388,8 @@ E' ancora utilizzabile conoscendone l'URL (inserendo ``/sendto_form`` dopo l'URL
 o riabilitando il link dal ``portal_actions`` in ZMI.
 
 Il permesso è dato al ruolo *Anonimo*, quindi chiunque può utilizzare questo form. 
+
+.. _section-permissions-cmfeditions-set:
 
 CMFEditions: *...*
 ------------------
@@ -737,6 +741,8 @@ Per impostazione predefinita i seguenti ruoli posseggono questo permesso:
 E' possibile quindi facilmente escludere uno dei pannelli di configurazione di Plone a qualunque
 modifica, togliendo il permesso associato.
 
+.. _section-permissions-manage-portlets:
+
 Portlets: Manage portlets
 -------------------------
 
@@ -744,7 +750,14 @@ E' il permesso che permette di accedere alla gestione delle portlet laterali ed 
 assegnato al *Manager* e all'*Amministratore del sito*.
 
 In assenza di un permesso specifico per gestire una nuova portlet (magari in seguito
-all'installazione di un prodotto agiuntivo), questo è il permesso che andrebbe utilizzato.
+all'installazione di un prodotto agiuntivo), questo è il permesso che andrebbe utilizzato, anche
+se la cosa migliore sarebbe sempre quella di avere un permesso per ogni tipo di portlet.
+
+Purtroppo questo non succede: tutte le portlet sono gestite da questo permesso a parte due
+eccezioni degne di note:
+
+* :ref:`section-permissions-plone-portlet-collection-add`
+* :ref:`section-permissions-plone-portlet-static-add`
 
 Portlets: View dashboard
 ------------------------
@@ -934,5 +947,39 @@ iterate : Check *...*
 I due permessi *iterate : Check in content* e *iterate : Check out content* sono forniti dal
 prodotto che si occupa del supporto alla *copia di lavoro*.
  
-.. todo ..
+Abbiamo già visto alcuni permessi che si occupano del versionamento e che lavorano con questo
+prodotto (vedere i :ref:`permessi relativi a CMFEditions <section-permissions-cmfeditions-set>`).
+
+Questi due permessi sono definiti, ma sembrano non usati da nessun componente Plone.
+
+plone.app.collection: Add Collection
+------------------------------------
+
+Questo permesso è stato introdotto con le nuove *Collezioni* ed è relativo al potere di aggiungere
+collezioni nel sito.
+
+Vale quanto detto per i
+:ref:`permessi di aggiungibilità dei contenuti <section-permissions-atct-add-all>`.
+
+Per impostazione predefinita i seguenti ruoli posseggono questo permesso:
+
+* *Manager*
+* *Amministratore del sito*
+
+.. _section-permissions-plone-portlet-collection-add:
+
+plone.portlet.collection: Add collection portlet
+------------------------------------------------
+
+Questo permesso è simile al permesso ":ref:`section-permissions-manage-portlets`", ma è specifico
+per poter creare nuove **portlet collezione**.
+
+.. _section-permissions-plone-portlet-static-add:
+
+plone.portlet.static: Add static portlet
+----------------------------------------
+
+Questo permesso è simile al permesso ":ref:`section-permissions-manage-portlets`", ma è specifico
+per poter creare nuove **portlet statiche**.
+
 
