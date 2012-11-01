@@ -268,7 +268,8 @@ Questo permesso è tanto difficile da spiegare quanto importante, letteralmente 
 Il suo uso è sparso qua è là nel codice Plone senza che sia esattamento chiarito il suo scopo.
 
 Nella pratica è un permesso che solitamente viaggia a stretto contatto col più famoso permesso
-**View** e di solito viene assegnato e negato agli stessi ruoli negli stessi contesti.
+":ref:`section-permissions-view`" e di solito viene assegnato e negato agli stessi ruoli negli
+stessi contesti.
 
 Per impostazione predefinita i seguenti ruoli posseggono questo permesso:
 
@@ -312,18 +313,18 @@ Add portal content
     E' il permesso di riferimento del ruolo **Contributore**
 
 Storicamente questo permesso era *il* permesso per aggiungere contenuti nel sito.
-Prima di Plone 2.1 esisteva solo questo permesso per controllare l'aggiungibilità dei contenuti e
+Prima di Plone 2.1 esisteva solo questo permesso per controllare l'aggiungibilità dei contenuti, e
 controllava *tutti* i contenuti.
 
 I limiti di un simile approccio si solo rivelati molti presto e si è poi arrivati ad avere un
-permesso per ogni contenuto, come descritto nella sezione
+permesso per l'aggiunta di ogni contenuto, come descritto nella sezione
 ":ref:`section-permissions-atct-add-all`".
 
 Il permesso però rimane importante ancora oggi perché dovrebbe determinare il potere di "*poter
 aggiungere contenuti*" senza specificare quali.
 
-In passato non avere questo permesso determinava infatti la possibilità di non poter aggiungere
-contenuti ma questa caratteristica pare essere sparita in una qualche versione di Plone.
+In passato non avere questo permesso determinava infatti l'impossibilità di poter aggiungere
+contenuti, ma questa caratteristica pare essere sparita in una qualche versione di Plone.
 
 Ad ogni modo: il permesso è ancora usato per varie verifiche di sicurezza nel codice Plone quindi
 non va ignorato completamente.
@@ -388,7 +389,6 @@ del versionamento dei contenuti (``applyVersionControl``, nel tool
 ``CopyModifyMergeRepositoryTool``).
 Dovrebbe essere utilizzato e verificato quando la storia del documento inizia (quindi alla sua
 creazione).
-
 In più un'installazione base di Plone imposta questo permesso ai ruoli *Contributore*, *Manager*,
 *Possessore*, *Editor*, *Revisore* e *Amministratore del sito*.
 
@@ -465,7 +465,7 @@ il documento.
 Se il prodotto per il supporto alla "Copia di lavoro" è attivo, questo permesso controlla anche il
 **checkin** del documento.
 
-Nel caso del versionamento del contenuto Plone ha un comportamento che potrebbe non esse chiaro.
+Nel caso del versionamento del contenuto Plone ha un comportamento che potrebbe non essere chiaro.
 Se l'utente corrente ha il potere di modificare il documento, egli può entrare nella pagina di
 modifica, ma se il versionamento è attivato e l'utente non possiede questo permesso, ottiene un
 errore al salvataggio (poiché salvando si sta tentando di creare anche una nuova versione).
@@ -490,14 +490,14 @@ Per impostazione predefinita i seguenti ruoli posseggono questo permesso:
 * *Revisore*
 
 La presenza del ruolo *Contributore* è dubbia (perché il *Contributore* ha il diritto di generare
-una nuova versione di un documento?).
+una nuova versione di un documento quando potenzialmente non avrebbe i diritti di modificarlo?).
 
 .. _section-permissions-change-portal-events:
 
 Change portal events
 --------------------
 
-Questo permesso, per ragioni storiche, è il **permesso di modifica degli eventi**.
+Questo permesso, per ragioni storiche, è **il permesso di modifica degli eventi**.
 
 E' da gestire allo stesso modo con cui viene usato il più famoso *Modify portal content*.
 E' anche molto probabile che l'importanza di questo permesso venga meno non appena gli eventi di
@@ -546,8 +546,8 @@ Anche gli elementi grafici dell'interfaccia Plone (la voce "*Elimina*" nel menù
 pulsante "*Elimina*" nella vista contenuti) sono mostrati o nascosti in presenza dello stesso
 permesso.
 
-Problema
-~~~~~~~~
+Il problema della cancellazione dei contenuti in Plone
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Questo approccio purtroppo è a volte limitante: se un utente ha il potere di cancellare i
 contenuti di una cartella allora *può cancellarli tutti*.
@@ -634,8 +634,8 @@ In assenza di un permesso specifico per gestire una nuova portlet (magari in seg
 all'installazione di un prodotto agiuntivo), questo è il permesso che andrebbe utilizzato, anche
 se la cosa migliore sarebbe sempre quella di avere un permesso per ogni tipo di portlet.
 
-Purtroppo questo non succede: tutte le portlet sono gestite da quest'unico permesso, eccezione
-fatta per due casi:
+Purtroppo questo non succede: tutte le portlet predefinite di Plone sono gestite da quest'unico
+permesso, eccezione fatta per due casi:
 
 * ":ref:`section-permissions-plone-portlet-collection-add`" (per gestire le **portlet collezione**)
 * ":ref:`section-permissions-plone-portlet-static-add`" (per gestire le **portlet statiche**)
@@ -645,8 +645,8 @@ fatta per due casi:
 Request review
 --------------
 
-E' il permesso che identifica il potere di un utente di sottoporre un documento alla richiesta
-di revisione (di solito effettuata dal *Revisore*).
+E' il permesso che identifica il potere di un utente di sottoporre un documento alla richiesta di
+revisione (di solito effettuata dal *Revisore*).
 
 E' utilizzata in tutti i workflow base, ma se avete intenzione di creare un vostro workflow e
 vi serve questa funzionalità, tenete presente questo permesso prima di volerne creare altri.
@@ -666,8 +666,8 @@ Review portal content
 .. Note::
     E' il permesso di riferimento del ruolo **Revisore**
 
-Questo permesso identifica il potere di poter revisionare un contenuto del sito, di solito legato
-ad una precedente richiesta di revisione ottenuta tramite uso di workfklow.
+Questo permesso identifica il potere di revisionare un contenuto del sito, di solito legato ad una
+precedente richiesta di revisione ottenuta tramite uso di workfklow.
 
 Come già discusso per il permesso ":ref:section-permissions-request-review", vale la pena
 riutilizzare il permesso anche in presenza di workflow personalizzati.
@@ -686,7 +686,11 @@ assegnare ad utenti e gruppi i singoli permessi disponibili in questa pagina.
 
 Questi permessi sono già stati introdotti brevemente alla sezione
 ":ref:`section-access-sharing-page`" nel capitolo sui ruoli, ma il loro comportamento necessita
-di una sezione apposita in seguito.
+di maggiori informazioni.
+
+...TODO...
+
+.. _section-permissions-view:
 
 View
 ----
@@ -695,8 +699,9 @@ View
     E' il permesso di riferimento del ruolo **Lettore**
 
 Il permesso più semplice, eppure il più importante tra tutti i permessi.
-Ci sono varie cose da dire relativamente al permesso di *View*, quindi verrà affrontato in una
-sezione apposita in seguito.
+Ci sono varie cose da dire relativamente a questo permesso.
+
+... TODO ...
 
 .. _section-permissions-plone-app-collection-add:
 
