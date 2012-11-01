@@ -299,4 +299,60 @@ prodotto (vedere i :ref:`permessi relativi a CMFEditions <section-permissions-cm
 
 Questi due permessi sono definiti, ma sembrano non usati da nessun componente Plone.
 
+Reply to item
+=============
+
+Questo permesso identifica il potere di poter **commentare**.
+
+Il Plone i commenti sono ora controllati dal prodotto `plone.app.discussion`__ e possono anche
+essere sottoposti a workflow.
+
+__ http://pypi.python.org/pypi/plone.app.discussion
+
+Tenete presente che il permesso controlla i commenti *se i commenti sono abilitati* sul contenuto.
+
+Nella pratica infatti il permesso è dato a tutti gli *Autenticati*, ma di base nessun contenuto
+Plone è di per se automaticamente commentabile.
+
+Review comments
+---------------
+
+Quando la revisione dei commenti è attivata, chi possiede questo permesso può effettuarne la
+revisione.
+
+Questo comportamento viene innanzi tutto abilitato dal pannello di controllo Plone, alla voce
+"*Commenti*".
+
+.. figure:: _static/comment-configuration-review.png
+   :alt: L'abilitazione della revisione dei commenti
+
+   *L'abilitazione della revisione dei commenti, dal pannello "Impostazioni dei commenti"*
+
+Per impostazione predefinita i seguenti ruoli posseggono questo permesso:
+
+* *Manager*
+* *Amministratore del sito*
+* *Revisore*
+
+Il motivo per cui esista un permesso separato per la revisione dei commenti (e non venga usato
+invece il permesso ":ref:`section-permissions-review-portal-content`" è opinabile.
+Sarebbe stato possibile usare quello stesso permesso, applicato al workflow dei commenti.
+
+.. _section-permissions-plone-portlet-collection-add:
+
+plone.portlet.collection: Add collection portlet
+------------------------------------------------
+
+Questo permesso è simile al permesso ":ref:`section-permissions-manage-portlets`", ma è specifico
+per poter creare nuove **portlet collezione**.
+
+.. _section-permissions-plone-portlet-static-add:
+
+plone.portlet.static: Add static portlet
+----------------------------------------
+
+Questo permesso è simile al permesso ":ref:`section-permissions-manage-portlets`", ma è specifico
+per poter creare nuove **portlet statiche**.
+
+
 
