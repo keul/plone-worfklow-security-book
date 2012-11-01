@@ -280,6 +280,8 @@ Per impostazione predefinita i seguenti ruoli posseggono questo permesso:
 * *Lettore*
 * *Editor*
 
+.. _section-permissions-access-inactive-portal-content:
+
 Access inactive portal content
 ------------------------------
 
@@ -699,9 +701,107 @@ View
     E' il permesso di riferimento del ruolo **Lettore**
 
 Il permesso più semplice, eppure il più importante tra tutti i permessi.
-Ci sono varie cose da dire relativamente a questo permesso.
+Determina il potere di vedere il contenuto.
 
-... TODO ...
+Anche se, come tutti gli altri permessi, è gestibile nella radice del sito o alla radice di Zope,
+il suo scopo è quello di essere **gestito nei contenuti tramite workflow**.
+
+Noterete infatti che il permesso, a livello di radice di Zope, è assegnato agli *Anonimi*, il che
+significa che *chiunque* deve poter accedere al sito Plone.
+Se state leggendo queste pagine perché volete disegnare una intranet, potreste pensare come questa
+impostazione sia qualcosa da cambiare, ma non è vero.
+
+Disabilitando il permesso di *View* alla radice del sito non è il modo corretto.
+Gli utenti (anche gli anonimi) devono poter raggiungere il sito, per poi essere obbligati ad
+effettuare l'autenticazione.
+
+.. Note::
+    Togliere il permesso di *View* all'oggetto "Sito Plone" ha l'effetto di obbligare gli utenti
+    ad eseguire un'autenticazione HTTP Basic, ma questa impostazione può portare a dei problemi
+    difficili da gestire.
+    
+    Non fatelo.
+
+Da questo momento in poi parleremo del permesso sempre riferendoci alla sua presenza o assenza
+relativamente a contenuti.
+
+Che cosa viene influenzato da "*View*"?
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Il permesso influenza due comportamenti: la **ricerca** e **l'accesso diretto ai contenuti**.
+
+Per ricerca si intende tutto ciò che in Plone si risolve con l'uso del **catalogo**, il che si
+traduce non solo nella ricerca tramite il campo di ricerca istantanea o la ricerca avanzata, ma
+anche l'uso delle collezioni, delle viste che mostrano i contenuti di una cartella, delle portlet,
+nel navigatore, etc.
+
+In pratica la mancanza del permesso di *View* influenza tutto ciò che in Plone può generare liste
+dinamiche di contenuti.
+Deve essere chiaro che nel momento stesso in cui un utente perde il permesso di *View*
+relativamente ad un contenuto (di solito: in seguito ad un cambio di stato nel workflow),
+l'interfaccia di Plone reagisce facendo sparire per l'utente il contenuto.
+
+Ma la sicurezza non è tutta qui.
+Se l'utente provasse comunque ad accedere al contenuto, magari tramite un link, un bookmark, o
+semplicemente perché ne conosce l'URL, viene verificata la presenza del permesso per i ruoli
+dell'utente.
+In caso negativo, si viene rediretti alla pagina di permessi insufficienti.
+
+"*View*" e il catalogo: allowedRolesAndUsers
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Diciamo qualche parola in più sulle ricerche di Plone e le relazioni con il catalogo.
+
+Il catalogo si occupa di *indicizzare* i contenuti in base a vari *indici* differenti e nel
+contempo di memorizzare alcuni dati del contenuto stesso.
+
+Il motivo: l'accesso ad un contenuto Plone ha un certo costo in termini di consumo di risorse,
+costo irrisorio se si parla di accedere ad un singolo contenuto ma che può diventare grande se
+l'operazione richiesta necessitasse di accederne centinaia... o migliaia.
+
+Se non ci fosse il catalogo ed un utente si trovasse ad eseguire una ricerca per la parola *Tasse*,
+sarebbe necessario caricare uno ad uno tutti i contenti del sito e poi controllare se la parola è
+compresa in uno dei campi del documento trovato.
+Impensabile.
+
+Ma questo non basta.
+Se il catalogo ritornasse un set di risultati con 100 contenuti che parlano di *Tasse* e questi
+venissero direttamente mostrati all'utente, potrebbero esserci problemi di sicurezza: va verificato
+se l'utente ha i diritti (il permesso di *View*) per accedere al contenuto.
+
+Per fare questo sarebbe comunque necessario caricare i contenuti prima di riportarli come risultato
+all'utente, invalidando in buona parte i benefici del catalogo.
+
+Per questo esiste uno speciale indice: **allowedRolesAndUsers**.
+Questo permesso memorizza per ogni contenuto del sito i ruoli, gli utenti e i gruppi che possono
+accedervi (quindi verificandono il permesso di *View*).
+L'uso di questo indice è sempre aggiunto a qualunque tipo di ricerca in modo trasparente
+all'utente.
+
+Quindi in Plone è possibile chiedere al catalogo se un certo utente ha il permesso di *View*
+su un certo contenuto, cosa che non è possibile con nessun altro permesso.
+
+Un buon esempio dell'approccio è il prodotto `collective.portlet.truereview`__, un componente (non
+molto conosciuto) che aggiunge a Plone una nuova portlet di revisione.
+Questa portlet a differenza di quella originale fornita col CMS (che in alcuni casi può diventare
+estremamente lenta, proprio perché non può usare il catalogo) utilizza lo stesso approccio
+dell'indice che abbiamo introdotto, applicando lo stesso principio con un nuovo indice:
+*reviewerRolesAndUsers*.
+
+__ http://pypi.python.org/pypi/collective.portlet.truereview
+
+"*View*" e i documenti scaduti
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Dei documenti scaduti si è già parlato in relazione del permesso
+":ref:`section-permissions-access-inactive-portal-content`".
+
+Ripetiamo qui una precisazione: è possibile che un documento scaduto sia "*visibile*" ad un certo
+utente (qui inteso come: "l'utente ha il permesso di *View* sul documento") eppure che non riesca
+a trovarlo, perché senza il permesso per vedere contenuti scaduti.
+
+In questo caso l'accesso diretto non mente: *Access contents information* influenza solo le
+ricerche ma l'utente può accedere al contenuto andando direttamente all'URL.
 
 .. _section-permissions-plone-app-collection-add:
 
