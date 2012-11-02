@@ -551,10 +551,12 @@ permesso.
 Il problema della cancellazione dei contenuti in Plone
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Questo approccio purtroppo è a volte limitante: se un utente ha il potere di cancellare i
-contenuti di una cartella allora *può cancellarli tutti*.
+Questo comportamento è a volte limitante e considerato inadatto: se un utente ha il potere di
+cancellare i contenuti di una cartella allora *può cancellarli tutti*.
 Non è possibile rendere cancellabili alcuni contenuti in base al loro stato di revisione del
-workflow poiché la verifica viene fatta comunque sul padre.
+workflow poiché la verifica viene fatta comunque sul padre, è possibile solo determinare che, se il
+padre è in un certo stato di revisione, allora i suoi contenuti figli saranno o non saranno
+cancellabili.
 
 Un comportamento che a mio avviso dovrebbe essere rispettato di base è che un utente non possa
 cancellare elementi che non è in grado di modificare (così come funziona un filesystem).
@@ -563,9 +565,11 @@ Per raggiungere questo obbiettivo è necessario modificare parte del codice Plon
 un'operazione fattibile direttamente da ZMI), oppure rimanere ad un livello superficiale:
 modificare solo l'interfaccia grafica.
 
-Questa è quella che viene detta "sicurezza tramite oscuramento", il che vuol dire che non è vera
-e propria sicurezza: se l'utente infatti conosce Plone e modifica a mano i form o richiama gli
-URL corretti potrà comunque bypassare la vostra modifica.
+Questa è quella che viene detta "sicurezza tramite oscuramento" ("`Security through obscurity`__"),
+il che vuol dire che non è vera e propria sicurezza: se l'utente infatti conosce Plone e modifica
+i form HTML ottenuti o richiama gli URL corretti potrà comunque bypassare la vostra modifica.
+
+__ http://en.wikipedia.org/wiki/Security_through_obscurity
 
 Nella maggior parte dei casi è comunque una scelta tutto sommano accettabile.
 
@@ -680,6 +684,8 @@ Per impostazione predefinita i seguenti ruoli posseggono questo permesso:
 * *Amministratore del sito*
 * *Revisore*
 
+.. _section-permissions-sharing-page-all:
+
 Sharing page: *...*
 -------------------
 
@@ -687,10 +693,36 @@ Questa serie di permessi controlla l'accesso alla **pagina di condivisione** e l
 assegnare ad utenti e gruppi i singoli permessi disponibili in questa pagina.
 
 Questi permessi sono già stati introdotti brevemente alla sezione
-":ref:`section-access-sharing-page`" nel capitolo sui ruoli, ma il loro comportamento necessita
-di maggiori informazioni.
+":ref:`section-access-sharing-page`" nel capitolo sui ruoli ma il loro comportamento necessita
+di maggiori delucidazioni.
 
-...TODO...
+Il permesso generale che determina la **possibilità di accede alla pagina di condivisione** è
+"**Sharing page: Delegate roles**".
+
+Questo è il permesso più importante e viene verificato prima di tutti gli altri.
+Questo permesso è quindi assegnato a tutti gli utenti che possono assegnare qualche ruolo ad altri
+utenti del sito.
+
+Nel nostro esempio del "*Super Revisore*" (vedere :ref:`section-super-revisore-in-sharing-page`) ci
+eravamo limitati ad usare questo permesso l'effetto ottenuto era quello di rendere possibile a
+tutti gli utenti in grado di condividere un documento, il potere di assegnare anche il ruolo.
+
+Per i ruoli predefiniti di Plone (ed è quello che faremo anche per il nostro nuovo ruolo) esiste
+invece un permesso specifico per ogni ruolo.
+
+Questi sono:
+
+* **Sharing page: Delegate Contributor role**
+* **Sharing page: Delegate Editor role**
+* **Sharing page: Delegate Reader role**
+* **Sharing page: Delegate Reviewer role**
+
+Con questo meccanismo è possibile arrivare ad un livello di granularità estremo:
+
+1. Si decide quali ruoli possono condividere il documento
+2. Si decide quali ruoli è possibile fornire
+
+In seguito vedremo come creare il nuovo permesso che al momento ci manca.
 
 .. _section-permissions-view:
 

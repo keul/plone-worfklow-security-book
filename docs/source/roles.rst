@@ -951,7 +951,10 @@ Per fortuna questa è solo una configurazione di base che può essere modificata
 L'accesso alla pagina è controllato da un singolo permesso, ma il poter assegnare o meno un
 determinato ruolo è controllato da uno specifico **permesso di delega**, diverso per ogni ruolo.
 
-Questi permessi verranno analizzati e spiegati nell'apposita sezione.
+Questi permessi verranno analizzati e spiegati
+nell':ref:`apposita sezione <section-permissions-sharing-page-all>`.
+
+.. _section-super-revisore-in-sharing-page:
 
 Comportamento del Super Revisore nella pagina di condivisione
 -------------------------------------------------------------
@@ -967,11 +970,12 @@ Tornando al nostro codice di esempio, c'è l'utilizzo dell'attributo ``required_
 cui valore viene importato da uno dei moduli base di Plone.
 
 Non essendo ancora in possesso di un permesso specifico per delegare il nostro ruolo, ci siamo
-limitati ad importare il permesso più generale ossia **Sharing page: Delegate roles**, che è lo
-stesso permesso che protegge l'accesso generale alla pagina di condivisione.
+limitati ad importare il permesso più generale ossia
+":ref:`Sharing page: Delegate roles <section-permissions-sharing-page-all>`", che è lo stesso
+permesso che protegge l'accesso generale alla pagina di condivisione.
 
 In pratica stiamo dicendo che chiunque acceda alla condivisione può delegare questo ruolo.
-In seguito sistemeremo questo problema.
+In vedremo come sistemare questo problema.
 
 .. _section-check-user-roles:
 

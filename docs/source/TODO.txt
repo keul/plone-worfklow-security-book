@@ -24,6 +24,7 @@ x miniform ZMI per vedere i permessi di un utente su un contesto
 - copiare/tagliare/incollare
 - le portlet (i ruoli che le gestiscono)
 - poteri di modifica dei singoli campi
+- workflow chain
 
 x appendice A --> tutti i permessi
 - appendice B --> riferimenti all'esempio e come installare
