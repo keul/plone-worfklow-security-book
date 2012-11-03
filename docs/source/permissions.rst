@@ -136,7 +136,7 @@ Il funzionamento dei permessi nei contenuti
 
 Pur tuttavia il cuore della sicurezza in Plone sta tutta qui: per sapere se un utente ha il potere
 di fare una certa azione in un dato contesto, viene verificato se è in possesso di uno specifico
-permesso, e nella maggior parte dei casi questo permesso è controllato sul contesto stesso.
+permesso, e nella maggior parte dei casi questo permesso **è controllato sul contesto stesso**.
 
 Vediamo ad esempio cosa succede se accediamo alla gestione della sicurezza di un contenuto news in
 stato *privato*.
@@ -159,6 +159,17 @@ Per questo motivo chiunque sia sprovvisto di questi ruoli nel contesto della new
 accedervi (ed otterrà l'errore permessi insufficienti).
 
 Chi però governa questi permessi sulla news è il **workflow ad essa associato**.
+
+L'importanza del contesto
+-------------------------
+
+Il concetto di **contesto** è vitale per comprendere appieno i permessi o per realizzare buoni
+workflow.
+
+Potenzialmente tutti i permessi possono essere verificati sul *contesto corrente* (che identifica
+sempre il documento che l'utente sta visitando o la radice del sito Plone, nel caso si sia
+posizionati proprio su quest'ultima) ma alcuni di questi sono nei fatti verificati solo sulla
+radice del sito.
 
 Analisi dei permessi esistenti
 ==============================
@@ -513,6 +524,8 @@ Per impostazione predefinita i seguenti ruoli posseggono questo permesso:
 * *Amministratore del sito*
 * *Possessore*
 
+.. _section-permissions-delete-objects:
+
 Delete objects
 --------------
 
@@ -547,6 +560,8 @@ tutti cancellati.
 Anche gli elementi grafici dell'interfaccia Plone (la voce "*Elimina*" nel menù "*Azioni*" e il
 pulsante "*Elimina*" nella vista contenuti) sono mostrati o nascosti in presenza dello stesso
 permesso.
+
+.. _section-delete-objects-criteria:
 
 Il problema della cancellazione dei contenuti in Plone
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -850,4 +865,144 @@ Per impostazione predefinita i seguenti ruoli posseggono questo permesso:
 
 * *Manager*
 * *Amministratore del sito*
+
+Dove i permessi incidono sull'interfaccia Plone
+===============================================
+
+.. Note::
+    Per tutti gli esempi seguenti, vale sempre la regola dell'uso della ZMI per effettuare
+    modifiche.
+    
+    Modificare le impostazioni via ZMI e non esportare le modifcihe rende la vostra configurazione
+    difficile da replicare, o eseguirne il debug se qualosa va storto.
+
+Segue una serie di punti da dove è possibile modificare le impostazioni dell'uso dei permessi
+tramite ZMI e le cui modifiche hanno immediati effetti sul comportamento di Plone.
+
+Il tool portal_actions
+----------------------
+
+Il primo elemento di ZMI che ambiamo a visitare è anche il più ricco in assoluto di impostazioni.
+E' il **portal_actions tool**, accessibile dal *Manager* in tramite la ZMI di ogni sito Plone.
+
+Si occupa di gestire la presenza di elementi dell'interfaccia Plone, solitamente sotto forma di
+link, o pulsanti di form.
+
+.. figure:: _static/zmi-portal-actions-link.png
+   :alt: portal_ctions in ZMI
+
+   *Il tool portal_actions visto dalla radice del sito Plone, in ZMI*
+
+Entrati nel tool vengono mostrate una serie di elementi "**CMF Action Category**", che non sono
+altro che gruppi di *azioni* (**CMF Action**).
+
+.. figure:: _static/zmi-portal-actions-overview.png
+   :alt: Vista generale del portal_ctions
+
+   *Come si presenta il portal_actions tool in un sito Plone*
+
+Il funzionamento generale è il seguente: per ogni categoria ci possono essere una serie di una o
+più azioni.
+Prodotti aggiuntivi potrebbero creare nuove tipologie di azioni (raro, ma non impossibile poiché
+questo tool è ottimo per configurare URL da usare nell'interfaccia Plone).
+
+Andando in creazione o in modifica di una nuova azione all'interno di una categoria, ci si trova
+difronte ad uno spettacolo del genere:
+
+.. figure:: _static/zmi-portal-actions-custom.png
+   :alt: Custom CMF Action
+
+   *La creazione di una nuova CMF Action all'interno del portal_actions tool*
+
+Non ci soffermeremo sull'intero form mostrato, ma solo sulla sezione "*Permissions*".
+Questa permette di configurare l'azione con un filtro che richieda un permesso specifico nel
+contesto su cui l'azione deve poi essere utilizzata.
+
+L'utente deve avere almeno uno dei permessi selezionati per poter vedere l'azione.
+Non è possibile specificare più permessi in " AND booleano " quindi verificare se l'utente ha tutti
+i permessi di un certo insieme.
+La selezione del permesso non è obbligatoria; non selezioandno nessun permesso rende dittiva la
+verifica.
+
+Per avere invece la verifica di più permessi, si ricorsse spesso all'uso della voce
+"*Condition (Expression)*", che permette di scrivere un'espressione Python per eseguire una
+condizione arbitraria (tra cui anche la verifica di permessi).
+
+Se la necessità fosse verificare due permessi, si potrebbe verificare un primo permesso nel modo
+canonico e un secondo permesso tramite l'uso di un'espressione.
+
+Segue una forma standard per ottenere questo tipo di espressioni::
+
+    python:checkPermission("nome del permesso", object)
+
+Qui sopra viene verificato tramite un'espressione Python (con l'uso della funzione
+``checkPermission``), che l'utente corrente abbia il permesso passato come stringa, sul contesto
+corrente (identificato da ``object``).
+
+Vediamo ora le azioni più importanti e il loro impatto sull'interfaccia.
+Nell'elenco che segue salteremo varie categorie di azioni, poiché usano di solito sempre il
+permesso *View*; ciò non toglie che l'utente possa aggiungere nuovi azioni in queste categorie,
+proteggendole con altri permessi.
+
+folder_buttons
+~~~~~~~~~~~~~~
+
+Questa categoria viene utilizzata per popolare i pulsanti che vengono mostrati nella vista dei
+contenuti di una cartella.
+
+.. figure:: _static/folder-buttons.png
+   :alt: I pulsanti nella vista dei contenuti
+
+   *I pulsanti mostrati nella vista dei contenuti di una cartella, popolati grazie alla categoria
+   folder_buttons*
+
+**copy**
+    Controlla la presenza del pulsante di "*Copia*" di uno o più contenuti ed è controllato dal
+    permesso ":ref:`section-permissions-copy-or-move`".
+**cut**
+    Controlla la presenza del pulsante per eseguire il "*Taglia*" di uno o più contenuti.
+    
+    Vista la particolarità delle operazioni di taglio (che necessitano anche della cancellazione
+    del contenuto dalla cartella corrente) vengono verificati due permessi:
+    ":ref:`section-permissions-copy-or-move`" e ":ref:`section-permissions-delete-objects`".
+**rename**
+    Controlla la presenza del pulsante di "*Rinomina*" di uno o più contenuti.
+    
+    Rinominare un contenuto è visto in qualche modo come un re-inserirlo nella cartella (con un
+    nome diverso) quindi il pulsante è controllato dal permesso
+    ":ref:`section-permissions-add-portal-content`". 
+**paste**
+    Controlla la presenza del pulsante di "*Incolla*", per inserire nella cartella uno o più
+    contenuti.
+    
+    Dovendo inserire nuovi contenuti nella cartella, viene verificato il permesso
+    ":ref:`section-permissions-add-portal-content`". 
+**delete**
+    Controlla la presenza del pulsante di "*Elimina*", per cancellare uno o più contenuti dalla
+    cartella.
+    
+    Come spiegato nella sezione ":ref:`section-delete-objects-criteria`", il permesso utilizzato
+    è solo ":ref:`section-permissions-delete-objects`" (sulla cartella stessa).
+**change_state**
+    Permette di controllare il pulsante "*Cambia lo stato*", che porta l'utente alla vista
+    "*Processo di pubblicazione*".
+    
+    Da questa pagina è possibile modificare lo stato di revisione di tutti i contenuti selezionati
+    (potendo anche inserire un **commento di revisione** unico per tutti i contenuti) e modificarle
+    le date di pubblicazione e scadenza (un'accoppiata di funzionalità non facili da giustificare).
+    
+    Si arriva a questa stessa pagina anche dal menù "*Stato*" che controlla i workflow (voce
+    "*Avanzate...*").
+    
+    Non è semplice capire con che permesso rendere disponbile questo pulsante, viste le differenti
+    cose che fa.
+    E' quindi protetto dal permesso di *"View"*, ma l'espressione verifica invece altri due
+    permessi: "*Modify portal content*" e "*Review portal content*".
+
+object
+~~~~~~
+
+... todo ...
+
+
 

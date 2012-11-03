@@ -96,6 +96,8 @@ Vedere quanto detto per i
 * *Amministratore del sito*
 * *Possessore*
 
+.. _section-permissions-copy-or-move:
+
 Copy or Move 
 ============
 
