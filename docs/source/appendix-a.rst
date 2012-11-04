@@ -96,6 +96,17 @@ Vedere quanto detto per i
 * *Amministratore del sito*
 * *Possessore*
 
+.. _section-permissions-content-rules-manage-rules:
+
+Content rules: Manage rules
+===========================
+
+Questo permesso è legato alla possibilità di poter gestire le **regole** di Plone sulla cartella
+corrente.
+
+Per impostazione predefinita: solo *Manager* e *Amministratore del sito* posseggono questi
+permessi.
+
 .. _section-permissions-copy-or-move:
 
 Copy or Move 
