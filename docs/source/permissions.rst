@@ -588,6 +588,8 @@ __ http://en.wikipedia.org/wiki/Security_through_obscurity
 
 Nella maggior parte dei casi è comunque una scelta tutto sommano accettabile.
 
+.. _section-permissions-list-folder-contents:
+
 List folder contents
 --------------------
 
@@ -956,34 +958,34 @@ contenuti di una cartella.
    *I pulsanti mostrati nella vista dei contenuti di una cartella, popolati grazie alla categoria
    folder_buttons*
 
-**copy**
+**copy** (Copia)
     Controlla la presenza del pulsante di "*Copia*" di uno o più contenuti ed è controllato dal
     permesso ":ref:`section-permissions-copy-or-move`".
-**cut**
+**cut** (Taglia)
     Controlla la presenza del pulsante per eseguire il "*Taglia*" di uno o più contenuti.
     
     Vista la particolarità delle operazioni di taglio (che necessitano anche della cancellazione
     del contenuto dalla cartella corrente) vengono verificati due permessi:
     ":ref:`section-permissions-copy-or-move`" e ":ref:`section-permissions-delete-objects`".
-**rename**
+**rename** (Rinomina)
     Controlla la presenza del pulsante di "*Rinomina*" di uno o più contenuti.
     
     Rinominare un contenuto è visto in qualche modo come un re-inserirlo nella cartella (con un
     nome diverso) quindi il pulsante è controllato dal permesso
     ":ref:`section-permissions-add-portal-content`". 
-**paste**
+**paste** (Incolla)
     Controlla la presenza del pulsante di "*Incolla*", per inserire nella cartella uno o più
     contenuti.
     
     Dovendo inserire nuovi contenuti nella cartella, viene verificato il permesso
     ":ref:`section-permissions-add-portal-content`". 
-**delete**
+**delete** (Elimina)
     Controlla la presenza del pulsante di "*Elimina*", per cancellare uno o più contenuti dalla
     cartella.
     
     Come spiegato nella sezione ":ref:`section-delete-objects-criteria`", il permesso utilizzato
     è solo ":ref:`section-permissions-delete-objects`" (sulla cartella stessa).
-**change_state**
+**change_state** (Cambia lo stato)
     Permette di controllare il pulsante "*Cambia lo stato*", che porta l'utente alla vista
     "*Processo di pubblicazione*".
     
@@ -1002,7 +1004,32 @@ contenuti di una cartella.
 object
 ~~~~~~
 
-... todo ...
+La categoria **object** racchiude una serie di link che vengono visualizzati in tutti i contenuti
+del sito tramite **tab** agli autenticati.
+
+.. figure:: _static/object-actions.png
+   :alt: I tab dei contenuti
+
+   *I tab mostrati sui contenuti, con evidenza a quelli forniti dalla categoria "object"*
+
+**folderContents** (Contenuti)
+    Controlla la comparsa del tab "**Contenuti**", che mostra i contenuti della cartella corrente.
+    Per questo motivo è protetto dal permesso ":ref:`section-permissions-list-folder-contents`".
+**syndication** (Distribuzione)
+    Un vecchio tab deprecato ed ora disabilitato, che controllava l'accesso al form "*Proprietà
+    della distribuzione*".
+**contentrules** (Regole)
+    Controlla la comparsa del tab "**Regole**" per accedere al form di controllo delle regole di
+    contenuto.
+    E' controllato dal permesso ":ref:`section-permissions-content-rules-manage-rules`".
+**local_roles** (Condivisione)
+    Controlla la comparsa del tab "**Condivisione**" per accedere alla condivisione dell'elemento
+    corrente.
+    E' controllato dal permesso
+    ":ref:`Sharing page: Delegate roles <section-permissions-sharing-page-all>`".
+
+object_buttons
+~~~~~~~~~~~~~~
 
 
 
