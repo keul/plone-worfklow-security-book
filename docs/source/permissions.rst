@@ -1031,5 +1031,14 @@ del sito tramite **tab** agli autenticati.
 object_buttons
 ~~~~~~~~~~~~~~
 
+La categoria **object_buttons** può erroneamente fare pensare che si occupi di bottoni, ma è invece
+usata per popolare il contenuto del **menù "Azioni"**.
+
+.. figure:: _static/action-menu-with-iterate.png
+   :alt: Il menù "Azioni"
+
+   *Il menù "Azioni" con tutte le opzioni predefiniti e col supporto alla copia di lavoro
+   installato*
+
 
 
