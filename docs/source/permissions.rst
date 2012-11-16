@@ -17,14 +17,14 @@ che condividono uno o più permessi.
 I permessi sono il vero cuore della sicurezza di Plone, poiché controllano una singola azione o un
 comportamento puntuale del CMS.
 
-Sappiate però che agiscono a basso livello; fin'ora ci siamo abituati a lavorare sull'interfaccia
-di Plone, per poi muoverci brevemente a livelli più bassi (in ZMI) e abbiamo visto poco codice.
-I permessi invece *non sono visibili o gestiti a livello Plone* (per questo motivo non sono nemmeno
-tradotti).
+E' bene chiarire che agiscono a basso livello; fin'ora ci siamo abituati a lavorare
+sull'interfaccia di Plone, per poi muoverci brevemente a livelli più bassi (in ZMI) e abbiamo visto
+poco codice. I permessi invece *non sono visibili o gestiti a livello Plone* (per questo motivo non
+sono nemmeno tradotti).
 
-In questo capitolo non scenderemo ad un livello di dettaglio eccessivo poiché non risulta utile a
-meno che la vostra intenzione non sia diventare uno sviluppatore di prodotti Plone (il che esula
-dallo scopo di questo libro).
+In questo capitolo non scenderemo ad un livello di dettaglio eccessivo poiché non risulterebbe
+utile, a meno che la vostra intenzione non sia diventare uno sviluppatore di prodotti Plone (il che
+esula dallo scopo di questo libro).
 
 Vi basti sapere che la singola chiamata ad un metodo di una classe Python potrebbe essere protetta
 da un permesso, il che significa che quando quel metodo viene chiamato per reagire ad un'azione di
@@ -53,11 +53,11 @@ creato in precedenza un nuovo ruolo: la scheda **Security**.
    *Link per andare alla gestione della sicurezza del sito Plone, da ZMI*
 
 Un accesso diretto alla pagina (che permette anche di non aprirla nel solito frame HTML usato dalla
-ZMI) è richiamare manualmente ``/manage_access`` sul contesto del sito Plone.
+ZMI) è ottenibile richiamando manualmente ``/manage_access`` sul contesto del sito Plone.
 
 Ad esempio: se state facendo test su un sito locale dovrete probabilmente digitare:
 
-    http://localhost:8080/book/manage_access
+    http://localhost:8080/Plone/manage_access
 
 Quello che vi troverete davanti è una griglia la cui logica è riassunta nello schema seguente.
 
@@ -81,7 +81,7 @@ e della colonna un checkbox:
 Capire "*Acquire permission settings?*"
 ---------------------------------------
 
-Avrete notato la presenta di una serie di checkbox in prima colonna con intestazione "**Acquire
+Avrete notato la presenza di una serie di checkbox in prima colonna con intestazione "**Acquire
 permission settings?**".
 
 Il loro significato è estremamente importante e diventerà vitale per la realizzazione di buoni
@@ -97,6 +97,12 @@ Ci si potrebbe chiedere quale possa essere il "contenitore" del sito Plone e la 
 Anche questa infatti è una specie di cartella, dove i siti Plone diventano dei semplici contenuti e
 da dove è possibile ancora una volta accedere alla scheda "*Security*".
 
+Per accedere alla radice di Zope è necessario avere un utente con i poteri di *Manager* sull'intera
+installazione (di solito: l'unico disponibile è l'utente predefinito *admin*).
+Mantenendo l'esempio precedente, l'URL di accesso del vostro sito di test dovrebbe quindi essere:
+
+    http://localhost:8080/manage_access
+
 .. figure:: _static/zmi-security-zope-root.png
    :alt: La gestione della sicurezza alla radice di Zope
 
@@ -104,10 +110,6 @@ da dove è possibile ancora una volta accedere alla scheda "*Security*".
 
 I permessi che troverete qui sono gli stessi del sito Plone, l'unica differenza sta nei *ruoli*:
 qui troverete solo i ruoli predefinti di Zope e non quelli Plone o il nostro *Super Revisore*.
-
-Di tutti i permessi definiti troverete come sia assegnato al ruolo *Manager* (ovviamente), a volte
-al ruolo *Anonimo* (poiché gli anonimi devono poter fare determinate cose) e *Owner* (scelta non
-sempre corretta).
 
 A parità di permesso, le impostazioni di sicurezza definite qui si vanno a sommare a quelle
 definite nello stesso permesso del sito Plone *se* il checkbox "*Acquire*" è selezionato.
@@ -120,7 +122,8 @@ Modifiche ai permessi al di fuori della radice del sito
 La modifica dei permessi sulla radice del sito è normale amministrazione del lavoro con Plone per
 personalizzare ai propri bisogni la sicurezza.
 
-La modifica dei permessi nella radice di Zope è meno comune ma comunque possibile e lecita.
+La modifica dei permessi nella radice di Zope è meno comune ma comunque possibile e tutto sommato
+lecita (consiglio comunqie di evitarla, ed accedervi solo in consultazione).
 
 Nella sezione ":ref:`section-check-user-roles`" abbiamo visto come la pagina di modifica della
 security sia accessibile anche al di fuori della radice del sito (anche se nascosta).
@@ -134,9 +137,9 @@ L'avvertimento dato in precedenza è talmente importante che vale la pena ripete
 Il funzionamento dei permessi nei contenuti
 ===========================================
 
-Pur tuttavia il cuore della sicurezza in Plone sta tutta qui: per sapere se un utente ha il potere
+Pur tuttavia il cuore della sicurezza in Plone sta tutto qui: per sapere se un utente ha il potere
 di fare una certa azione in un dato contesto, viene verificato se è in possesso di uno specifico
-permesso, e nella maggior parte dei casi questo permesso **è controllato sul contesto stesso**.
+permesso e nella maggior parte dei casi questo permesso **è controllato sul contesto stesso**.
 
 Vediamo ad esempio cosa succede se accediamo alla gestione della sicurezza di un contenuto news in
 stato *privato*.
@@ -150,7 +153,7 @@ Noterete come ci siano varie impostazioni personalizzate e non solo una serie in
 "Acquire".
 
 Per rendere le cose semplici ci concentreremo solo su un permesso: *View*, ossia il permesso che
-determina se il contenuto può essere visto o meno (verrà trattato molto nel dettaglio in seguito).
+determina se il contenuto può essere visto o meno (verrà trattato nel dettaglio in seguito).
 
 *Qualcosa* ha determinato che quel contenuto (la news) sia visibile (e quindi accessibile) solo dai
 ruoli *Contributore*, *Editor*, *Manager*, *Possessore*, *Lettore* e *Amministratore del sito*.
@@ -169,7 +172,7 @@ workflow.
 Potenzialmente tutti i permessi possono essere verificati sul *contesto corrente* (che identifica
 sempre il documento che l'utente sta visitando o la radice del sito Plone, nel caso si sia
 posizionati proprio su quest'ultima) ma alcuni di questi sono nei fatti verificati solo sulla
-radice del sito.
+radice del sito (questo dipende dallo scopo del permesso).
 
 Analisi dei permessi esistenti
 ==============================
@@ -178,13 +181,13 @@ Se fin'ora vi siete spaventati di fronte alla grande quantità di permessi che P
 mancanza di una descrizione dettagliata sul loro significato, sappiate che le cose non stanno così
 male.
 
-Molti dei permessi che vedete sono definiti dagli strati software più bassi (CMF, Zope, ...)e
-**non serve gestirli in Plone**.
+Molti dei permessi che vedete sono definiti dagli strati software più bassi (CMF, Zope, ...) e
+**non serve gestirli in Plone** o tanto meno comprenderne il significato.
 Per questi permessi potete lasciare il valore predefinito e dimenticarvi di loro (e così faremo
 qui).
 
 Rimane però vera la seconda osservazione: non ci sono descrizioni del funzionamenti dei permessi
-ma è importante sapere a cosa servono.
+ma per alcuni è importante sapere a cosa servono.
 
 Di seguito analizzeremo una piccola serie di permessi che sono davvero molto importanti per il
 funzionamento di Plone e che necessitano di essere compresi.
