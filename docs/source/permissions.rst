@@ -200,18 +200,21 @@ all':ref:`Appendice A <chapter-appendix-a>`.
 ATContentTypes: Add *tipo di contenuto*
 ---------------------------------------
 
-Questa serie di permessi controllano il potere di **poter aggiungere un tipo di contenuto** e ne
+Questa serie di permessi controlla il potere di **poter aggiungere un tipo di contenuto** e ne
 esiste uno per ognuno dei tipi base di Plone.
 
 Il prefisso *ATContentTypes* identifica uno dei prodotti Plone centrali che è per l'appunto
 `Products.ATContentTypes`__.
 Questo prodotto è quello che fornisce attualmente i tipi base di Plone basati sul framework
 `Archetypes`__.
-Nelle prossime versioni di Plone il framework di riferimento cambierà, sostituito da `Dexterity`__.
+Nelle prossime versioni di Plone il framework di riferimento cambierà, sostituito da `Dexterity`__
+(e quindi dal prodotto `plone.app.contenttypes`__ di cui al momento non esiste una release
+stabile).
 
 __ http://pypi.python.org/pypi/Products.ATContentTypes
 __ http://pypi.python.org/pypi/Products.Archetypes
 __ http://plone.org/products/dexterity
+__ https://github.com/plone/plone.app.contenttypes
 
 Segue uno a uno la lista dei permessi e una brevissima spiegazione.
 
@@ -247,14 +250,14 @@ __ http://pypi.python.org/pypi/plone.app.folder
     Aggiunta di un **Collegamento**.
 
 `ATContentTypes: Add News Item`
-    Aggiunta di una *News*
+    Aggiunta di una **News**
 
 Noterete come da questa lista sia assente la *Collezione*, poiché per ragioni storiche la sua
 aggiungibilità è gestita da altri permessi (vedere
 ":ref:`section-permissions-plone-app-collection-add`").
 
-Manipolare questi permessi si traduce letteralmente nel far sparire dal menù per l'aggiunta di
-nuovi elementi il tipo relativo.
+Manipolare questi permessi si traduce letteralmente nel far sparire o apparire dal menù per
+l'aggiunta di nuovi elementi il tipo relativo.
 La differenza con la voce "*Restrizioni...*" dello stesso menù è sostanziale, poiché quella
 limitazione viene fatta per singola cartella.
 
@@ -332,13 +335,12 @@ Storicamente questo permesso era *il* permesso per aggiungere contenuti nel sito
 Prima di Plone 2.1 esisteva solo questo permesso per controllare l'aggiungibilità dei contenuti, e
 controllava *tutti* i contenuti.
 
-I limiti di un simile approccio si solo rivelati molti presto e si è poi arrivati ad avere un
+I limiti di un simile approccio si solo rivelati molto presto e si è poi arrivati ad avere un
 permesso per l'aggiunta di ogni contenuto, come descritto nella sezione
 ":ref:`section-permissions-atct-add-all`".
 
 Il permesso però rimane importante ancora oggi perché dovrebbe determinare il potere di "*poter
 aggiungere contenuti*" senza specificare quali.
-
 In passato non avere questo permesso determinava infatti l'impossibilità di poter aggiungere
 contenuti, ma questa caratteristica pare essere sparita in una qualche versione di Plone.
 
@@ -378,13 +380,16 @@ tutte in qualche modo collegate.
 
 .. Note::
     Non va confusa la storia di un documento Plone con le transazioni dello ZODB.
-    L'esecuzione dell'operazione di *pack dello ZODB* di un sito Plone *non* interferisce col
-    numero di versioni di un documento salvate.
+    L'esecuzione dell'operazione di `pack dello ZODB`__ di un sito Plone *non* interferisce col
+    numero di versioni di un documento salvate ma solo con la possibilità di poter annullare
+    (*undo*) le operazioni effettuate.
+    
+    __ http://plone.org/documentation/faq/how-do-i-pack-the-zodb
 
 Il prodotto definisce quindi una serie di permessi aggiuntivi, tutti raccolti sotto il prefisso
 *CMFEditions*.
-A noi interessa anlizzare solo un sotto-insieme di questi permessi poiché altri permessi sono solo
-usati a basso livello.
+A noi interessa analizzare solo un sotto-insieme di questi permessi poiché i rimanenti non sono
+nei fatti utili al funzionamento di Plone.
 
 CMFEditions: Access previous versions
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -485,14 +490,12 @@ Nel caso del versionamento del contenuto Plone ha un comportamento che potrebbe 
 Se l'utente corrente ha il potere di modificare il documento, egli può entrare nella pagina di
 modifica, ma se il versionamento è attivato e l'utente non possiede questo permesso, ottiene un
 errore al salvataggio (poiché salvando si sta tentando di creare anche una nuova versione).
-
 Forse la cosa andrebbe gestita in un altro modo (non creando una versione, oppure segnalando il
 problema all'utente in un modo alternativo).
 
 Se l'estensione per la copia di lavoro è attiva e si tenta di eseguire il *checkin*, la cosa sembra
 funzionare ma non appena l'utente inserisce il commento alla modifica ottiene di nuovo l'errore
 di permessi insufficienti.
-
 Anche in questo caso il comportamento non è ottimale: sarebbe meglio che all'utente fosse inibita
 la voce di menù che scatena il *checkin*.
 
@@ -583,9 +586,9 @@ Per raggiungere questo obbiettivo è necessario modificare parte del codice Plon
 un'operazione fattibile direttamente da ZMI), oppure rimanere ad un livello superficiale:
 modificare solo l'interfaccia grafica.
 
-Questa è quella che viene detta "sicurezza tramite oscuramento" ("`Security through obscurity`__"),
-il che vuol dire che non è vera e propria sicurezza: se l'utente infatti conosce Plone e modifica
-i form HTML ottenuti o richiama gli URL corretti potrà comunque bypassare la vostra modifica.
+Questa è quella che viene detta "sicurezza tramite oscuramento" ("`Security through obscurity`__")
+il che vuol dire: non è vera e propria sicurezza: se l'utente infatti conosce Plone e modifica i
+form HTML ottenuti o richiama gli URL corretti potrà comunque bypassare la vostra modifica.
 
 __ http://en.wikipedia.org/wiki/Security_through_obscurity
 
@@ -599,6 +602,11 @@ List folder contents
 Questo permesso è quello che permette agli utenti di vedere i contenuti di una cartella, quindi la
 sua modifica ha effetti solo sui contenuti di tipo simil-cartella, e controlla la presenza del tab
 "*Contenuti*".
+
+.. figure:: _static/folder-contents.png
+   :alt: Tab "Contenuti"
+
+   *Link al tab dei contenuti della cartella*
 
 Per impostazione predefinita i seguenti ruoli posseggono questo permesso:
 
@@ -624,13 +632,15 @@ Questo permesso determina tantissimi poteri, tutti legati ad azioni che di solit
 il ruolo Manager.
 
 Ad oggi può creare problemi di incompatibilità col ruolo "*Amministratore del sito*" in presenza
-di prodotti che ancora non lo supportano
+di prodotti che ancora non supportano quest'ultimo ruolo
 (vedere :ref:`la discussione relativa <section-roles-site-administrator-notes>`).
 
-Un esempio classico è l'**uso delle portlet**.
-In Plone le portlet sono sempre state gestire dal *Manager* e di recente dal nuovo ruolo
-*Amministratore del sito* ma è possibile ancora oggi trovare prodotti aggiuntivi che forniscono
-nuove portlet usando questo permesso e quindi inutilizzabili dal nuovo ruolo.
+Un esempio classico è l'**uso delle portlet**, che in Plone sono sempre state gestire dal *Manager*
+e di recente dal nuovo ruolo *Amministratore del sito*, ma è possibile ancora oggi trovare vecchi
+prodotti aggiuntivi che forniscono nuove portlet usando questo permesso e quindi inutilizzabili dal
+nuovo ruolo.
+
+Un permesso più corretto sarebbe ":ref:`section-permissions-portlets-manage-portlets`".
 
 Modify portal content
 ---------------------
@@ -638,8 +648,9 @@ Modify portal content
 .. Note::
     E' il permesso di riferimento del ruolo **Editor**
 
-A parte qualche :ref:`eccezione degna di nota <section-permissions-change-portal-events>`, questo
-è *il* permesso che identifica il potere di modificare i contenuti.
+A parte qualche eccezione degna di nota (vedere
+":ref:`section-permissions-change-portal-events`"), questo è *il* permesso che identifica il
+potere di modificare i contenuti.
 
 Per impostazione predefinita i seguenti ruoli posseggono questo permesso:
 
@@ -648,7 +659,9 @@ Per impostazione predefinita i seguenti ruoli posseggono questo permesso:
 * *Possessore*
 * *Editor*
 
-Ma il potere viene in realtà gestito altrove: nei **workflow**.
+L'importanza di questo permesso è altrove, gestito tramite l'uso dei **workflow**.
+
+.. _section-permissions-portlets-manage-portlets:
 
 Portlets: Manage portlets
 -------------------------
@@ -674,6 +687,13 @@ Request review
 E' il permesso che identifica il potere di un utente di sottoporre un documento alla richiesta di
 revisione (di solito effettuata dal *Revisore*).
 
+Di solito si traduce della presenza di una specifica voce nel menù di cambio di stato.
+
+.. figure:: _static/workflow-menu-request-review.png
+   :alt: Link "sottoponi a revisione"
+
+   *La richiesta di sottoporre a revisione un documento, nel menù del workflow*
+
 E' utilizzata in tutti i workflow base, ma se avete intenzione di creare un vostro workflow e
 vi serve questa funzionalità, tenete presente questo permesso prima di volerne creare altri.
 
@@ -695,8 +715,16 @@ Review portal content
 Questo permesso identifica il potere di revisionare un contenuto del sito, di solito legato ad una
 precedente richiesta di revisione ottenuta tramite uso di workfklow.
 
-Come già discusso per il permesso ":ref:section-permissions-request-review", vale la pena
+Come già discusso per il permesso ":ref:`section-permissions-request-review`", vale la pena
 riutilizzare il permesso anche in presenza di workflow personalizzati.
+
+Di solito si traduce della presenza di voci aggiuntive nel menù di cambio di stato, una per
+pubblicare il contenuto (richiesta accettata) e un'ultra voce per rifiutarlo.
+
+.. figure:: _static/workflow-menu-review-portal-content.png
+   :alt: Link "Pubblica" e "Rifiuta"
+
+   *Pubblicazione o rifiuto del documento, nel menù del workflow*
 
 Per impostazione predefinita i seguenti ruoli posseggono questo permesso:
 
@@ -724,7 +752,7 @@ Questo permesso è quindi assegnato a tutti gli utenti che possono assegnare qua
 utenti del sito.
 
 Nel nostro esempio del "*Super Revisore*" (vedere :ref:`section-super-revisore-in-sharing-page`) ci
-eravamo limitati ad usare questo permesso l'effetto ottenuto era quello di rendere possibile a
+eravamo limitati ad usare questo permesso e l'effetto ottenuto era quello di rendere possibile a
 tutti gli utenti in grado di condividere un documento, il potere di assegnare anche il ruolo.
 
 Per i ruoli predefiniti di Plone (ed è quello che faremo anche per il nostro nuovo ruolo) esiste
@@ -811,9 +839,9 @@ Il motivo: l'accesso ad un contenuto Plone ha un certo costo in termini di consu
 costo irrisorio se si parla di accedere ad un singolo contenuto ma che può diventare grande se
 l'operazione richiesta necessitasse di accederne centinaia... o migliaia.
 
-Se non ci fosse il catalogo ed un utente si trovasse ad eseguire una ricerca per la parola *Tasse*,
-sarebbe necessario caricare uno ad uno tutti i contenti del sito e poi controllare se la parola è
-compresa in uno dei campi del documento trovato.
+Se non ci fosse il catalogo ed un utente si trovasse ad eseguire una ricerca per la parola
+"*Tasse*", sarebbe necessario caricare uno ad uno tutti i contenti del sito e poi controllare se la
+parola è compresa in uno dei campi del documento trovato.
 Impensabile.
 
 Ma questo non basta.
@@ -852,7 +880,7 @@ Ripetiamo qui una precisazione: è possibile che un documento scaduto sia "*visi
 utente (qui inteso come: "l'utente ha il permesso di *View* sul documento") eppure che non riesca
 a trovarlo, perché senza il permesso per vedere contenuti scaduti.
 
-In questo caso l'accesso diretto non mente: *Access contents information* influenza solo le
+In questo caso l'accesso diretto non mente: "*Access inactive portal content*" influenza solo le
 ricerche ma l'utente può accedere al contenuto andando direttamente all'URL.
 
 .. _section-permissions-plone-app-collection-add:
@@ -878,7 +906,7 @@ Dove i permessi incidono sull'interfaccia Plone
     Per tutti gli esempi seguenti, vale sempre la regola dell'uso della ZMI per effettuare
     modifiche.
     
-    Modificare le impostazioni via ZMI e non esportare le modifcihe rende la vostra configurazione
+    Modificare le impostazioni via ZMI e non esportare le modifiche rende la vostra configurazione
     difficile da replicare, o eseguirne il debug se qualosa va storto.
 
 Segue una serie di punti da dove è possibile modificare le impostazioni dell'uso dei permessi
@@ -887,8 +915,8 @@ tramite ZMI e le cui modifiche hanno immediati effetti sul comportamento di Plon
 Il tool portal_actions
 ----------------------
 
-Il primo elemento di ZMI che ambiamo a visitare è anche il più ricco in assoluto di impostazioni.
-E' il **portal_actions tool**, accessibile dal *Manager* in tramite la ZMI di ogni sito Plone.
+Il primo elemento di ZMI che anbiamo a visitare è anche il più ricco in assoluto di impostazioni.
+E' il **portal_actions tool**, accessibile dal ruolo *Manager* tramite la ZMI di ogni sito Plone.
 
 Si occupa di gestire la presenza di elementi dell'interfaccia Plone, solitamente sotto forma di
 link, o pulsanti di form.
@@ -924,14 +952,14 @@ Questa permette di configurare l'azione con un filtro che richieda un permesso s
 contesto su cui l'azione deve poi essere utilizzata.
 
 L'utente deve avere almeno uno dei permessi selezionati per poter vedere l'azione.
-Non è possibile specificare più permessi in " AND booleano " quindi verificare se l'utente ha tutti
-i permessi di un certo insieme.
+Non è possibile specificare più permessi in "*AND booleano*" (verificare se l'utente ha tutti
+i permessi di un certo insieme).
 La selezione del permesso non è obbligatoria; non selezioandno nessun permesso rende dittiva la
 verifica.
 
-Per avere invece la verifica di più permessi, si ricorsse spesso all'uso della voce
-"*Condition (Expression)*", che permette di scrivere un'espressione Python per eseguire una
-condizione arbitraria (tra cui anche la verifica di permessi).
+Per avere invece la verifica di più permessi, si ricorre spesso all'uso della voce "*Condition
+(Expression)*", che permette di scrivere un'espressione Python per eseguire una condizione
+arbitraria (tra cui anche la verifica di permessi).
 
 Se la necessità fosse verificare due permessi, si potrebbe verificare un primo permesso nel modo
 canonico e un secondo permesso tramite l'uso di un'espressione.
@@ -999,8 +1027,8 @@ contenuti di una cartella.
     Si arriva a questa stessa pagina anche dal menù "*Stato*" che controlla i workflow (voce
     "*Avanzate...*").
     
-    Non è semplice capire con che permesso rendere disponbile questo pulsante, viste le differenti
-    cose che fa.
+    Non è semplice capire con che permesso rendere disponbile questo pulsante, viste le
+    funzionalità differenti che offre.
     E' quindi protetto dal permesso di *"View"*, ma l'espressione verifica invece altri due
     permessi: "*Modify portal content*" e "*Review portal content*".
 

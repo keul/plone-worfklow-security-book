@@ -25,6 +25,7 @@ x miniform ZMI per vedere i permessi di un utente su un contesto
 - le portlet (i ruoli che le gestiscono)
 - poteri di modifica dei singoli campi
 - workflow chain
+- SearchableText non rispetta i permessi di View sui singoli campi
 
 x appendice A --> tutti i permessi
 - appendice B --> riferimenti all'esempio e come installare
