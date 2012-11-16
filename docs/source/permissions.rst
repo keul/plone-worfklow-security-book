@@ -955,7 +955,7 @@ L'utente deve avere almeno uno dei permessi selezionati per poter vedere l'azion
 Non è possibile specificare più permessi in "*AND booleano*" (verificare se l'utente ha tutti
 i permessi di un certo insieme).
 La selezione del permesso non è obbligatoria; non selezioandno nessun permesso rende dittiva la
-verifica.
+verifica (di solito comunque viene sempre indicata la presenza del permesso "*View*").
 
 Per avere invece la verifica di più permessi, si ricorre spesso all'uso della voce "*Condition
 (Expression)*", che permette di scrivere un'espressione Python per eseguire una condizione
@@ -1062,8 +1062,8 @@ del sito tramite **tab** agli autenticati.
 object_buttons
 ~~~~~~~~~~~~~~
 
-La categoria **object_buttons** può erroneamente fare pensare che si occupi di bottoni, ma è invece
-usata per popolare il contenuto del **menù "Azioni"**.
+La categoria **object_buttons** può erroneamente far pensare a "bottoni", ma è invece usata per
+popolare il contenuto del **menù "Azioni"**.
 
 .. figure:: _static/action-menu-with-iterate.png
    :alt: Il menù "Azioni"
@@ -1071,5 +1071,111 @@ usata per popolare il contenuto del **menù "Azioni"**.
    *Il menù "Azioni" con tutte le opzioni predefiniti e col supporto alla copia di lavoro
    installato*
 
+**cut** (Taglia)
+    Controlla la presenza della funzionalità di "*Taglia*" sul contenuto.
+    
+    Vista la particolarità delle operazioni di taglio (che necessitano anche della cancellazione
+    del contenuto dalla cartella corrente), tramite una combinazione di uso dei permessi
+    dell'azione ed espressione di controllo vengono verificati due permessi:
+    ":ref:`section-permissions-delete-objects`" (sul contenuto e sul suo contenitore) e
+    ":ref:`section-permissions-copy-or-move`" (sul contenitore).
+**copy** (Copia)
+    Controlla la presenza dell'azione di "*Copia*" del contenuti.
+    Per qualche motivo è protetto dal permesso di "*View*", mentre la verifica del permesso reale
+    è lasciata all'espressione di controllo (che verifica la presenza di
+    ":ref:`section-permissions-copy-or-move`").
+**paste** (Incolla)
+    Controlla la presenza dell'azione di "*Incolla*", per aggiungere il contenuto precedentemente
+    copiato/tagliato nella cartella che contiene l'elemento corrente.
+    
+    Dato che il contesto corrente non ha nulla a che fare con il nuovo elemento che si va a
+    copiare, viene verificato il permesso di "*View*" e la presenza del pulsante è lasciata ad
+    un'espressione che verifica se ci sono dati validi da incollare.
+    
+    Tutto questo sembra molto permissivo (e lo è... perché non viene invece verificato il permesso
+    ":ref:`section-permissions-add-portal-content`" sul contesto del padre?) ma se poi l'utente
+    non ha nei fatti i poteri per incollare, ottieneun messaggio di errore.
 
+    .. figure:: _static/portalmessage-error-cant-paste.png
+       :alt: "Errore: non sei autorizzato ad incollare elementi"
 
+       *Il messaggio di errore mostrato se non si hanno permessi per incollare elementi*
+    
+**delete** (Elimina)
+    Controlla la presenza dell'azione di "*Elimina*"del contenuto corrente.
+    
+    Perché il controllo compaia viene verificato il permesso
+    ":ref:`section-permissions-delete-objects`" sia sul contenuto che sul suo contenitore.
+**rename** (Rinomina)
+    Controlla la presenza dell'azione di "*Rinomina*" del contenuto.
+    
+    Rinominare un contenuto è visto in qualche modo come un re-inserirlo nella cartella (con un
+    nome diverso).
+    In questo caso viene fatta un complessa lista di verifiche:
+    
+    * ":ref:`section-permissions-add-portal-content`" sul contenuto
+    * ":ref:`section-permissions-delete-objects`" sul contenitore
+    * ":ref:`section-permissions-copy-or-move`" sul contenitore
+    * ":ref:`section-permissions-add-portal-content`" sul contenitore
+
+Segue una lista di altre tre azioni, disponibili solo se viene attivato il componente opzionale
+per il supporto alla *copia di lavoro* (Working Copy).
+
+I limiti attuali dei permessi di questo prodotto sono stati introdotti quando si è perlato dei
+:ref:`permessi relativi a CMFEditions <section-permissions-cmfeditions-set>`.
+
+**iterate_checkout** (Estrai versione)
+    L'azione che permette di creare una nuova copia di lavoro, partendo dal contenuto corrente.
+    
+    L'azione è protetta dalla presenza del permesso di "*View*", perché tutta la logica è racchiusa
+    nella chiamata ad un metodo ``checkout_allowed``.
+**iterate_checkin** (Crea versione)
+    L'azione compare solo sulle copie di lavoro di altri contenuti.
+    Permette di far "rientrare" il documento corrente nel documento principale, come nuova
+    versione di quest'ultimo.
+    
+    L'azione è protetta dalla presenza del permesso di "*View*", perché tutta la logica è racchiusa
+    nella chiamata ad un metodo ``checkin_allowed``.
+**iterate_checkout_cancel** (Annulla il check-out)
+    L'azione compare solo sulle copie di lavoro di altri contenuti.
+    Permette di annulla la copia di lavoro (nei fatti eliminando il contenuto).
+
+    L'azione è protetta dalla presenza del permesso
+    ":ref:section-permission-modify-portal-content" (perché non il permesso per cancellare?) e
+    dalla verifica alla chiamata del metodo ``cancel_allowed``.
+
+portal_tabs
+~~~~~~~~~~~
+
+I tab del portale identificano quella zona che normalmente racchiude i link sotto alla testata del
+sito.
+
+Questa zona è popolata dalle azioni definite in questa categoria, ma anche da tutti i contenuti
+nella radice del sito (questo se nella configurazionedel sito, nelle impostazioni della
+Navigazione è stata selezionata la voce "*Genera automaticamente le schede*").
+
+.. figure:: _static/portal-tabs.png
+   :alt: Tab del portale predefiniti
+
+   *La separazione tra la sezione dei tab del portale e le schede generate automaticamente*
+
+I tab del portale hanno una particolarità: non si riferiscono al contesto corrente ma sempre alla
+radice del sito (i pemessi sono quindi verificati sul sito Plone).
+Questo è corretto, anche se limita notevolmente l'utilizzo di questa sezione.
+
+Di base esiste una sola voce: **index_html** (Home) che è un link alla home del sito (quindi
+protetto dal semplice permesso "*View*".
+
+Quest'area può comunque essere sfruttata per mostrare altri link utili, magari a siti esterni.
+
+users
+~~~~~
+
+xxx
+
+.. figure:: _static/user-menu.png
+   :alt: Il menù degli strumenti personali
+
+   *Il menù degli strumenti personali*
+
+xxx
