@@ -1147,8 +1147,8 @@ I limiti attuali dei permessi di questo prodotto sono stati introdotti quando si
 portal_tabs
 ~~~~~~~~~~~
 
-I tab del portale identificano quella zona che normalmente racchiude i link sotto alla testata del
-sito.
+I **tab del portale** identificano quella zona che normalmente racchiude i link sotto alla testata
+del sito.
 
 Questa zona è popolata dalle azioni definite in questa categoria, ma anche da tutti i contenuti
 nella radice del sito (questo se nella configurazionedel sito, nelle impostazioni della
@@ -1166,16 +1166,51 @@ Questo è corretto, anche se limita notevolmente l'utilizzo di questa sezione.
 Di base esiste una sola voce: **index_html** (Home) che è un link alla home del sito (quindi
 protetto dal semplice permesso "*View*".
 
-Quest'area può comunque essere sfruttata per mostrare altri link utili, magari a siti esterni.
+Tutto questo potrebbe far sembrare questa categoria di azioni poco importante, ma nel complesso
+è invece una tra le aree più sfruttabili.
+Quest'area può comunque essere usata per mostrare altri link utili, magari a siti esterni, che non
+coincidino per forza con contenuti del sito (o contenuti del sito nella radice di questo).
 
 users
 ~~~~~
 
-xxx
+Questa categoria raccoglie tutte le azioni presenti nel menù a tendina riservato agli utenti (se
+le voci disponibili sono meno di due, il menù diventa in realtù un semplice link) e alle operazioni
+che gli utenti possono svolgere in merito al loro stato.
 
 .. figure:: _static/user-menu.png
    :alt: Il menù degli strumenti personali
 
    *Il menù degli strumenti personali*
 
-xxx
+Questo menù di base è fortemente influenzato dal ruolo dell'utente.
+Se l'utente è autenticato, viene mostrato il suo nome come voce principale del menù ed espandendolo
+vengono mostrate le altre opzioni.
+
+Anche in questo caso: i permessi sono sempre verificati sulla radice del sito, il che limita
+notevolmente la manipolazione dei permessi.
+
+**mytuff** (Cartella personale)
+    E' il link alla cartella personale degli utent (se abilitata).
+    
+    E' protetto dal semplice permesso di "*View*" (in pratica: non è usato nessun permesso) ma
+    compare solo se la cartella personale dell'utente esiste (grazie ad un'espressione di
+    controllo).
+    
+    Vedere anche ":ref:`section-users-personal-folder`".
+**dashboard** (Dashboard)
+    E' il link alla **dashboard** personale dell'utente ma per qualche motivo non è controllato dal
+    permesso ":ref:`section-permissions-portlets-view-dashboard`" quanto invece dal permesso
+    ":ref:`section-permissions-portlets-manage-own-portlets`".
+**preferences** (Preferenze personali)
+    Il link alle preferenze personali dell'utente.
+    
+    Non è protetto da un permesso specifico (viene usato *View*) ma compare automaticamente per
+    ogni utente autenticato.
+**plone_setup** (Configurazione del sito)
+    Il link al pannello generale della configurazione del sito.
+    
+    Per questo motivo controllato dal permesso "Plone Site Setup: Overview" (vedere
+    :ref:`l'apposita sezione <section-permissions-plone-site-setup-all>`).
+**login** (Log in)
+    xxx

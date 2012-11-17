@@ -47,6 +47,8 @@ ha di partenza nessun altro potere.
 L'utente inizia ad acquisire poteri nel momento in cui gli vengono assegnati dei ruoli
 (direttamente, o tramite un gruppo).
 
+.. _section-users-personal-folder:
+
 Le cartelle personali
 ---------------------
 

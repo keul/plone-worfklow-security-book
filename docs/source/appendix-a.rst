@@ -184,7 +184,8 @@ Per impostazione predefinita i seguenti ruoli posseggono questo permesso:
 * *Possessore*
 * *Editor*
 
-    
+.. _section-permissions-plone-site-setup-all:
+
 Plone Site Setup: *...*
 =======================
 
@@ -195,9 +196,9 @@ Per ogni pannello di configurazione c'è un permesso con prefisso "*Plone Site S
 
 Mettiamo solo in una minima evidenza due permessi in particolare:
 
-`Plone Site Setup: Overview`
+**Plone Site Setup: Overview**
     E' il permesso principale, per accedere al pannello di controllo generale.
-`Plone Site Setup: Users and Groups`
+**Plone Site Setup: Users and Groups**
     Questo permesso serve ad accedere alla sezione di gestione gruppi e utenti e pare quindi aver
     sostituito i vecchi permessi "*Manage groups*" e "*Manage users*".
     
@@ -212,19 +213,34 @@ Per impostazione predefinita i seguenti ruoli posseggono questo permesso:
 E' possibile quindi facilmente escludere uno dei pannelli di configurazione di Plone a qualunque
 modifica, togliendo il permesso associato.
 
-.. _section-permissions-manage-portlets:
+.. _section-permissions-portlets-manage-own-portlets:
+
+Portlets: Manage own portlets
+=============================
+
+E' il permesso per gestire le proprie portlet (nella dashboard) e controlla quella voce di menù.
+
+Per impostazione predefinita i seguenti ruoli posseggono questo permesso:
+
+* *Manager*
+* *Amministratore del sito*
+* *Collaboratore*
+
+.. _section-permissions-portlets-view-dashboard:
 
 Portlets: View dashboard
 ========================
 
 Permesso per poter vedere la propria **dashboard**.
-Rimuovendo questo permesso però il link dal menù personale alla *dashboard* non viene rimosso, ma
-si ottiene un errore per permessi insufficienti una cliccato.
 
 .. figure:: _static/dashboard-link.png
    :alt: Link alla Dashboard
 
    *Link alla Dashboard dal menù personale*
+
+Rimuovendo questo permesso però il link dal menù personale alla *dashboard* non viene rimosso, ma
+si ottiene un errore per permessi insufficienti una cliccato (è come se ci fosse la possibilità di
+vedere la propria dashboard senza poterla modificare, ma al momento la cosa non funziona a dovere).
 
 Per impostazione predefinita i seguenti ruoli posseggono questo permesso:
 
@@ -356,16 +372,14 @@ Sarebbe stato possibile usare quello stesso permesso, applicato al workflow dei 
 plone.portlet.collection: Add collection portlet
 ------------------------------------------------
 
-Questo permesso è simile al permesso ":ref:`section-permissions-manage-portlets`", ma è specifico
-per poter creare nuove **portlet collezione**.
+Questo permesso è simile al permesso ":ref:`section-permissions-portlets-manage-portlets`", ma è
+specifico per poter creare nuove **portlet collezione**.
 
 .. _section-permissions-plone-portlet-static-add:
 
 plone.portlet.static: Add static portlet
 ----------------------------------------
 
-Questo permesso è simile al permesso ":ref:`section-permissions-manage-portlets`", ma è specifico
-per poter creare nuove **portlet statiche**.
-
-
+Questo permesso è simile al permesso ":ref:`section-permissions-portlets-manage-portlets`", ma è
+specifico per poter creare nuove **portlet statiche**.
 
