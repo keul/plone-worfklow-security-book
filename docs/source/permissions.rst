@@ -1174,9 +1174,10 @@ coincidino per forza con contenuti del sito (o contenuti del sito nella radice d
 users
 ~~~~~
 
-Questa categoria raccoglie tutte le azioni presenti nel menù a tendina riservato agli utenti (se
-le voci disponibili sono meno di due, il menù diventa in realtù un semplice link) e alle operazioni
-che gli utenti possono svolgere in merito al loro stato.
+Questa categoria raccoglie tutte le azioni presenti nel menù a tendina riservato agli utenti
+autenticati; se l'utente è un anonimo e per impostazioni ha più di un'azione a disposizione (di
+solito *Fatti riconoscere* e *Iscriviti*) le azioni vengono mostrate coma una serie di link
+affiancati.
 
 .. figure:: _static/user-menu.png
    :alt: Il menù degli strumenti personali
@@ -1212,5 +1213,24 @@ notevolmente la manipolazione dei permessi.
     
     Per questo motivo controllato dal permesso "Plone Site Setup: Overview" (vedere
     :ref:`l'apposita sezione <section-permissions-plone-site-setup-all>`).
-**login** (Log in)
-    xxx
+**login** (Fatti riconoscere)
+    E' il link che permette l'autenticazione nel sito Plone (un nome migliore sarebbe probabilmente
+    mantenere la forma inglese **log in**.
+    
+    Non è protetto da nessun permesso particolare se non *View* ma compare solo agli utenti anonimi
+    grazie ad un'espressione di controllo.
+**join** (Iscriviti)
+    Se nelle *impostazioni di sicurezza* è selezionata al voce **Consenti l'auto-registrazione**
+    questa azione compare a tutti gli utenti anonimi e permette di crearsi autonomamente un account
+    nel sito.
+
+    E' protetto dal permesso ":ref:`section-permissions-add-portal-member`".
+**undo** (Annulla)
+    Controlla la presenza dell'azione che permette l'accesso al modulo "*Annulla azioni*" per
+    effettuare l'annullamento di operazioni effettuate e tornare ad uno stato precedente del
+    sistema.
+    
+    Le operazioni di *undo* in Plone sono piuttosto delicate (non inteso come "pericolose", ma
+    molto spesso non possono essefe effettuare, quindi la voce è di solito disabilitata.
+    
+    E' controllata dal permesso ":ref:`section-permissions-list-undoable-changes`".

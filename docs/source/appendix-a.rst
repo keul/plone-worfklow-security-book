@@ -29,6 +29,8 @@ Per fortuna ora non serve più occuparsene.
 Per impostazione predefinita: solo *Manager* e *Amministratore del sito* posseggono questi
 permessi.
 
+.. _section-permissions-add-portal-member:
+
 Add portal member
 =================
 
@@ -132,6 +134,21 @@ Per impostazione predefinita questo permesso è dato ai *Manager*, all'*Amminist
 al *Collaboratore* (quindi in pratica tutti gli utenti del sito possono vedere gli altri).
 
 Vale la pena modificarlo in presenza di stringenti motivi di privacy.
+
+.. _section-permissions-list-undoable-changes:
+
+List undoable changes
+=====================
+
+E' il permesso che permette di accedere alla pagine per annullare transazioni effettuato dello ZODB:
+"**Annulla azioni**". In pratica permette di annullare operazioni svolte nel sito Plone e tornare
+ad uno stato precedente del sistema.
+
+Per impostazione predefinita i seguenti ruoli posseggono questo permesso:
+
+* *Manager*
+* *Amministratore del sito*
+* *Collaboratore*
 
 .. _section-permissions-mail-forgotten-password:
 
