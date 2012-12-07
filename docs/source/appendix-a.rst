@@ -360,6 +360,8 @@ Tenete presente che il permesso controlla i commenti *se i commenti sono abilita
 Nella pratica infatti il permesso è dato a tutti gli *Autenticati*, ma di base nessun contenuto
 Plone è di per se automaticamente commentabile.
 
+.. _section-permission-review-comments:
+
 Review comments
 ---------------
 

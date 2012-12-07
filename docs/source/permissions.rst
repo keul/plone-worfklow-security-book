@@ -27,8 +27,9 @@ utile, a meno che la vostra intenzione non sia diventare uno sviluppatore di pro
 esula dallo scopo di questo libro).
 
 Vi basti sapere che la singola chiamata ad un metodo di una classe Python potrebbe essere protetta
-da un permesso, il che significa che quando quel metodo viene chiamato per reagire ad un'azione di
-un utente, viene verificato se l'utente possiede il permesso richiesto.
+da un permesso.
+Questo significa che quando quel metodo viene chiamato per reagire ad un'azione di un utente, viene
+verificato se l'utente possiede il permesso richiesto.
 In caso contrario viene lanciata un'eccezione speciale: **Unauthorized** (**Non autorizzato**) che,
 di solito, genera la classica pagina di permessi insufficienti di Plone.
 
@@ -37,9 +38,10 @@ di solito, genera la classica pagina di permessi insufficienti di Plone.
 
    *La classica pagina di errore di Plone per permessi insufficienti*
 
-In altri casi, alcuni comportamenti controllabili da ZMI (come ad esempio l'accesso a vari aspetti
-dell'interfaccia grafica di Plone) sono controllati da permessi: avere il permesso richiesto
-determina se l'elemento grafico compaia o meno. 
+Ma i permessi non si limitato solo a generare errori di mancaza di privilegi: alcuni comportamenti
+del CMS controllabili da ZMI (come ad esempio l'accesso a vari aspetti dell'interfaccia grafica di
+Plone) sono regolati da permessi: avere il permesso richiesto determina se l'elemento grafico
+compaia o meno.
 
 La gestione dei permessi
 ========================
@@ -88,7 +90,8 @@ Il loro significato è estremamente importante e diventerà vitale per la realiz
 workflow.
 
 Noterete infatti come per tantissimi permessi non ci sia nessuno dei checkbox della griglia
-selezionati ma solo quello dell'acquisizione (che è quasi sempre selezionato, in ogni permesso).
+selezionati ma solo quello dell'acquisizione (che è invece quasi sempre selezionato in ogni
+permesso).
 
 Il suo significato è "*acquisisci permessi dal livello superiore/dal contenitore*".
 
@@ -108,22 +111,27 @@ Mantenendo l'esempio precedente, l'URL di accesso del vostro sito di test dovreb
 
    *Come si presenta la gestione della sicurezza sulla radice di Zope*
 
-I permessi che troverete qui sono gli stessi del sito Plone, l'unica differenza sta nei *ruoli*:
-qui troverete solo i ruoli predefinti di Zope e non quelli Plone o il nostro *Super Revisore*.
+Innanzi tutto va notato come da questa pagina non sia presente un ulteriore serie di checkbox
+per l'acquisizione dei permessi (siamo giunti davvero alla radice).
+
+I permessi che troverete sono gli stessi del sito Plone, l'unica differenza sta nei *ruoli*: qui
+troverete solo i ruoli predefiniti di Zope e non quelli Plone (quindi nemmeno il nostro *Super
+Revisore*.
 
 A parità di permesso, le impostazioni di sicurezza definite qui si vanno a sommare a quelle
 definite nello stesso permesso del sito Plone *se* il checkbox "*Acquire*" è selezionato.
 
-Se l'acquisizione è deselezionata, le impostazioni al livello superiore vengono ignorate.
+Se l'acquisizione del permesso nel sito Plone è deselezionata, le impostazioni al livello
+superiore vengono ignorate.
 
 Modifiche ai permessi al di fuori della radice del sito
 -------------------------------------------------------
 
 La modifica dei permessi sulla radice del sito è normale amministrazione del lavoro con Plone per
-personalizzare ai propri bisogni la sicurezza.
+personalizzare per i propri bisogni la sicurezza.
 
 La modifica dei permessi nella radice di Zope è meno comune ma comunque possibile e tutto sommato
-lecita (consiglio comunqie di evitarla, ed accedervi solo in consultazione).
+lecita (consiglio comunque di evitarla, ed accedervi solo in consultazione).
 
 Nella sezione ":ref:`section-check-user-roles`" abbiamo visto come la pagina di modifica della
 security sia accessibile anche al di fuori della radice del sito (anche se nascosta).
@@ -170,7 +178,7 @@ Il concetto di **contesto** è vitale per comprendere appieno i permessi o per r
 workflow.
 
 Potenzialmente tutti i permessi possono essere verificati sul *contesto corrente* (che identifica
-sempre il documento che l'utente sta visitando o la radice del sito Plone, nel caso si sia
+sempre il documento che l'utente sta visitando, o la radice del sito Plone nel caso si sia
 posizionati proprio su quest'ultima) ma alcuni di questi sono nei fatti verificati solo sulla
 radice del sito (questo dipende dallo scopo del permesso).
 
@@ -216,7 +224,7 @@ __ http://pypi.python.org/pypi/Products.Archetypes
 __ http://plone.org/products/dexterity
 __ https://github.com/plone/plone.app.contenttypes
 
-Segue uno a uno la lista dei permessi e una brevissima spiegazione.
+Segue uno ad uno l'elenco dei permessi e una brevissima spiegazione.
 
 `ATContentTypes: Add Document`
     Aggiunta di una **Pagina** (*Document* è il vecchio nome della *Pagina* ma era considerato
@@ -244,7 +252,7 @@ Segue uno a uno la lista dei permessi e una brevissima spiegazione.
     Con Plone 4 esiste `solo un tipo di cartella`__ con tutti i pregi e nessuno dei difetti dei
     precedenti due tipi.
 
-__ http://pypi.python.org/pypi/plone.app.folder
+    __ http://pypi.python.org/pypi/plone.app.folder
 
 `ATContentTypes: Add Link`
     Aggiunta di un **Collegamento**.
@@ -271,8 +279,8 @@ Per impostazione predefinita i seguenti ruoli posseggono questi permessi:
 .. Note::
     Il fatto che in questa lista compaia il *Possessore* ci dice una cosa importante (e che molto
     spesso vale la pena modificare).
-    Un utente che sia in grado di creare una cartella avrà il potere di inserirvi all'interno
-    tutti i contenuti che vuole.
+    Un utente che sia propietario di una cartella (di solito: perché è stato lui a crearla) avrà il
+    potere di inserirvi all'interno tutti i contenuti che vuole.
 
 Vedere anche ":ref:`section-permissions-add-portal-content`".
 
@@ -283,7 +291,6 @@ Questo permesso è tanto difficile da spiegare quanto importante, letteralmente 
 "*accedere alle informazioni dei contenuti*".
 
 Il suo uso è sparso qua è là nel codice Plone senza che sia esattamento chiarito il suo scopo.
-
 Nella pratica è un permesso che solitamente viaggia a stretto contatto col più famoso permesso
 ":ref:`section-permissions-view`" e di solito viene assegnato e negato agli stessi ruoli negli
 stessi contesti.
@@ -314,6 +321,8 @@ contenuto abbia a che fare con il permesso di accedervi.
 Fortunatamente ho già affrontato l'argomento in passato in un articolo piuttosto dettagliato (ed
 ancora valido):
 "`Data di Scadenza/Pubblicazione in Plone: la guida definitiva`__".
+La lezione più importante dell'articolo è la seguente: questo permesso può essere solo usato sulla
+radice del sito Plone (non può quindi funzionare o essere utilizzato nei workflow). 
 
 __ http://blog.keul.it/2011/08/data-di-scadenzapubblicazione-in-plone.html
 
@@ -367,7 +376,7 @@ del documento.
 
 __ http://pypi.python.org/pypi/Products.CMFEditions
 
-Il prodotto è in qualche modo legato ad un'altro dei componenti di Plone (disattivato di default
+Il prodotto è in qualche modo legato ad un altro dei componenti di Plone (disattivato di default
 ma presente in ogni installazione) che è il supporto alla `copia di lavoro`__ (*Working Copy*).
 Questo prodotto aggiunge numerose opzioni nel menù "*Azioni*".
 
@@ -587,12 +596,12 @@ un'operazione fattibile direttamente da ZMI), oppure rimanere ad un livello supe
 modificare solo l'interfaccia grafica.
 
 Questa è quella che viene detta "sicurezza tramite oscuramento" ("`Security through obscurity`__")
-il che vuol dire: non è vera e propria sicurezza: se l'utente infatti conosce Plone e modifica i
-form HTML ottenuti o richiama gli URL corretti potrà comunque bypassare la vostra modifica.
+quindi non una vera e propria sicurezza: se l'utente infatti conosce il funzionamento di Plone,
+potrà comunque bypassare la vostra modifica.
 
 __ http://en.wikipedia.org/wiki/Security_through_obscurity
 
-Nella maggior parte dei casi è comunque una scelta tutto sommano accettabile.
+In alcune situazione (e.g: una intranet) è comunque una scelta tutto sommato accettabile.
 
 .. _section-permissions-list-folder-contents:
 
@@ -637,9 +646,8 @@ di prodotti che ancora non supportano quest'ultimo ruolo
 
 Un esempio classico è l'**uso delle portlet**, che in Plone sono sempre state gestire dal *Manager*
 e di recente dal nuovo ruolo *Amministratore del sito*, ma è possibile ancora oggi trovare vecchi
-prodotti aggiuntivi che forniscono nuove portlet usando questo permesso e quindi inutilizzabili dal
-nuovo ruolo.
-
+prodotti aggiuntivi che forniscono nuove portlet usando questo permesso, e sono quindi
+inutilizzabili dal nuovo ruolo.
 Un permesso più corretto sarebbe ":ref:`section-permissions-portlets-manage-portlets`".
 
 Modify portal content
@@ -671,7 +679,7 @@ assegnato al *Manager* e all'*Amministratore del sito*.
 
 In assenza di un permesso specifico per gestire una nuova portlet (magari in seguito
 all'installazione di un prodotto agiuntivo), questo è il permesso che andrebbe utilizzato, anche
-se la cosa migliore sarebbe sempre quella di avere un permesso per ogni tipo di portlet.
+se la soluzione migliore sarebbe sempre quella di avere un permesso per ogni tipo di portlet.
 
 Purtroppo questo non succede: tutte le portlet predefinite di Plone sono gestite da quest'unico
 permesso, eccezione fatta per due casi:
@@ -719,7 +727,7 @@ Come già discusso per il permesso ":ref:`section-permissions-request-review`", 
 riutilizzare il permesso anche in presenza di workflow personalizzati.
 
 Di solito si traduce della presenza di voci aggiuntive nel menù di cambio di stato, una per
-pubblicare il contenuto (richiesta accettata) e un'ultra voce per rifiutarlo.
+pubblicare il contenuto (richiesta accettata) e un'altra voce per rifiutarlo.
 
 .. figure:: _static/workflow-menu-review-portal-content.png
    :alt: Link "Pubblica" e "Rifiuta"
@@ -751,8 +759,8 @@ Questo è il permesso più importante e viene verificato prima di tutti gli altr
 Questo permesso è quindi assegnato a tutti gli utenti che possono assegnare qualche ruolo ad altri
 utenti del sito.
 
-Nel nostro esempio del "*Super Revisore*" (vedere :ref:`section-super-revisore-in-sharing-page`) ci
-eravamo limitati ad usare questo permesso e l'effetto ottenuto era quello di rendere possibile a
+Nel nostro esempio del "*Super Revisore*" (vedere ":ref:`section-super-revisore-in-sharing-page`")
+ci eravamo limitati ad usare questo permesso e l'effetto ottenuto era quello di rendere possibile a
 tutti gli utenti in grado di condividere un documento, il potere di assegnare anche il ruolo.
 
 Per i ruoli predefiniti di Plone (ed è quello che faremo anche per il nostro nuovo ruolo) esiste
@@ -822,8 +830,8 @@ relativamente ad un contenuto (di solito: in seguito ad un cambio di stato nel w
 l'interfaccia di Plone reagisce facendo sparire per l'utente il contenuto.
 
 Ma la sicurezza non è tutta qui.
-Se l'utente provasse comunque ad accedere al contenuto, magari tramite un link, un bookmark, o
-semplicemente perché ne conosce l'URL, viene verificata la presenza del permesso per i ruoli
+Se l'utente provasse comunque ad accedere al contenuto (magari tramite un link, un bookmark o
+semplicemente perché ne conosce l'URL) viene verificata la presenza del permesso per i ruoli
 dell'utente.
 In caso negativo, si viene rediretti alla pagina di permessi insufficienti.
 
@@ -915,14 +923,14 @@ tramite ZMI e le cui modifiche hanno immediati effetti sul comportamento di Plon
 Il tool portal_actions
 ----------------------
 
-Il primo elemento di ZMI che anbiamo a visitare è anche il più ricco in assoluto di impostazioni.
-E' il **portal_actions tool**, accessibile dal ruolo *Manager* tramite la ZMI di ogni sito Plone.
+Il primo elemento di ZMI che andiamo a visitare è anche il più ricco in assoluto di impostazioni.
+E' il **portal_actions tool**, accessibile tramite la ZMI di ogni sito Plone.
 
 Si occupa di gestire la presenza di elementi dell'interfaccia Plone, solitamente sotto forma di
 link, o pulsanti di form.
 
 .. figure:: _static/zmi-portal-actions-link.png
-   :alt: portal_ctions in ZMI
+   :alt: portal_actions in ZMI
 
    *Il tool portal_actions visto dalla radice del sito Plone, in ZMI*
 
@@ -954,10 +962,10 @@ contesto su cui l'azione deve poi essere utilizzata.
 L'utente deve avere almeno uno dei permessi selezionati per poter vedere l'azione.
 Non è possibile specificare più permessi in "*AND booleano*" (verificare se l'utente ha tutti
 i permessi di un certo insieme).
-La selezione del permesso non è obbligatoria; non selezioandno nessun permesso rende dittiva la
+La selezione del permesso non è obbligatoria; non selezionando nessun permesso rende dittiva la
 verifica (di solito comunque viene sempre indicata la presenza del permesso "*View*").
 
-Per avere invece la verifica di più permessi, si ricorre spesso all'uso della voce "*Condition
+Per avere invece la verifica di più permessi si ricorre spesso all'uso della voce "*Condition
 (Expression)*", che permette di scrivere un'espressione Python per eseguire una condizione
 arbitraria (tra cui anche la verifica di permessi).
 
@@ -971,6 +979,10 @@ Segue una forma standard per ottenere questo tipo di espressioni::
 Qui sopra viene verificato tramite un'espressione Python (con l'uso della funzione
 ``checkPermission``), che l'utente corrente abbia il permesso passato come stringa, sul contesto
 corrente (identificato da ``object``).
+
+Se fosse necessario verificare due (o più) permessi tramite l'espressione::
+
+    python:checkPermission("permesso1", object) and checkPermission("permesso2", object)
 
 Vediamo ora le azioni più importanti e il loro impatto sull'interfaccia.
 Nell'elenco che segue salteremo varie categorie di azioni, poiché usano di solito sempre il
@@ -1094,13 +1106,16 @@ popolare il contenuto del **menù "Azioni"**.
     
     Tutto questo sembra molto permissivo (e lo è... perché non viene invece verificato il permesso
     ":ref:`section-permissions-add-portal-content`" sul contesto del padre?) ma se poi l'utente
-    non ha nei fatti i poteri per incollare, ottieneun messaggio di errore.
+    non ha nei fatti i poteri per incollare, ottiene un messaggio di errore.
 
     .. figure:: _static/portalmessage-error-cant-paste.png
        :alt: "Errore: non sei autorizzato ad incollare elementi"
 
        *Il messaggio di errore mostrato se non si hanno permessi per incollare elementi*
-    
+
+    La sicurezza è quindi rispettata, ma sarebbe a mio avviso più corretto non far comparire il
+    pulsante.
+
 **delete** (Elimina)
     Controlla la presenza dell'azione di "*Elimina*"del contenuto corrente.
     
@@ -1121,8 +1136,8 @@ popolare il contenuto del **menù "Azioni"**.
 Segue una lista di altre tre azioni, disponibili solo se viene attivato il componente opzionale
 per il supporto alla *copia di lavoro* (Working Copy).
 
-I limiti attuali dei permessi di questo prodotto sono stati introdotti quando si è perlato dei
-:ref:`permessi relativi a CMFEditions <section-permissions-cmfeditions-set>`.
+I limiti attuali dei permessi di questo prodotto sono stati introdotti quando si è parlato dei
+":ref:`permessi relativi a CMFEditions <section-permissions-cmfeditions-set>`".
 
 **iterate_checkout** (Estrai versione)
     L'azione che permette di creare una nuova copia di lavoro, partendo dal contenuto corrente.
@@ -1160,7 +1175,7 @@ Navigazione è stata selezionata la voce "*Genera automaticamente le schede*").
    *La separazione tra la sezione dei tab del portale e le schede generate automaticamente*
 
 I tab del portale hanno una particolarità: non si riferiscono al contesto corrente ma sempre alla
-radice del sito (i pemessi sono quindi verificati sul sito Plone).
+radice del sito (i permessi sono quindi verificati sul sito Plone).
 Questo è corretto, anche se limita notevolmente l'utilizzo di questa sezione.
 
 Di base esiste una sola voce: **index_html** (Home) che è un link alla home del sito (quindi
@@ -1191,7 +1206,7 @@ vengono mostrate le altre opzioni.
 Anche in questo caso: i permessi sono sempre verificati sulla radice del sito, il che limita
 notevolmente la manipolazione dei permessi.
 
-**mytuff** (Cartella personale)
+**mystuff** (Cartella personale)
     E' il link alla cartella personale degli utent (se abilitata).
     
     E' protetto dal semplice permesso di "*View*" (in pratica: non è usato nessun permesso) ma
@@ -1231,6 +1246,50 @@ notevolmente la manipolazione dei permessi.
     sistema.
     
     Le operazioni di *undo* in Plone sono piuttosto delicate (non inteso come "pericolose", ma
-    molto spesso non possono essefe effettuare, quindi la voce è di solito disabilitata.
+    molto spesso non possono essere effettuare e falliscono senza riuscire a dare all'utente una
+    spegazione ragionevole) quindi la voce è di solito disabilitata.
     
     E' controllata dal permesso ":ref:`section-permissions-list-undoable-changes`".
+**review-comments** (Moderazione commenti)
+    Questo permesso controlla l'accesso alla pagina "*Moderazione commenti*".
+    Nel caso ci siano commenti da moderare sparsi per il sito, questi sono riassunti in questa
+    pagina.
+    
+    La voce è controllata dal permesso ":ref:`section-permission-review-comments`" ma compare solo
+    se ai commenti del sito è stato associato un workflow (come è spiegato alla sezione
+    "*Commenti*" della configurazione del sito).
+**logout** (Esci)
+    Controlla la presenza del link che permette di uscire dalla sezzione corrente (eseguendo
+    appunto il log-out).
+    
+    Non c'è un permesso particolare per questo contenuto, la sua presenza viene controllata
+    dall'espressione.
+
+Il tool portal_types
+--------------------
+
+In passato Plone aveva vari tool della ZMI offrivano delle azioni che potevano influenzare
+l'interfaccia (erano chiamati *action providers*).
+Di tutti questi ad oggi è rimasto solo il tool *portal_types*.
+
+.. figure:: _static/zmi-portal-types-link.png
+   :alt: portal_types in ZMI
+
+   *Il tool portal_types visto dalla radice del sito Plone, in ZMI*
+
+Lo scopo principale del **portal_types** tool non è direttamente legato all'interfaccia, ma
+racchiude la registrazione di tutti i tipi di contenuto del CMS.
+
+.. figure:: _static/zmi-portal-types-view.png
+   :alt: Contenuti del tool portal_types in ZMI
+
+   *Il contenuto del tool portal_types visto da ZMI*
+
+In ogni tipo di contenuto avete quindi a disposizione un familiare tab "*Actions*":
+
+.. figure:: _static/zmi-portal-types-actions-link.png
+   :alt: Link alle azioni del contenuto
+
+   *Il link alle azioni di un tipo di contenuto*
+
+xxx_deprecated
