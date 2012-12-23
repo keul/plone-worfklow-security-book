@@ -1044,6 +1044,8 @@ contenuti di una cartella.
     E' quindi protetto dal permesso di *"View"*, ma l'espressione verifica invece altri due
     permessi: "*Modify portal content*" e "*Review portal content*".
 
+.. _section-permissions-portal_actions-object:
+
 object
 ~~~~~~
 
@@ -1269,16 +1271,17 @@ Il tool portal_types
 --------------------
 
 In passato Plone aveva vari tool della ZMI offrivano delle azioni che potevano influenzare
-l'interfaccia (erano chiamati *action providers*).
-Di tutti questi ad oggi è rimasto solo il tool *portal_types*.
+l'interfaccia.
+A parte il tool principale appena descritto (*portal_actions*) erano presenti altri
+*action providers* secondari ma di questi ad oggi è rimasto solo il tool *portal_types*.
 
 .. figure:: _static/zmi-portal-types-link.png
    :alt: portal_types in ZMI
 
    *Il tool portal_types visto dalla radice del sito Plone, in ZMI*
 
-Lo scopo principale del **portal_types** tool non è direttamente legato all'interfaccia, ma
-racchiude la registrazione di tutti i tipi di contenuto del CMS.
+Lo scopo principale del **portal_types** tool non è direttamente legato all'interfaccia o alle
+azioni, ma racchiude la **registrazione di tutti i tipi** di contenuto del CMS.
 
 .. figure:: _static/zmi-portal-types-view.png
    :alt: Contenuti del tool portal_types in ZMI
@@ -1292,4 +1295,67 @@ In ogni tipo di contenuto avete quindi a disposizione un familiare tab "*Actions
 
    *Il link alle azioni di un tipo di contenuto*
 
-xxx_deprecated
+Questo ci porta ad un form dove è possibile gestire un'altra categoria di azioni. La grossa
+differenza sta nel contesto: questo azioni solo legate al tipo di contenuto in esame.
+
+.. figure:: _static/zmi-portal-types-actions-preview.png
+   :alt: Anteprima delle azioni del contenuto
+
+   *Le azioni di un tipo di contenuto, e il messaggio che avverte che la funzionalità è
+   in dismissione*
+
+.. Warning::
+    Un chiaro messaggio in questo caso avverte che la funzionalità è in via di dismissione e che
+    è sconsigliato aggiungere azioni in questo tool.
+
+Rimane il fatto che ad oggi è ancora il posto più semplice da utilizzare per aggiungere azioni
+specifiche di un tipo di contenuto.
+
+Le azioni qui definite vengono utilizzate nell'interfaccia grafica di Plone allo stesso modo con
+cui vengono mostrate i link nella categoria :ref:`section-permissions-portal_actions-object` del
+*portal_action* tool.
+
+La differenza è sostanziale.
+Le azioni nella categoria *object* sono globali ed incidono contemporaneamente su tutti i tipi di
+contenuto; in caso negativo è necessario ricorrere a delle espressioni di controllo più o meno
+complesse.
+
+Le azioni definite nel *portal_types* tool sono invece limitate al tipo specifico.
+
+Ad oggi tutti i tipi di contenuto base di Plone definiscono due semplici azioni: *view* ed *edit*
+per determinare il link della scheda "*Visualizza*" e "*Modifica*".
+
+.. figure:: _static/portal-types-action-view-edit.png
+   :alt: Azioni "Visualizza" e "Modifica"
+
+   *Le due azioni "Visualizza" e "Modifica", controllate dal portal_types tool*
+
+Le due azioni sono controllate (ovviamente) dai due permessi associati: *View* e
+*Modify portal content*.
+
+Vale la pena notare come a prima vista sembrerebbe che queste due azioni, essendo uguali per tutti
+i contenuti del sito, possano essere spostare nel *portal_action* tool, come già accade per azioni
+quali *Contenuti* e *Condivisione*.
+Questo è probabilmente quello che presto succederà, ma ad oggi ci sono però piccole sfumature
+che rendono ancora comodo avere ed usare questo tool:
+
+* Il link alla vista di un contenuto dipende dal tipo di contenuto.
+  I contenuti di tipo *File* infatti vogliono che l'URL della loro vista pricipale termini con
+  "*/view*" o il file viene invece scaricato direttamente.
+* Le vecchie collezioni hanno un link aggiuntivo "*Criteri*", che viene quindi controllato dal
+  tipo stesso.
+
+Creare nuovi permessi
+=====================
+
+Come accennato all'inizio del capitolo, ricordiamo che la creazione di nuovi permessi è
+**un'operazione di programmazione**.
+
+Va anche ricordato come la creazione di nuovi permessi vada limitata il più possibile, nella
+maggior parte dei casi il permesso che *credete* di dover creare potrebbe essere già presente
+in Plone.
+Ad ogni modo il voler aggiungere nuovi permessi è quasi sempre legata alla presenza di codice (da
+voi sviluppato, o codice di terze parti che avete installato nel vostro ambiente Plone).
+
+Il permesso in quanto tale non arricchisce Plone in nessun modo.
+
