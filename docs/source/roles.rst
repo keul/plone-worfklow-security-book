@@ -8,28 +8,30 @@ I Ruoli
 
 La miglior definizione di "ruolo Plone" che posso trovare è questa:
 
-    I ruoli sono un accorpamento di **permessi**.
-    I ruoli sono direttamente associabili ai **poteri** di un utente nel sito.
+    I ruoli sono un accorpamento di **permessi** e quindi rappresentano un insieme di **poteri**
+    di un utente nel sito.
 
 Quando assegnate un ruolo ad un utente, state fornendo in realtà una serie di permessi (il vero
 motore della sicurezza di Zope).
-Come già detto in precedenza, *non potete in nessun modo assegnare permessi agli utenti* o ai
-gruppi, ma potete solo assegnare ruoli.
+Come già detto in precedenza, **non potete in nessun modo assegnare permessi agli utenti o ai
+gruppi, ma potete solo assegnare ruoli**.
 
 La funzionalità dei ruoli è una delle prime caratteristiche che fanno assaporare la potenza del
 sistema sottostante.
 Prendiamo ad esempio in ruolo del **Lettore** (che verrà introdotto meglio in seguito):
 cosa significhi essere un "lettore" non è qualcosa scritto nella roccia; siti diversi (e senza
-dover per forza sviluppare del codice) possono differire nella definizione, aumentando o limitando
-i poteri (permessi) del ruolo.
+dover per forza sviluppare del codice) possono differire nella definizione aumentando o limitando i
+poteri (permessi) del ruolo.
+
+Va da se che il nome di un ruolo deve poter ricordare a chi lo andrà ad utilizzare il suo scopo.
 
 I ruoli predefiniti
 ===================
 
 Plone (e il framework Zope sottostante) forniscono una serie di ruoli predefiniti il cui
 funzionamento è bene approfondire e comprendere.
-Il motivo principale è che, sebbene sia possibile creare nuovi ruoli, l'eventualità di doverlo fare
-è meno frequente di quanto si pensi (anche se non da escludere a priori).
+Sebbene sia possibile creare nuovi ruoli l'eventualità di doverlo fare è meno frequente di quanto
+si pensi (anche se non da escludere a priori).
 
 .. Warning::
     Uno errore molto comune nelle applicazioni Plone mal scritte è definire una grande serie di
@@ -108,9 +110,9 @@ E' un ruolo che va ben compreso:
 * di solito deve essere assegnato ad un solo utente
 * è possibile fornirlo a più utenti (ciò oggi è fortunatamente più difficile da farsi da
   interfaccia Plone, mentre in versioni precedenti del CMS era purtroppo un modo di operare molto
-  comune).
+  comune) ma bisogna essere certi di che cosa si sta facendo
 * è possibile avere a che fare con workflow dove il *Possessore* non ha importanza (o sarebbe
-  meglio non l'avesse).
+  meglio non l'avesse)
 
 In una configurazione base, un *Possessore* mantiene un certo livello di potere sui propri
 contenuti.
@@ -205,8 +207,8 @@ Contributore (Contributor)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Il **Contributore** (un altro ruolo la cui traduzione ufficiale italiana lascia a desiderare) è la
-persona che porta contributi al sito.
-Una traduzione migliore è probabilmente quella dell'**Autore**.
+persona che "porta contributi al sito".
+Una traduzione migliore sarebbe probabilmente quella di *Autore* o *Redattore*.
 
 Il *Contributore* è una persona che può inserire nuovi contenuti nel sito.
 Nella configurazione predefinita di Plone, questo include i permessi per inserire *tutti* i
@@ -217,8 +219,8 @@ __________________________________________________
 
 Nella configurazione iniziale di Plone, la risposta è sì.
 
-Questo potere però non dipende dal ruolo di *Contributore* e dai suoi poteri ma dal fatto che il
-*Contributore* che crea un contenuto ne diventa *Possessore*.
+Questo potere però non dipende dal ruolo di *Contributore* stesso e dai suoi poteri ma dal fatto
+che un utente che crea un contenuto ne diventa *Possessore*.
 
 Questo concetto è molto importante.
 
@@ -231,15 +233,15 @@ E qui ci si ferma!
 Un *Editor* può modificare quindi *tutti* i contenuti su cui ha potere, ma non è nella sua natura
 creare nuovi contenuti.
 
-Nella mia idea sito un editor deve poter aggiungere *e* modificare
-__________________________________________________________________
+Nella mia idea di sito un editor deve poter aggiungere *e* modificare
+_____________________________________________________________________
 
 Non siete gli unici.
 Questo in Plone può essere fatto in due modi.
 
 Il primo sarebbe quello di modificare i poteri del ruolo *Editor* per fornirgli anche i poteri
 del *Contributore*.
-Il modo che però consiglio è quello di **assegnare al vostro editor due ruoli**: il ruolo di
+Il modo che però consiglio è quello di **assegnare al vostro utente due ruoli**: il ruolo di
 *Editor* e **Contributore**.
 
 Editor e le Collezioni
@@ -278,7 +280,7 @@ globale*.
    *Il ruolo "Collaboratore" dato a tutti gli utenti* 
 
 Il *Collaboratore* non è un ruolo speciale.
-Basi dati utente aggiuntive (LDAP, RDBMS) di solito forniscono questo stesso ruolo.
+Basi dati utente aggiuntive (LDAP, RDBMS) di solito forniscono questo stesso ruolo automaticamente.
 In pratica quando si vogliono dare poteri agli utenti autenticati nel sito Plone bisogna riferirsi
 a questo ruolo, che va preferito al ruolo *Autenticato* visto in precedenza. 
 
@@ -610,16 +612,16 @@ Non c'è bisogno di immaginare questa tabella poiché esiste davvero.
 
 Nell'immagine sopra troviamo in riga i permessi del sito (sono solo una piccola parte e non
 scenderemo nei dettagli per ora) e in colonna i ruoli.
-Potete ben immagina che più la tabella diventa grande, più è difficile da gestire ma non ci è davvero
-possibile limitare i permessi (o solo in minima parte).
-Un'installazione base di Plone ha comunque un numero enorme di permessi, quindi dobbiamo rassegnarci
-ad avere una tabella con tantissime righe.
+Potete ben immaginare che più la tabella diventa grande, più è difficile da gestire ma non ci è
+davvero possibile limitare i permessi (o solo in minima parte).
+Un'installazione base di Plone ha comunque un numero enorme di permessi, quindi dobbiamo
+rassegnarci ad avere una tabella con tantissime righe.
 
 Capite quindi che aggiungere una colonna a questa tabella aumenta di molto il numero di permessi da
 gestire per questo ruolo.
-Nella maggior parte dei casi il valore predefinito del permesso andrà bene, ma particolare attenzione
-andrà ai permessi che sono poi gestiti tramite workflow... e questo ci obbliga anche a verificare i
-permessi gestiti dai workflow... per ogni stato.
+Nella maggior parte dei casi il valore predefinito del permesso andrà bene, ma particolare
+attenzione andrà ai permessi che sono poi gestiti tramite workflow... e questo ci obbliga anche a
+verificare i permessi gestiti dai workflow... per ogni stato.
 
 Se tutto questo non sembra ancora abbastanza chiaro, le cose miglioreranno dopo aver letto i
 rispettivi capitoli sui **permessi** e **workflow**.
@@ -641,8 +643,8 @@ Quando *non* serve un nuovo ruolo
 Molto spesso si crede che nel proprio sito Plone serva un nuovo ruolo quando invece serve una
 modifica ad un qualche workflow o alla sicurezza.
 
-Il problema principale è che **creare nuovi ruoli è facile**, mentre modificare i workflow è una cosa
-più complessa; alle volte la scelta sbagliata viene presa per pigrizia.
+Il problema principale è che **creare nuovi ruoli è facile**, mentre modificare i workflow è una
+cosa più complessa; alle volte la scelta sbagliata viene presa per pigrizia.
 
 Non è detto serva un nuovo ruolo Plone se serve che un utente debba fare "qualcosa di nuovo".
 
@@ -660,16 +662,17 @@ La soluzione: dare entrambi i ruoli ai tuoi utenti.
 Non serve un nuovo ruolo se... 2
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Hai appena installato `Ploneboard`__ e vuoi un nuovo ruolo che ti permetta di gestire i commenti: il
-*Moderatore*.
+Hai appena installato `Ploneboard`__ e vuoi un nuovo ruolo che ti permetta di gestire i commenti:
+il *Moderatore*.
 
 __ http://plone.org/products/ploneboard
 
 La soluzione: il moderatore non sarebbe più o meno il *Revisore* dell'area forum?
 Perché quindi non usare quel ruolo?
+
 Quello che in questo caso ti serve è una modifica al workflow del forum o dei commenti e
-l'assegnazione di ruoli locali ai giusti utenti nell'area forum (bloccando ovviamente eventuali altri
-revisori del sito).
+l'assegnazione di ruoli locali ai giusti utenti nell'area forum (bloccando ovviamente eventuali
+altri revisori del sito).
 
 Non serve un nuovo ruolo se... 3
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -690,7 +693,7 @@ Quando serve un nuovo ruolo
 La creazione di nuovi ruoli è scoraggiata ma è inevitabile in vari casi.
 
     Un ruolo ruolo diventa necessario quando un utente deve poter fare qualcosa che nessun altro
-    ruolo (o combinazione di ruoli) sia in grado di fare in quel contesto
+    ruolo (o combinazione di ruoli) sia in grado di fare in quel contesto.
 
 Ricolleghiamoci all'ultimo caso appena affrontato (l'ipotesi del *Super Revisore*).
 
@@ -698,8 +701,9 @@ Se in quella speciale area del sito la richiesta fosse stata di mantenere *anche
 *Revisore* (col suo funzionamento predefinito, accettare/rifiutare i contenuti), allora il *Super
 Revisore* (che in più modifica) sarebbe stato per forza un nuovo ruolo.
 
-In presenza di una simile richiesta c'è poco da fare, se non tentare di far ragionare il committente,
-chiedergli se *davvero* c'è la necessità di una simile presenza di due diverse figure di revisori.
+In presenza di una simile richiesta c'è poco da fare, se non tentare di far ragionare il
+committente, chiedergli se *davvero* c'è la necessità di una simile presenza di due diverse figure
+di revisori.
 
 Seguono tre esempi di casi in cui la creazione di un nuovo ruolo è inevitabile.
 Sono tutti e tre casi reali (decontestualizzati) che ho potuto vedere in questi anni.
@@ -707,28 +711,28 @@ Sono tutti e tre casi reali (decontestualizzati) che ho potuto vedere in questi 
 Serve un nuovo ruolo se... 1
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Hai necessità di un meccanismo di revisione a due livelli: il normale *Revisore* approva i contenuti
-ma una seconda figura ha voce in capitolo per un'approvazione di secondo livello.
+Hai necessità di un meccanismo di revisione a due livelli: il normale *Revisore* approva i
+contenuti ma una seconda figura ha voce in capitolo per un'approvazione di secondo livello.
 
 Serve un nuovo ruolo se... 2
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Ti viene chiesto che un certo gruppo di utenti debba poter gestire le portlet (riquadri) del sito.
 
-Le portlet sono un'attività ad oggi sotto il cotrollo dei *Manager* e degli *Amministratori del sito*
-e, a meno che la richiesta non sia di dare questo potere a tutti gli *Revisori* del sito, l'unica
-soluzione è creare un ruolo di *Gestore portlet*.
+Le portlet sono un'attività ad oggi sotto il controllo dei *Manager* e degli
+*Amministratori del Sito* e, a meno che la richiesta non sia di dare questo potere a tutti i
+*Revisori* del sito, l'unica soluzione è creare un ruolo di *Gestore portlet*.
 
 Serve un nuovo ruolo se... 3
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-La tua installazione plone è in realtà un applicativo di gestione ordini (diciamo un DMS), dove in
+La tua installazione Plone è in realtà un applicativo di gestione ordini (diciamo un DMS), dove in
 poche cartelle sono contenute decine di migliaia di ordini di acquisto.
 In più l'azienda che utilizza l'applicativo ha un enorme numero di ruoli interni e tutti devono
 mettere voce nell'approvazione dell'ordine per passare dalla sua fase iniziale all'evasione finale.
 
-In questo caso siamo in presenza di una struttura del sito molto semplice ma anche di un organigramma
-molto complesso.
+In questo caso siamo in presenza di una struttura del sito molto semplice ma anche di un
+organigramma molto complesso.
 L'unica soluzione è davvero quella di creare tutti i ruoli necessari.
 
 Come creare nuovi ruoli
@@ -742,8 +746,8 @@ Come creare nuovi ruoli
     Per replicare la creazione di un nuovo ruolo con un prodotto, vedere la sezione
     :ref:`section-product-add-new-role`.
 
-La creazione di nuovi ruoli è semplice, basta accedere alla ZMI del proprio sito Plone alla gestione
-della sicurezza (scheda **security**) il che ci porta alla pagina ``/manage_access``.
+La creazione di nuovi ruoli è semplice, basta accedere alla ZMI del proprio sito Plone alla
+gestione della sicurezza (scheda **security**) il che ci porta alla pagina ``/manage_access``.
 
 .. figure:: _static/zmi-manage-security-link.png
    :alt: Link alla manage access in ZMI
@@ -776,7 +780,8 @@ tenendo presente che:
 * alcuni permessi potrebbero essere gestiti dai workflow
 * gli utenti potrebbero avere altri ruoli oltre al nuovo venuto
 
-Date al ruolo il minor numero di permessi possibile, concentratevi su quello che il ruolo dovrà fare.
+Date al ruolo il minor numero di permessi possibile, concentratevi su quello che il ruolo dovrà
+fare.
 
 Manteniamoci sull'esempio proposto in precedenza: il *Super Revisore* deve avere gli stessi poteri
 del *Revisore* ma poter modificare i contenuti pubblicati.
@@ -798,8 +803,8 @@ Come fatto in precedenza, partiamo dalla gestione utenti e gruppi del sito.
 
    *Il nuovo ruolo appena creato, visto dalla gestione utenti e gruppi di Plone*
 
-In questo caso possiamo vedere la facilità con cui saremmo in grado di assegnare questo ruolo in modo
-globale.
+In questo caso possiamo vedere la facilità con cui saremmo in grado di assegnare questo ruolo in
+modo globale.
 Come già discusso, questo può essere giusto o sbagliato; magari nel vostro sito il gruppo
 **Direzione** deve possedere questo ruolo in modo globale e senza eccezioni e sarebbe quindi giusto
 fornirgli questo ruolo da questa pagina.
@@ -831,7 +836,8 @@ codice.
     Ad oggi non c'è nessun modo di scegliere da interfaccia Plone o ZMI quali ruoli mostrare nella
     pagina della condivisione.
     
-    Questo viene fatto registrano delle **utility**.
+    Questo viene ottenuto in modo piuttosto semplice, utilizzando uno dei passi di un profilo di
+    *Generic Setup* (che si occupa ri gesitrare per noi una *local utility*).
 
 Mostrare i nuovi ruoli nella condivisione
 -----------------------------------------
@@ -853,14 +859,15 @@ Il vostro nuovo ruolo è parte integrante di un prodotto che aggiunge una qualch
 Plone?
 In quel caso la risposta è semplice: il prodotto stesso dovrebbe fornirvi anche il nuovo ruolo.
 
-Se il vostro ruolo è necessario per il funzionamento di un workflow personalizzato è molto probabile
-che anche il workflow diventerà prima o poi parte di un prodotto, quindi tanto vale inserire in un
-ipotetico prodotto chiamato "*miaazienda*.worfklow" la registrazione del permesso.
+Se il vostro ruolo è necessario per il funzionamento di un workflow personalizzato è molto
+probabile che anche il workflow diventerà prima o poi parte di un prodotto, quindi tanto vale
+inserire in un ipotetico prodotto chiamato "*miaazienda*.worfklow" la registrazione del permesso.
 
 Questo stesso prodotto potrebbe poi essere necessario per ospitare anche le modifiche ai permessi
 del sito.
 
-Ammettiamo che l'azienda per cui stiamo sviluppando questo workflow si chiami **Lorem Ipsum S.r.L**.
+Ammettiamo che l'azienda per cui stiamo sviluppando questo workflow si chiami
+**Lorem Ipsum S.r.L**.
 Ecco quindi che il buon nome per questo prodotto potrebbe diventare **loremipsum.workflow** (la
 convenzione dei nomi di prodotti Zope&Plone di solito rispecchia il namespace Python della
 libreria) e la sua realizzazione ci accompagnerà nei prossimi capitoli.
@@ -868,37 +875,30 @@ libreria) e la sua realizzazione ci accompagnerà nei prossimi capitoli.
 La registrazione del ruolo
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-La prima cosa che ci serve è la modifica del ``configure.zcml`` del nostro prodotto, per registrare
-una nuova *utility* (`sorgente online`__)::
+La prima cosa che ci serve è avere un prodotto che registri un profilo di *Generic Setup*, in
+pratica la definizione di una serie di passi che vengano eseguiti quando il prodotto verrà poi
+attivato.
 
-    ...
-    
-    <utility
-      name="Super Revisore"
-      factory=".localroles.SuperRevisoreRole"
-      />
-      
-    ...
+Il profilo principale è di solito contenuto nella cartelle ``profiles/default`` di un qualunque
+prodotto.
+Per maggiori informazioni riferirsi alla sezione ":ref:`section-product-add-new-role`".
 
-__ https://github.com/keul/loremipsum.workflow/blob/308485eea30fb752732f7eb6eca5318b8f03202e/loremipsum/workflow/configure.zcml
+La definizione del ruolo locale va fatta utilizzando un file `sharing.xml`__ così composto
+(`sorgente online`__):
 
-Questo necessita della presenza del modulo ``localroles`` all'interno della directory dove è presente
-il file ``configure.zcml``.
+.. literalinclude:: src/sharing_01.xml
 
-Il file ``localroles.py`` è il seguente (`sorgente online`__):
+__ http://plone.org/documentation/manual/developer-manual/generic-setup/reference/sharing-ref
+__ https://github.com/keul/loremipsum.workflow/blob/de8abb19c0006246c881a9a397510ffa67fa0db5/loremipsum/workflow/profiles/default/sharing.xml
 
-.. literalinclude:: src/localroles_01.py
-
-__ https://github.com/keul/loremipsum.workflow/blob/308485eea30fb752732f7eb6eca5318b8f03202e/loremipsum/workflow/localroles.py
-
-Non scendiamo in nessun dettaglio di quanto mostrato nel codice sopra, se non il titolo (attributo
-``title``) che abbiamo scelto di visualizzare.
+Sebbene possiamo ignorare come il codice sopra venga eseguito, capirlo risulterà piuttosto
+semplice: l'``id`` non è altro che il nome del ruolo, l'attributo ``title`` rappresenta come
+questo ruolo deve essere tradotto nell'interfaccia di condivisione. 
 Come ricorderete, la pagina di condivisione "traduce" i ruoli in azioni; ammetto che il nome scelto
 "*Può super revisionare*" sia assolutamente poco sensato, ma ci farà capire al volo a quale ruolo
 ci stiamo riferendo.
 
-Notate che l'associazione tra il nome del ruolo come lo abbiamo scelto (*Super Revisore*) e la
-classe che lo rappresenta data dall'attributo ``name``, nella registrazione dell'utility.
+L'ultimo attributo (``permissions``) verrà spiegato tra poco.
 
 Ora torniamo all'interfaccia Plone.
 
@@ -908,8 +908,8 @@ Ora torniamo all'interfaccia Plone.
    *Dalla condivisione della cartella "News" finalmente si vede il nuovo ruolo*
 
 Sembra che il nostro scopo sia raggiunto!
-Assegnando il nuovo ruolo ad utenti e gruppi sulla cartella possiamo finalmente imbastire dei *Super
-Revisori* locali.
+Assegnando il nuovo ruolo ad utenti e gruppi sulla cartella possiamo finalmente imbastire dei
+*Super Revisori* locali.
 
 Chi può assegnare i ruoli, e quali
 ==================================
@@ -938,12 +938,12 @@ Leggendo l'elenco qui sopra potreste avere molte obiezioni ma è probabilmente i
 caso trovare una configurazione di base che vada bene a tutti.
 
 Una delle cose contro mi sono trovato più spesso a modificare è il comportamento del *Possessore*:
-solo perché io ho creato un documento, magari in una sezioen privata, mi da il diritto di fornire
-l'accesso ad altri utenti?
+solo perché un utente ha creato un documento, magari in una sezione privata, gli da il diritto di
+fornire l'accesso ad altri utenti?
 
 Altro esempio: è giusto che ogni utente con un determinato ruolo che ha accesso alla vista possa
 fornire il ruolo stesso?
-Magari un amministratore ha fornito all'utente A il ruolo di revisore, e questi "subappalta" lo
+Magari un amministratore ha fornito all'utente A il ruolo di Revisore, e questi "subappalta" lo
 stesso ruolo ad altre persone!
 
 Per fortuna questa è solo una configurazione di base che può essere modificata.
@@ -959,15 +959,8 @@ nell':ref:`apposita sezione <section-permissions-sharing-page-all>`.
 Comportamento del Super Revisore nella pagina di condivisione
 -------------------------------------------------------------
 
-Il comportamento del nostro nuovo ruolo nella condivisione è quantomai bizzarro.
-Pare che tutti i ruoli che possono accedere a questa pagina siano in grado di fornire questo ruolo!
-
-Questo logicamente assurdo, anche volendo mantenere l'opinabile standard usato da Plone,
-significherebbe limitare comunque l'assegnazione di questo ruolo agli utenti con il ruolo stesso
-(più ovviamente i ruoli di gestione del sito).
-
-Tornando al nostro codice di esempio, c'è l'utilizzo dell'attributo ``required_permission`` il
-cui valore viene importato da uno dei moduli base di Plone.
+Non abbiamo ancora parlato di chi possa fornire il ruolo di *Super Revisore* ma capirete facilmente
+che questo dipende dall'attributo ``permissions`` che poco sopra abbiamo ignorato.
 
 Non essendo ancora in possesso di un permesso specifico per delegare il nostro ruolo, ci siamo
 limitati ad importare il permesso più generale ossia
@@ -975,7 +968,8 @@ limitati ad importare il permesso più generale ossia
 permesso che protegge l'accesso generale alla pagina di condivisione.
 
 In pratica stiamo dicendo che chiunque acceda alla condivisione può delegare questo ruolo.
-In vedremo come sistemare questo problema.
+
+Non è assolutamente una soluzione ottimale, quindi in vedremo come sistemare questo problema.
 
 .. _section-check-user-roles:
 
@@ -1058,32 +1052,11 @@ Lasciatemi dire che i puristi questa volta hanno ragione.
 Ciononostante è molto più facile imparare a configurare Plone via Web, poi sistemare le cose non
 appena la nostra modifica diventa definitiva.
 
-La situazione attuale
----------------------
-
-L'unica configurazione non ancora coperta da codice che abbiamo eseguito è la creazione del nuovo
-ruolo *Super Revisore*.
-
-Siamo infatti in una situazione un po' strana.
-Ammettiamo che nella vostra installazione coesistano *due siti Plone*, con nome "*Plone*" e
-"*Plonetest*" (sebbene è sempre meglio che i siti di test abbiano una loro installazione a parte).
-
-Nel secondo sito *non avete* creato il ruolo di *Super Revisore*, quindi andando nella gestione
-utenti e gruppi il ruolo ovviamente non si trova.
-Se però andaste nella condivisione di un contenuto, trovereste comunque il ruolo.
-
-Il problema nasce dal fatto che le utility registrate, sebbene presenti dentro al codice di
-uno specifico prodotto, non dipendono dalla sua reale attivazione: basta siano presenti
-nell'installazione Zope.
-
-Cosa succederebbe quindi se quel ruolo venisse assegnato localmente?
-Nei fatti nulla, poiché il ruolo non sarebbe *davvero* presente nel sito e non potremmo fornire
-alcun tipo di permesso.
-Capirete però come questo crei una cerca confusione, una situazione poco pulita ed incline ad
-errori.
-
 Creare automaticamente il nuovo ruolo
 -------------------------------------
+
+L'unica configurazione non ancora coperta da codice che abbiamo eseguito è la creazione del nuovo
+ruolo *Super Revisore* fatta da ZMI.
 
 Il nostro *loremipsum.workflow* ha bisogno di avere un profilo di installazione e diventare
 quindi un prodotto Plone installabile dal pannello di gestione dei prodotti aggiuntivi.
