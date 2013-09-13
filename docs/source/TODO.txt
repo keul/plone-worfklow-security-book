@@ -29,6 +29,7 @@ x miniform ZMI per vedere i permessi di un utente su un contesto
 - attenzione a togliere i permessi gestiti dal workflow prima di resettarne le impostazioni 
 - workflow sottrattivi
 - iw.rejectanonymous
+- https://github.com/collective/Products.Ploneboard/issues/22 (problema WF, permessi e blocco ereditarieta' permessi)
 
 x appendice A --> tutti i permessi
 - appendice B --> riferimenti all'esempio e come installare
