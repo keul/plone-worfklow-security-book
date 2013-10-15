@@ -5,7 +5,7 @@ Introduzione
 Lo scopo del libro
 ==================
 
-Questo documento si prefigge lo scopo di fornire una guida completa al comprendere le funzionalità,
+Questo documento si prefigge lo scopo di fornire una guida completa per comprendere le funzionalità,
 la configurazione e la gestione dei **workflow** e della **sicurezza** nel CMS `Plone`__.
 
 __ http://plone.org/
@@ -34,10 +34,10 @@ Questo libro è pensato per entrambi questi tipi di utente:
   Questo vuole evitare situazioni in cui lo sviluppatore non esperto di Plone *non sa* di una
   determinata funzionalità, e quindi la reinventa in modo non corretto.
 * ad un **amministratore** verrà mostrato tutto quello che è possibile fare senza ricorrere allo
-  sviluppo, semplicemente usando prodotti già presenti o aggiuntivi, o configurado a dovere il
+  sviluppo, semplicemente usando prodotti già presenti o aggiuntivi, o configurando a dovere il
   sistema.
   
-  Questo secondo scopo vuole far comprendere agli amministratori quante cose è possibile fare senza
+  Questo secondo scopo vuole far comprendere agli amministratori quante cose sia possibile fare senza
   bisogno di richiedere sviluppo dall'esterno.
 
 Per chi *non* è questo libro
@@ -63,13 +63,13 @@ Verranno poi introdotti i **permessi** e il loro ruolo nella sicurezza, portando
 al cuore della sicurezza dei contenuti in Plone: il **workflow**.
 Verranno mostrati i workflow predefiniti del CMS, i loro limiti e difetti e il come superarli.
 
-Infine verrà insegnato come creare nuovi workflow, come disegnarli e fargli fare cose non sempre
+Infine verrà insegnato come creare nuovi workflow, come disegnarli e far fare loro cose non sempre
 semplici.
 
 Cosa *non* verrà affrontato
 ===========================
 
-Questo libro vuole essere *diretto*, evitando tutti quegli argomenti che non ritengo importanti.
+Questo libro vuole essere *diretto*, ed eviterà tutti quegli argomenti che non ritengo importanti.
 Non verranno spiegati i "dogmi", non verranno date inutili definizioni di qualcosa che (mi aspetto)
 sia già conosciuto dal lettore.
 
@@ -80,11 +80,11 @@ Come è strutturato questo libro
 
 Il libro parte dalla "superficie", mostrando Plone come si presenta una volta installato e
 spiegandone il funzionamento (e la *configurazione*) di base.
-Da qui si prenderà lo spunto per le prime riflessioni e domande su cosa è possibile
+Da qui si prenderà lo spunto per le prime riflessioni e domande su cosa sia possibile
 personalizzare, il che ci porterà a scavare sotto la superficie e sarà trampolino di lancio
 per personalizzare lo strumento e spingersi quindi verso i confini con la programmazione.
 
-Sebbene il focus centrale degli argomenti è il CMS Plone, gran parte degli argomenti mostrati
+Sebbene il focus centrale degli argomenti sia il CMS Plone, gran parte degli argomenti mostrati
 sono applicabili alle tecnologie sottostanti (`Zope`__, `CMF`__, ...), ma per semplicità di lettura
 queste differenze di tecnologia *non* saranno evidenziate nel libro.
 
@@ -95,7 +95,7 @@ Riferimenti alle versione utilizzata
 ====================================
 
 Quanto mostrato è applicabile alla versione 4 di Plone (specificatamente: `Plone 4.2.x`__), ma sono
-quasi certo che se la vostra versione di Plone è maggiore, una grossa percentuale di quanto qui
+quasi certo che se la vostra versione di Plone dovesse essere maggiore, una grossa percentuale di quanto qui
 riportato sarà comunque estremamente utile.
 
 __ http://plone.org/products/plone/releases/4.2
