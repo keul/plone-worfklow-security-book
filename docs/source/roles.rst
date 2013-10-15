@@ -52,7 +52,7 @@ Anonimo (Anonymous)
 ~~~~~~~~~~~~~~~~~~~
 
 **Anonimo** (**Anonymous**) è il ruolo assegnato agli utenti anonimi.
-E' un ruolo speciale ed ha un comportamento diverso da tutti gli altri ruoli.
+È un ruolo speciale ed ha un comportamento diverso da tutti gli altri ruoli.
 Non è infatti possibile definire un permesso accessibile dal ruolo Anonymous ma non da altri ruoli:
 un potere dato ad un anonimo è di certo fornito anche a *qualunque* utente del sito.
 
@@ -80,11 +80,11 @@ Manager
 L'Alpha e l'Omega dei ruoli. Chi ha ruolo **Manager** ha solitamente potere assoluto nel sito Plone
 ed entra senza restrizioni in ZMI.
 
-E' un ruolo ovviamente pericoloso e non va mai assegnato a sproposito. Come regola generale, se il
+È un ruolo ovviamente pericoloso e non va mai assegnato a sproposito. Come regola generale, se il
 vostro utente *non ha* bisogno di accedere alla ZMI, *Manager* non è il ruolo migliore da
 assegnargli ma va preferito il ruolo di *Amministratore del Sito*.
 
-E' lecito avere installazioni di Plone dove esiste un solo utente con questo ruolo: **admin**,
+È lecito avere installazioni di Plone dove esiste un solo utente con questo ruolo: **admin**,
 l'utente predefinito a livello Zope che è di solito il creatore dei siti Plone.
 
 .. Note::
@@ -105,7 +105,7 @@ livello Zope.
 Un primo esempio: l'utente *admin* ha di solito il ruolo di *Owner* sull'"oggetto sito Plone"
 poiché solitamente è questo utente che crea i nuovi siti all'interno del database di Zope.
 
-E' un ruolo che va ben compreso:
+È un ruolo che va ben compreso:
 
 * di solito deve essere assegnato ad un solo utente
 * è possibile fornirlo a più utenti (ciò oggi è fortunatamente più difficile da farsi da
@@ -337,7 +337,7 @@ Il suo scopo e dare poteri assoluti agli utenti Plone, senza dar loro poteri def
 programmazione" (che si traduce normalmente con l'accesso alla ZMI).
 
 Di questo ruolo se ne sentiva la mancanza.
-E' normale che il vostro cliente, l'azienda che vi a commissionato un'applicazione basata su Plone
+È normale che il vostro cliente, l'azienda che vi a commissionato un'applicazione basata su Plone
 voglia avere utenti con "poteri assoluti" (per l'appunto gli "amministratori del sito").
 
 Il problema un tempo era non dare poteri inutilmente pericolosi:
@@ -581,7 +581,7 @@ ossia assegnare all'utente tutti i permessi possibili... e non pensarci più.
 Va invece tenuto presente che alcuni ruoli, per loro natura, "incapsulano" i poteri di altri ruoli.
 Nella configurazione base di Plone il problema si presenta spesso col ruolo *Lettore*.
 
-E' inutile assegnare ad un utente il permesso di *Lettore* se questo utente possiede già uno di
+È inutile assegnare ad un utente il permesso di *Lettore* se questo utente possiede già uno di
 altri ruoli quali *Contributore*, *Revisore* o *Editor* poiché questi ruoli per loro natura
 possiedono già i poteri del *Lettore*.
 
@@ -627,7 +627,7 @@ Se tutto questo non sembra ancora abbastanza chiaro, le cose miglioreranno dopo 
 rispettivi capitoli sui **permessi** e **workflow**.
 
 Un altro motivo sono i **prodotti aggiuntivi**.
-E' lecito pensare che la vostra installazione Plone utilizzerà alcuni tra le centinaia di add-on
+È lecito pensare che la vostra installazione Plone utilizzerà alcuni tra le centinaia di add-on
 disponibili.
 I prodotti aggiuntivi non conoscono i vostri ruoli e contemporaneamente è possibile che aggiungano
 al vostro sito nuovi permessi; il prodotto quindi si prenderà in carico di configurare alcune
@@ -1038,7 +1038,7 @@ Anche se è possibile effettuare alcune modifiche al proprio sito via ZMI, quest
 assolutamente dire che sia giusto farlo.
 
 .. Note::
-    E' sconveniente agire via ZMI poiché diventa problematico rendere *replicabili* le operazioni
+    È sconveniente agire via ZMI poiché diventa problematico rendere *replicabili* le operazioni
     svolte.
 
 Se le vostre configurazioni fossero da replicare in un sito gemello di quello che state impostando,

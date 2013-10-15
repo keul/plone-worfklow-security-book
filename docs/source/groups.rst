@@ -91,7 +91,7 @@ Il suo uso può invalidare altre configurazioni fatte per altri gruppi o altri u
 Un esempio: se assegnassimo un qualunque ruolo al gruppo "*Authenticated Users*", per esempio
 **Lettore**, questo renderebbe inutile l'aver assegnato (o assegnare in futuro) quello stesso ruolo
 a veri utenti e gruppi (globalmente o localmente: non importa).
-E' inutile dire "il gruppo dell'Ufficio 5 è *Lettore* sulla cartella
+È inutile dire "il gruppo dell'Ufficio 5 è *Lettore* sulla cartella
 ``/uffici/ufficio-5/documenti-privati`` se *tutti* gli utenti del sito hanno quel potere e possono
 quindi leggere da quella cartella.
 
