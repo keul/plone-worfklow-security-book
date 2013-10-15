@@ -178,7 +178,7 @@ appartenenza ad un gruppo allora il *dato* relativo al creatore può avere la su
 persona che ha creato il contenuto no.
 
 Un esempio: l'Utente 1 ha scritto un documento mentre lavorava per l'Ufficio 5. Poco importa chi
-ha creato il documento, ma dopo la sua creazione l'utente non deve avere permessi particolari sul
+abbia creato il documento, ma dopo la sua creazione l'utente non deve avere permessi particolari sul
 contenuto, o di certo non deve continuare a mantenerli se in futuro lascerà l'Ufficio 5. 
 
 .. Warning::
@@ -408,7 +408,7 @@ gruppo dove porre questo utente e dare i poteri al gruppo.
 I ruoli locali (condivisione)
 -----------------------------
 
-Il modo che consiglio per gestire l'assegnazioni dei ruoli nel vostro sito è il pannello della
+Il modo che consiglio per gestire le assegnazioni dei ruoli nel vostro sito è il pannello della
 condivisione.
 Proseguiamo l'esempio mostrando la condivisione di una cartella del sito che dovrebbe essere l'area
 di lavoro dell'"Ufficio 5", all'interno di una macro-area che racchiude tutti gli uffici.
@@ -457,7 +457,7 @@ Ereditarietà dei ruoli locali
 
 I ruoli assegnati agli utenti in Plone vengono di norma ereditati.
 Questo permette di fornire ruoli locali ad utenti in una sezione e (ovviamente) avere questi stessi
-ruoli in tutto il sottoalbero.
+ruoli in tutto il sotto-albero.
 
 Nell'esempio di poco fa, il gruppo "*Direzione*" all'interno della cartella "*Ufficio 5*" ha un
 ruolo ereditato da un qualche livello superiore.
@@ -914,7 +914,7 @@ Assegnando il nuovo ruolo ad utenti e gruppi sulla cartella possiamo finalmente 
 Chi può assegnare i ruoli, e quali
 ==================================
 
-In questa sezione analizzeremo un'altro aspetto spesso tralasciato della configurazione della
+In questa sezione analizzeremo un altro aspetto spesso tralasciato della configurazione della
 sicurezza: limitare (o per lo meno: conoscere) chi può fornire nuovi ruoli... e quali.
 
 .. _section-access-sharing-page:
@@ -1041,7 +1041,7 @@ assolutamente dire che sia giusto farlo.
     E' sconveniente agire via ZMI poiché diventa problematico rendere *replicabili* le operazioni
     svolte.
 
-Se le vostre configurazioni fossere da replicare in un sito gemello di quello che state impostando,
+Se le vostre configurazioni fossero da replicare in un sito gemello di quello che state impostando,
 o se voleste rendere disponibile ad altri il vostor lavoro, obblighereste queste persone a
 ripetere manualmente i passi da voi eseguiti.
 Alle volte il problema diventa anche ricordarsi tutto quello che è stato fatto.
