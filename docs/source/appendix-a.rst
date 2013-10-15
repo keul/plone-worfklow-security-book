@@ -34,7 +34,7 @@ permessi.
 Add portal member
 =================
 
-E' il permesso che controlla il potere di creare nuovi utenti nel sito.
+È il permesso che controlla il potere di creare nuovi utenti nel sito.
 
 Oltre al *Manager* e all'*Amministratore del sito* se viene aggiunto anche il ruolo *Anonimo* si
 abilita la libertà dei visitatori di iscriversi al sito.
@@ -53,7 +53,7 @@ sezione "*Sicurezza*" della configurazione del sito.
 Add portal topics
 =================
 
-E' il permesso che determina il potere di aggiungere le vecchie **Collezioni** nel sito Plone
+È il permesso che determina il potere di aggiungere le vecchie **Collezioni** nel sito Plone
 (*Topic* è stato il primo nome del tipo di contenuto, poi diventato *Cercatore* ed infine ha
 preso il nome odierno).
 
@@ -69,14 +69,14 @@ Ignorate questo permesso se non dovete gestire le vecchie collezioni, poiché il
 Allow sendto
 ============
 
-E' il permesso che permette di utilizzare una vista che permette di inviare un collegamento al
+È il permesso che permette di utilizzare una vista che permette di inviare un collegamento al
 documento corrente per e-mail.
 
 Il link a questa pagina è stato disabilitato di default nelle recenti versioni di Plone (in realtà
 non è una funzionalità così utile e probabilmente il link così esposto era facile preda di crawler
 malevoli).
 
-E' ancora utilizzabile conoscendone l'URL (inserendo ``/sendto_form`` dopo l'URL di un documento)
+È ancora utilizzabile conoscendone l'URL (inserendo ``/sendto_form`` dopo l'URL di un documento)
 o riabilitando il link dal ``portal_actions`` in ZMI.
 
 Il permesso è dato al ruolo *Anonimo*, quindi chiunque può utilizzare questo form. 
@@ -128,7 +128,7 @@ In questi casi il fatto che il permesso sia unificato per copia e taglia a volte
 List portal members
 ===================
 
-E' il permesso che controlla la possibilità di accedere alla lista degli utenti del sito.
+È il permesso che controlla la possibilità di accedere alla lista degli utenti del sito.
 
 Per impostazione predefinita questo permesso è dato ai *Manager*, all'*Amministratore del sito* e
 al *Collaboratore* (quindi in pratica tutti gli utenti del sito possono vedere gli altri).
@@ -140,7 +140,7 @@ Vale la pena modificarlo in presenza di stringenti motivi di privacy.
 List undoable changes
 =====================
 
-E' il permesso che permette di accedere alla pagine per annullare transazioni effettuato dello ZODB:
+È il permesso che permette di accedere alla pagine per annullare transazioni effettuato dello ZODB:
 "**Annulla azioni**". In pratica permette di annullare operazioni svolte nel sito Plone e tornare
 ad uno stato precedente del sistema.
 
@@ -163,7 +163,7 @@ sia dimenticata.
 Se volete disabilitare la funzionalità (magari perché le password non sono gestire in Plone ma in
 un LDAP esterno) vale la pena togliere questo permesso a chiunque.
 
-E' ovviamente dato agli utenti *Anonimi*.
+È ovviamente dato agli utenti *Anonimi*.
 
 .. _section-permissions-manage-groups:
 
@@ -214,7 +214,7 @@ Per ogni pannello di configurazione c'è un permesso con prefisso "*Plone Site S
 Mettiamo solo in una minima evidenza due permessi in particolare:
 
 **Plone Site Setup: Overview**
-    E' il permesso principale, per accedere al pannello di controllo generale.
+    È il permesso principale, per accedere al pannello di controllo generale.
 **Plone Site Setup: Users and Groups**
     Questo permesso serve ad accedere alla sezione di gestione gruppi e utenti e pare quindi aver
     sostituito i vecchi permessi "*Manage groups*" e "*Manage users*".
@@ -227,7 +227,7 @@ Per impostazione predefinita i seguenti ruoli posseggono questo permesso:
 * *Manager*
 * *Amministratore del sito*
 
-E' possibile quindi facilmente escludere uno dei pannelli di configurazione di Plone a qualunque
+È possibile quindi facilmente escludere uno dei pannelli di configurazione di Plone a qualunque
 modifica, togliendo il permesso associato.
 
 .. _section-permissions-portlets-manage-own-portlets:
@@ -235,7 +235,7 @@ modifica, togliendo il permesso associato.
 Portlets: Manage own portlets
 =============================
 
-E' il permesso per gestire le proprie portlet (nella dashboard) e controlla quella voce di menù.
+È il permesso per gestire le proprie portlet (nella dashboard) e controlla quella voce di menù.
 
 Per impostazione predefinita i seguenti ruoli posseggono questo permesso:
 
@@ -272,10 +272,10 @@ In pratica: a tutti gli utenti del sito.
 Set own password
 ================
 
-E' il permesso associato alla funzionalità di poter cambiare la propria password dalla vista
+È il permesso associato alla funzionalità di poter cambiare la propria password dalla vista
 "*Azzera la password*", accessibile tramite le proprie preferenze personali.
 
-E' differente dal permesso ":ref:`section-permissions-mail-forgotten-password`" perché in questo
+È differente dal permesso ":ref:`section-permissions-mail-forgotten-password`" perché in questo
 caso l'utente è autenticato nel sistema.
 Anche in questo caso però potreste voler togliere questo permesso in casi di fonti dati utente
 esterne (quali LDAP).
@@ -285,7 +285,7 @@ Il permesso è dato a tutti gli utenti *Autenticati*
 Set own properties
 ==================
 
-E' il permesso legato al potere dell'utente di modificare le proprie informazioni personali.
+È il permesso legato al potere dell'utente di modificare le proprie informazioni personali.
 
 Togliendo questo permesso (assegnato a tutti gli *Autenticati*) l'utente non è più in grado di
 accedere alla voce "*Preferenze personali*" nel proprio menù di autenticazione.
@@ -315,9 +315,9 @@ Per impostazione predefinita i seguenti ruoli posseggono questo permesso:
 View Groups
 ===========
 
-E' un permesso collegato a vari metodi di basso livello per accedere ai gruppi
+È un permesso collegato a vari metodi di basso livello per accedere ai gruppi
 
-E' assegnato ai *Manager*, *Amministratori del sito* e *Collaboratori*, quindi a tutti gli utenti
+È assegnato ai *Manager*, *Amministratori del sito* e *Collaboratori*, quindi a tutti gli utenti
 autenticati.
 
 Da test eseguiti, se si rimuove il permesso per il *Collaboratore*, gli utenti sono comunque in

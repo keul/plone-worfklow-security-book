@@ -17,7 +17,7 @@ che condividono uno o più permessi.
 I permessi sono il vero cuore della sicurezza di Plone, poiché controllano una singola azione o un
 comportamento puntuale del CMS.
 
-E' bene chiarire che agiscono a basso livello; fin'ora ci siamo abituati a lavorare
+È bene chiarire che agiscono a basso livello; fin'ora ci siamo abituati a lavorare
 sull'interfaccia di Plone, per poi muoverci brevemente a livelli più bassi (in ZMI) e abbiamo visto
 poco codice. I permessi invece *non sono visibili o gestiti a livello Plone* (per questo motivo non
 sono nemmeno tradotti).
@@ -338,7 +338,7 @@ Add portal content
 ------------------
 
 .. Note::
-    E' il permesso di riferimento del ruolo **Contributore**
+    È il permesso di riferimento del ruolo **Contributore**
 
 Storicamente questo permesso era *il* permesso per aggiungere contenuti nel sito.
 Prima di Plone 2.1 esisteva solo questo permesso per controllare l'aggiungibilità dei contenuti, e
@@ -527,8 +527,8 @@ Change portal events
 
 Questo permesso, per ragioni storiche, è **il permesso di modifica degli eventi**.
 
-E' da gestire allo stesso modo con cui viene usato il più famoso *Modify portal content*.
-E' anche molto probabile che l'importanza di questo permesso venga meno non appena gli eventi di
+È da gestire allo stesso modo con cui viene usato il più famoso *Modify portal content*.
+È anche molto probabile che l'importanza di questo permesso venga meno non appena gli eventi di
 Plone verranno sostituiti dal prodotto `plone.app.event`__, nelle future versioni di Plone.
 
 __ http://pypi.python.org/pypi/plone.app.event
@@ -635,7 +635,7 @@ Manage portal
 -------------
 
 .. Note::
-    E' il permesso di riferimento del ruolo **Manager**
+    È il permesso di riferimento del ruolo **Manager**
 
 Questo permesso determina tantissimi poteri, tutti legati ad azioni che di solito può fare solo
 il ruolo Manager.
@@ -654,7 +654,7 @@ Modify portal content
 ---------------------
 
 .. Note::
-    E' il permesso di riferimento del ruolo **Editor**
+    È il permesso di riferimento del ruolo **Editor**
 
 A parte qualche eccezione degna di nota (vedere
 ":ref:`section-permissions-change-portal-events`"), questo è *il* permesso che identifica il
@@ -674,7 +674,7 @@ L'importanza di questo permesso è altrove, gestito tramite l'uso dei **workflow
 Portlets: Manage portlets
 -------------------------
 
-E' il permesso che permette di accedere alla gestione delle portlet laterali ed è per questo motivo
+È il permesso che permette di accedere alla gestione delle portlet laterali ed è per questo motivo
 assegnato al *Manager* e all'*Amministratore del sito*.
 
 In assenza di un permesso specifico per gestire una nuova portlet (magari in seguito
@@ -692,7 +692,7 @@ permesso, eccezione fatta per due casi:
 Request review
 --------------
 
-E' il permesso che identifica il potere di un utente di sottoporre un documento alla richiesta di
+È il permesso che identifica il potere di un utente di sottoporre un documento alla richiesta di
 revisione (di solito effettuata dal *Revisore*).
 
 Di solito si traduce della presenza di una specifica voce nel menù di cambio di stato.
@@ -702,7 +702,7 @@ Di solito si traduce della presenza di una specifica voce nel menù di cambio di
 
    *La richiesta di sottoporre a revisione un documento, nel menù del workflow*
 
-E' utilizzata in tutti i workflow base, ma se avete intenzione di creare un vostro workflow e
+È utilizzata in tutti i workflow base, ma se avete intenzione di creare un vostro workflow e
 vi serve questa funzionalità, tenete presente questo permesso prima di volerne creare altri.
 
 Per impostazione predefinita i seguenti ruoli posseggono questo permesso:
@@ -718,7 +718,7 @@ Review portal content
 ---------------------
 
 .. Note::
-    E' il permesso di riferimento del ruolo **Revisore**
+    È il permesso di riferimento del ruolo **Revisore**
 
 Questo permesso identifica il potere di revisionare un contenuto del sito, di solito legato ad una
 precedente richiesta di revisione ottenuta tramite uso di workfklow.
@@ -786,7 +786,7 @@ View
 ----
 
 .. Note::
-    E' il permesso di riferimento del ruolo **Lettore**
+    È il permesso di riferimento del ruolo **Lettore**
 
 Il permesso più semplice, eppure il più importante tra tutti i permessi.
 Determina il potere di vedere il contenuto.
@@ -924,7 +924,7 @@ Il tool portal_actions
 ----------------------
 
 Il primo elemento di ZMI che andiamo a visitare è anche il più ricco in assoluto di impostazioni.
-E' il **portal_actions tool**, accessibile tramite la ZMI di ogni sito Plone.
+È il **portal_actions tool**, accessibile tramite la ZMI di ogni sito Plone.
 
 Si occupa di gestire la presenza di elementi dell'interfaccia Plone, solitamente sotto forma di
 link, o pulsanti di form.
@@ -1041,7 +1041,7 @@ contenuti di una cartella.
     
     Non è semplice capire con che permesso rendere disponbile questo pulsante, viste le
     funzionalità differenti che offre.
-    E' quindi protetto dal permesso di *"View"*, ma l'espressione verifica invece altri due
+    È quindi protetto dal permesso di *"View"*, ma l'espressione verifica invece altri due
     permessi: "*Modify portal content*" e "*Review portal content*".
 
 .. _section-permissions-portal_actions-object:
@@ -1066,11 +1066,11 @@ del sito tramite **tab** agli autenticati.
 **contentrules** (Regole)
     Controlla la comparsa del tab "**Regole**" per accedere al form di controllo delle regole di
     contenuto.
-    E' controllato dal permesso ":ref:`section-permissions-content-rules-manage-rules`".
+    È controllato dal permesso ":ref:`section-permissions-content-rules-manage-rules`".
 **local_roles** (Condivisione)
     Controlla la comparsa del tab "**Condivisione**" per accedere alla condivisione dell'elemento
     corrente.
-    E' controllato dal permesso
+    È controllato dal permesso
     ":ref:`Sharing page: Delegate roles <section-permissions-sharing-page-all>`".
 
 object_buttons
@@ -1209,15 +1209,15 @@ Anche in questo caso: i permessi sono sempre verificati sulla radice del sito, i
 notevolmente la manipolazione dei permessi.
 
 **mystuff** (Cartella personale)
-    E' il link alla cartella personale degli utent (se abilitata).
+    È il link alla cartella personale degli utent (se abilitata).
     
-    E' protetto dal semplice permesso di "*View*" (in pratica: non è usato nessun permesso) ma
+    È protetto dal semplice permesso di "*View*" (in pratica: non è usato nessun permesso) ma
     compare solo se la cartella personale dell'utente esiste (grazie ad un'espressione di
     controllo).
     
     Vedere anche ":ref:`section-users-personal-folder`".
 **dashboard** (Dashboard)
-    E' il link alla **dashboard** personale dell'utente ma per qualche motivo non è controllato dal
+    È il link alla **dashboard** personale dell'utente ma per qualche motivo non è controllato dal
     permesso ":ref:`section-permissions-portlets-view-dashboard`" quanto invece dal permesso
     ":ref:`section-permissions-portlets-manage-own-portlets`".
 **preferences** (Preferenze personali)
@@ -1231,7 +1231,7 @@ notevolmente la manipolazione dei permessi.
     Per questo motivo controllato dal permesso "Plone Site Setup: Overview" (vedere
     :ref:`l'apposita sezione <section-permissions-plone-site-setup-all>`).
 **login** (Fatti riconoscere)
-    E' il link che permette l'autenticazione nel sito Plone (un nome migliore sarebbe probabilmente
+    È il link che permette l'autenticazione nel sito Plone (un nome migliore sarebbe probabilmente
     mantenere la forma inglese **log in**.
     
     Non è protetto da nessun permesso particolare se non *View* ma compare solo agli utenti anonimi
@@ -1241,7 +1241,7 @@ notevolmente la manipolazione dei permessi.
     questa azione compare a tutti gli utenti anonimi e permette di crearsi autonomamente un account
     nel sito.
 
-    E' protetto dal permesso ":ref:`section-permissions-add-portal-member`".
+    È protetto dal permesso ":ref:`section-permissions-add-portal-member`".
 **undo** (Annulla)
     Controlla la presenza dell'azione che permette l'accesso al modulo "*Annulla azioni*" per
     effettuare l'annullamento di operazioni effettuate e tornare ad uno stato precedente del
@@ -1251,7 +1251,7 @@ notevolmente la manipolazione dei permessi.
     molto spesso non possono essere effettuare e falliscono senza riuscire a dare all'utente una
     spegazione ragionevole) quindi la voce è di solito disabilitata.
     
-    E' controllata dal permesso ":ref:`section-permissions-list-undoable-changes`".
+    È controllata dal permesso ":ref:`section-permissions-list-undoable-changes`".
 **review-comments** (Moderazione commenti)
     Questo permesso controlla l'accesso alla pagina "*Moderazione commenti*".
     Nel caso ci siano commenti da moderare sparsi per il sito, questi sono riassunti in questa
