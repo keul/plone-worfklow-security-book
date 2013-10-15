@@ -453,10 +453,10 @@ Questo permesso è collegato alla possibilità di tornare alla versione preceden
 Il problema è che nelle versioni moderne di Plone i template che controllano la storia sono
 cambiati.
 
-Oggi il controllo delle versioni avviene tramite un moderno popup.
+Oggi il controllo delle versioni avviene tramite un moderno pop-up.
 
 .. figure:: _static/document-history-popup.png
-   :alt: Popup della storia del documento
+   :alt: Pop-up della storia del documento
 
    *Come compare oggi la storia del documento, dopo aver cliccato sul link "Cronologia"*
 
