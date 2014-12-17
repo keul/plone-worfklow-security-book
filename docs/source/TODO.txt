@@ -30,6 +30,7 @@ x miniform ZMI per vedere i permessi di un utente su un contesto
 - workflow sottrattivi
 - iw.rejectanonymous
 - https://github.com/collective/Products.Ploneboard/issues/22 (problema WF, permessi e blocco ereditarieta' permessi)
+- stato "beeing_created" con prima transizione automatica: quando può tornare utile
 
 x appendice A --> tutti i permessi
 - appendice B --> riferimenti all'esempio e come installare
